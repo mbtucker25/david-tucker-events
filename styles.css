@@ -1,14 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
 
 :root {
-    --primary: #386641;
-    --accent: #A7C957;
-    --cta: #6A994E;
-    --bg: #F1FAEE;
-    --card: #ffffff;
-    --text: #1D1D1D;
-    --border: #dcdcdc;
-  --font-main: 'Roboto', sans-serif;
+  --green-dark: #228B22;
+  --green-medium: #6FBF73;
+  --green-light: #DFF1E2;
+  --sky-blue: #87CEEB;
+  --sand: #F5DEB3;
+  --white: #ffffff;
+  --black: #1d1d1d;
+  --gray-light: #f9f9f9;
+  --gray-border: #e0e0e0;
+  --font-main: 'Open Sans', sans-serif;
+  --font-heading: 'Bebas Neue', sans-serif;
 }
 
 * {
@@ -18,20 +21,15 @@
 body {
   margin: 0;
   font-family: var(--font-main);
-  background-color: var(--gray-light);
-  color: var(--text);
+  background: var(--gray-light);
+  color: var(--black);
   line-height: 1.6;
-}
-
-a {
-  text-decoration: none;
-  color: var(--primary);
 }
 
 /* HEADER */
 .site-header {
-  background-color: var(--white);
-  border-bottom: 4px solid var(--border);
+  background: linear-gradient(135deg, var(--green-dark), var(--sky-blue));
+  color: var(--white);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,64 +40,53 @@ a {
 }
 
 .site-header .brand-name {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--primary);
-  letter-spacing: 0.05em;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.header-center a {
-  margin: 0 0.75rem;
-  font-weight: 500;
-  color: var(--text);
+.header-center a,
+.site-header a {
+  color: var(--white);
+  margin-left: 1rem;
+  font-weight: 600;
 }
 
 .header-center a:hover {
-  color: var(--primary);
+  text-decoration: underline;
 }
 
 .header-right .btn {
   margin-left: 0.5rem;
 }
 
-/* CONTAINER */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
 /* SIDEBAR */
 .sidebar {
   width: 220px;
-  background-color: var(--primary);
-  border-right: 1px solid var(--border);
+  background-color: var(--green-dark);
+  color: var(--white);
   padding: 2rem 1rem;
   position: fixed;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .sidebar img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
   margin-bottom: 2rem;
 }
 
 .sidebar nav a {
   display: block;
-  color: var(--text);
-  margin-bottom: 1rem;
+  color: var(--white);
   font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
 .sidebar nav a:hover {
-  background-color: var(--gray-light);
-  color: var(--primary);
+  color: var(--sky-blue);
 }
 
 .main-content {
@@ -110,16 +97,15 @@ a {
 
 /* HERO */
 .hero-banner {
-color: (var(--card));
   position: relative;
   height: 400px;
   overflow: hidden;
-  margin-bottom: 3rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.hero-image {
+.hero-banner .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -133,16 +119,18 @@ color: (var(--card));
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--white);
   text-align: center;
-  background: rgba(0, 0, 0, 0.3);
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.35);
   padding: 2rem;
 }
 
 .hero-overlay h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  text-transform: uppercase;
   margin-bottom: 1rem;
+  letter-spacing: 1px;
 }
 
 .hero-overlay p {
@@ -151,31 +139,31 @@ color: (var(--card));
 
 /* BUTTONS */
 .btn {
-  display: inline-block;
-  background-color: var(--primary);
+  background-color: var(--green-dark);
   color: var(--white);
-  padding: 0.5rem 1rem;
-  font-weight: 500;
+  padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 6px;
-  transition: background 0.2s ease;
+  font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
 }
 
 .btn:hover {
-  background-color: var(--primary-light);
+  background-color: var(--green-medium);
 }
 
 .btn.outline {
   background: transparent;
-  border: 1px solid var(--primary);
-  color: var(--primary);
+  border: 2px solid var(--white);
+  color: var(--white);
 }
 
 .btn.outline:hover {
-  background-color: var(--primary);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--green-dark);
 }
 
 .btn.small {
@@ -183,7 +171,7 @@ color: (var(--card));
   padding: 0.35rem 0.75rem;
 }
 
-/* CONTENT BLOCKS */
+/* CONTENT SECTIONS */
 section {
   margin-bottom: 3rem;
 }
@@ -194,24 +182,34 @@ section {
 .register {
   background: var(--white);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
+h2 {
+  color: var(--green-dark);
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* SPONSORS */
 .sponsor-logos {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .sponsor-logos img {
-  width: 280px;
-  height: 220px;
+  width: 140px;
+  height: 80px;
   object-fit: contain;
   background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  border: 1px solid var(--gray-border);
   padding: 0.5rem;
+  border-radius: 6px;
 }
 
 /* SCHEDULE */
@@ -219,12 +217,11 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-top: 1rem;
 }
 
 .schedule-item {
   background-color: var(--gray-light);
-  border-left: 4px solid var(--primary);
+  border-left: 4px solid var(--green-dark);
   padding: 1rem;
   border-radius: 6px;
 }
@@ -232,21 +229,11 @@ section {
 .schedule-item strong {
   display: block;
   font-size: 1rem;
-  color: var(--primary);
+  color: var(--green-dark);
   font-weight: 700;
 }
 
-.schedule-item span {
-  font-size: 0.95rem;
-}
-
-/* REGISTER FORM */
-.register h2 {
-  color: var(--primary);
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
+/* FORMS */
 .register form {
   max-width: 600px;
   margin: 0 auto;
@@ -254,23 +241,21 @@ section {
 
 .register fieldset {
   border: none;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 .register label {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.95rem;
 }
 
 .register input,
 .register select,
 .register textarea {
-  width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--gray-border);
   border-radius: 4px;
   font-family: var(--font-main);
   font-size: 1rem;
@@ -279,22 +264,20 @@ section {
 .register input:focus,
 .register select:focus,
 .register textarea:focus {
-  border-color: var(--primary);
+  border-color: var(--green-dark);
   outline: none;
 }
 
 /* STATIC HERO */
 .static-hero {
-  background-color: var(--secondary-bg);
-  color: var(--text);
+  background: var(--green-light);
   padding: 2rem 1rem;
   text-align: center;
-  border-bottom: 1px solid var(--border);
 }
 
 .static-hero h1 {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -302,7 +285,7 @@ section {
 footer {
   text-align: center;
   font-size: 0.85rem;
-  color: #888;
+  color: #666;
   padding: 2rem 0;
 }
 
@@ -317,8 +300,8 @@ footer {
     width: 100%;
     height: auto;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
+    padding: 1rem;
   }
 
   .main-content {
