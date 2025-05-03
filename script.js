@@ -1,2 +1,4 @@
 console.log("David Tucker Memorial Site Loaded");
-// JS hooks will go here later if needed (donation tracking, form logic, etc.)
+document.getElementById("darkModeToggle").addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+  });  
