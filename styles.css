@@ -204,8 +204,8 @@ section {
 }
 
 .sponsor-logos img {
-  width: 140px;
-  height: 80px;
+  width: 280px;
+  height: 220px;
   object-fit: contain;
   background: var(--white);
   border: 1px solid var(--border);
