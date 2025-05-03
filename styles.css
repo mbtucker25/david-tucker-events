@@ -1,7 +1,95 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  h1, h2 {
+    color: #005f3c;
+  }
+  
+  a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Hero */
+  .hero {
+    background: #cce5cc;
     text-align: center;
-    padding: 2rem;
-    background-color: #f0f8ff;
+    padding: 3rem 1rem;
+  }
+  
+  .hero .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  /* Sections */
+  section {
+    padding: 2rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .details ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .details li {
+    background: #e9ecef;
+    margin-bottom: 10px;
+    padding: 0.75rem;
+    border-radius: 5px;
+  }
+  
+  /* Donate */
+  .donate {
+    background-color: #fdf2e9;
+    text-align: center;
+  }
+  
+  .donate .btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* Contact */
+  .contact {
+    background: #fff3cd;
+    text-align: center;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: #343a40;
+    color: white;
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile-Friendly */
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 1.75rem;
+    }
+  
+    .btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
   }
   
