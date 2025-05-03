@@ -23,6 +23,13 @@ body {
   line-height: 1.6;
 }
 
+.logo img {
+    max-width: 180px;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+  }  
+
 body.dark-mode {
   background-color: #121212;
   color: #e0e0e0;
@@ -58,25 +65,27 @@ body.dark-mode {
 }
 
 .main-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-}
-
-.main-nav a {
-  color: var(--white);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.main-nav a:hover {
-  text-decoration: underline;
-}
-
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .main-nav li {
+    list-style: none;
+  }
+  
+  .main-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
 .hero-banner {
   position: relative;
+  width: 100%;
   height: 400px;
   overflow: hidden;
   border-radius: 12px;
