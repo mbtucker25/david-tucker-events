@@ -68,6 +68,7 @@ body {
 .hero-banner {
   position: relative;
   height: 400px;
+  max-width: 1000px;
   overflow: hidden;
   border-radius: 12px;
   margin-bottom: 2rem;
