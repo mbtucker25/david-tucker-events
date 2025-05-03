@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -6,7 +6,8 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   color: #2e2e2e;
   background-color: #f1f5f9;
   line-height: 1.6;
@@ -18,14 +19,14 @@ body {
 }
 
 .wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
-  }  
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
-/* Sidebar */
+/* Sidebar with gradient */
 .sidebar {
   width: 220px;
-  background: #1b4332;
+  background: linear-gradient(180deg, #1b4332, #2d6a4f);
   color: white;
   padding: 2rem 1rem;
   position: fixed;
@@ -47,7 +48,7 @@ body {
   color: white;
   text-decoration: none;
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   transition: color 0.2s ease;
 }
@@ -59,20 +60,16 @@ body {
 
 /* Main content */
 .main-content {
-    margin-left: 220px;
-    padding: 2rem;
-    flex-grow: 1;
-  }  
+  margin-left: 220px;
+  padding: 2rem;
+  flex-grow: 1;
+}
 
-/* Hero Banner */
 .hero-banner {
   position: relative;
   height: 400px;
-  max-width: 100%;
   overflow: hidden;
-  border-radius: 12px;
   margin-bottom: 2rem;
-  background-color: #1b4332;
 }
 
 .hero-banner .hero-image {
@@ -94,42 +91,48 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
 }
 
 .hero-banner h1 {
   font-size: 2.75rem;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.hero-overlay p {
+  font-weight: 400;
 }
 
 .hero-buttons {
   margin-top: 1rem;
 }
 
+/* Gradient Buttons */
 .btn {
-  background: #4c9aff;
+  background: linear-gradient(135deg, #4c9aff, #2684ff);
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   margin: 0 0.5rem;
   display: inline-block;
   font-size: 1rem;
-  transition: all 0.2s ease;
+  transition: background 0.3s ease, box-shadow 0.2s ease;
 }
 
 .btn:hover {
-  background: #2684ff;
+  background: linear-gradient(135deg, #2684ff, #4c9aff);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .btn.secondary {
-  background: #6c757d;
+  background: linear-gradient(135deg, #6c757d, #343a40);
 }
 
 .btn.green {
-  background-color: #38a169;
+  background: linear-gradient(135deg, #38a169, #2f855a);
 }
 
 /* Sponsors */
@@ -165,7 +168,7 @@ body {
 .contact-box {
   flex: 1;
   min-width: 300px;
-  background: #ffffff;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -189,7 +192,7 @@ body {
 /* Donate */
 .donate {
   text-align: center;
-  background-color: #e9f5ec;
+  background: linear-gradient(to bottom right, #e6f4ea, #d2f3df);
   padding: 2rem;
   border-radius: 10px;
 }
@@ -200,6 +203,7 @@ footer {
   text-align: center;
   color: #777;
   font-size: 0.9rem;
+  font-weight: 400;
 }
 
 /* Registration Form Styling */
@@ -233,6 +237,7 @@ footer {
 
 .register h3 {
   margin-bottom: 0.5rem;
+  font-weight: 500;
   color: #22543d;
 }
 
@@ -251,7 +256,7 @@ footer {
   border-radius: 5px;
 }
 
-/* Mobile Styles */
+/* Responsive */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -282,6 +287,6 @@ footer {
 }
 
 img, video {
-    max-width: 100%;
-    height: auto;
-  }  
+  max-width: 100%;
+  height: auto;
+}
