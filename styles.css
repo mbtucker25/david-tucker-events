@@ -31,7 +31,7 @@ a {
 /* HEADER */
 .site-header {
   background-color: var(--white);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 4px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,7 +71,7 @@ a {
 /* SIDEBAR */
 .sidebar {
   width: 220px;
-  background-color: var(--white);
+  background-color: var(--primary);
   border-right: 1px solid var(--border);
   padding: 2rem 1rem;
   position: fixed;
