@@ -110,6 +110,7 @@ a {
 
 /* HERO */
 .hero-banner {
+color: (var(--card));
   position: relative;
   height: 400px;
   overflow: hidden;
