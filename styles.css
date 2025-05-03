@@ -17,6 +17,11 @@ body {
   min-height: 100vh;
 }
 
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+  }  
+
 /* Sidebar */
 .sidebar {
   width: 220px;
@@ -54,13 +59,13 @@ body {
 
 /* Main content */
 .main-content {
-  margin-left: 220px;
-  padding: 2rem;
-  flex-grow: 1;
-  max-width: 1200px;
-  margin-right: auto;
-  margin-left: 220px;
-}
+    margin-left: 220px;
+    padding: 2rem;
+    flex-grow: 1;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: calc(220px + 2rem); /* adjust for sidebar + padding */
+  }  
 
 /* Hero Banner */
 .hero-banner {
