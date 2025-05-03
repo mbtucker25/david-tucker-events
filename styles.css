@@ -62,9 +62,6 @@ body {
     margin-left: 220px;
     padding: 2rem;
     flex-grow: 1;
-    max-width: 1000px;
-    margin-right: auto;
-    margin-left: calc(220px + 2rem); /* adjust for sidebar + padding */
   }  
 
 /* Hero Banner */
