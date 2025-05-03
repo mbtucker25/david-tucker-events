@@ -1,102 +1,72 @@
+<!-- register.html (modernized) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register – David Tucker Memorial Golf Outing</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- 🔲 Top Header -->
-  <header class="site-header">
-    <div class="brand-name">David Tucker Memorial</div>
-    <div class="header-center">
-      <a href="index.html">Home</a>
-      <a href="#register">Register</a>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="brand">
+    <img src="DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
+    <span class="brand-name">David Tucker Memorial</span>
+  </div>
+  <nav class="main-nav" aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="sponsor-registration.html">Sponsor</a></li>
+    </ul>
+  </nav>
+  <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗</button>
+</header>
 
-  <!-- 🔻 Hero Section -->
-  <section class="hero static-hero">
-    <div class="wrapper">
-      <h1>🏌️ Register for the Event</h1>
-      <p>Secure your spot for the 2025 memorial golf outing.</p>
-      <a href="index.html" class="btn">← Back to Home</a>
-    </div>
-  </section>
+<section class="static-hero">
+  <h1>Register to Play</h1>
+  <p>Secure your spot for the 2025 memorial golf outing.</p>
+  <a href="index.html" class="btn">← Back to Home</a>
+</section>
 
-  <!-- 📝 Registration Form -->
-  <section class="register" id="register">
-    <div class="wrapper">
-      <h2>Register for the Event</h2>
+<section class="register" id="register">
+  <div class="wrapper">
+    <h2>Player Registration</h2>
+    <form action="https://formspree.io/f/xyzwebjq" method="POST">
+      <fieldset>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
 
-      <form action="https://formspree.io/f/xyzwebjq" method="POST" id="registrationForm">
-        <fieldset>
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" required />
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="_replyto" required />
 
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="_replyto" required />
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" inputmode="tel" />
 
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" />
+        <label for="team">Team Name (optional)</label>
+        <input type="text" id="team" name="team" />
 
-          <label for="team">Team Name (if registering as a team)</label>
-          <input type="text" id="team" name="team" />
+        <label for="players">Number of Players</label>
+        <select id="players" name="players" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
 
-          <label for="players">Number of Players</label>
-          <select id="players" name="players" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
+        <div id="playerFields"></div>
 
-          <!-- 🔧 Dynamic Player Inputs -->
-          <div id="playerFields"></div>
+        <button type="submit" class="btn">Submit Registration</button>
+      </fieldset>
+    </form>
+    <p class="note">You'll receive a confirmation email after registration.</p>
+  </div>
+</section>
 
-          <button type="submit" class="btn">Submit Registration</button>
-        </fieldset>
-      </form>
-
-      <p class="note">You’ll receive a confirmation email after registration. Please check your spam folder if you don’t see it.</p>
-    </div>
-  </section>
-
-  <!-- 🔻 Footer -->
-  <footer>
-    <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
-  </footer>
-
-  <script>
-    const playerSelect = document.getElementById("players");
-    const playerFields = document.getElementById("playerFields");
-
-    function updatePlayerFields() {
-      const count = parseInt(playerSelect.value);
-      playerFields.innerHTML = ""; // clear existing
-
-      for (let i = 1; i <= count; i++) {
-        const label = document.createElement("label");
-        label.textContent = `Player ${i} Name`;
-        label.setAttribute("for", `player${i}`);
-
-        const input = document.createElement("input");
-        input.type = "text";
-        input.id = `player${i}`;
-        input.name = `player${i}`;
-        input.required = true;
-
-        playerFields.appendChild(label);
-        playerFields.appendChild(input);
-      }
-    }
-
-    playerSelect.addEventListener("change", updatePlayerFields);
-
-    // Initialize with default value
-    window.addEventListener("DOMContentLoaded", updatePlayerFields);
-  </script>
+<footer>
+  <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>

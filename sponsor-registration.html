@@ -1,79 +1,77 @@
+<!-- sponsor-registration.html (modernized) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sponsor Registration – David Tucker Memorial Golf Outing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sponsor Registration – David Tucker Memorial</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- 🔲 Top Header -->
-  <header class="site-header">
-    <div class="brand-name">David Tucker Memorial</div>
-    <div class="header-center">
-      <a href="index.html">Home</a>
-      <a href="register.html">Player Registration</a>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="brand">
+    <img src="DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
+    <span class="brand-name">David Tucker Memorial</span>
+  </div>
+  <nav class="main-nav" aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="register.html">Player Register</a></li>
+    </ul>
+  </nav>
+  <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗</button>
+</header>
 
-  <!-- 🔻 Hero Section -->
-  <section class="hero static-hero">
-    <div class="wrapper">
-      <h1>🎗️ Become a Sponsor</h1>
-      <p>Support our cause by sponsoring the 2025 memorial golf outing.</p>
-      <a href="index.html" class="btn">← Back to Home</a>
-    </div>
-  </section>
+<section class="static-hero">
+  <h1>Become a Sponsor</h1>
+  <p>Support our cause and gain visibility at the event.</p>
+  <a href="index.html" class="btn">← Back to Home</a>
+</section>
 
-  <!-- 📝 Sponsor Registration Form -->
-  <section class="register" id="sponsor-register">
-    <div class="wrapper">
-      <h2>Sponsor Registration</h2>
+<section class="register">
+  <div class="wrapper">
+    <h2>Sponsor Registration</h2>
+    <form action="https://formspree.io/f/xgvkarjn" method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <label for="sponsorName">Sponsor Name</label>
+        <input type="text" id="sponsorName" name="sponsorName" required />
 
-      <form action="https://formspree.io/f/xgvkarjn" method="POST" enctype="multipart/form-data">
-        <fieldset>
+        <label for="contactName">Contact Person</label>
+        <input type="text" id="contactName" name="contactName" required />
 
-          <label for="sponsorName">Sponsor Name</label>
-          <input type="text" id="sponsorName" name="sponsorName" required />
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="_replyto" required />
 
-          <label for="contactName">Contact Person</label>
-          <input type="text" id="contactName" name="contactName" required />
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" inputmode="tel" />
 
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="_replyto" required />
+        <label for="sponsorshipLevel">Sponsorship Level</label>
+        <select id="sponsorshipLevel" name="sponsorshipLevel" required>
+          <option value="">Select a Level</option>
+          <option value="Platinum">Platinum – $5,000</option>
+          <option value="Gold">Gold – $2,500</option>
+          <option value="Silver">Silver – $1,000</option>
+          <option value="Bronze">Bronze – $500</option>
+        </select>
 
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" />
+        <label for="logo">Company Logo (optional)</label>
+        <input type="file" id="logo" name="logo" accept="image/*" />
 
-          <label for="sponsorshipLevel">Sponsorship Level</label>
-          <select id="sponsorshipLevel" name="sponsorshipLevel" required>
-            <option value="">Select a Level</option>
-            <option value="Platinum">Platinum – $5,000</option>
-            <option value="Gold">Gold – $2,500</option>
-            <option value="Silver">Silver – $1,000</option>
-            <option value="Bronze">Bronze – $500</option>
-          </select>
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" rows="4"></textarea>
 
-          <label for="logo">Company Logo (optional)</label>
-          <input type="file" id="logo" name="logo" accept="image/*" />
+        <button type="submit" class="btn">Submit Sponsorship</button>
+      </fieldset>
+    </form>
+    <p class="note">We’ll contact you after submission with next steps.</p>
+  </div>
+</section>
 
-          <label for="notes">Additional Notes</label>
-          <textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea>
-
-          <button type="submit" class="btn">Submit Sponsorship</button>
-        </fieldset>
-      </form>
-
-      <p class="note">We’ll contact you with confirmation and next steps. Thank you for your support!</p>
-    </div>
-  </section>
-
-  <!-- 🔻 Footer -->
-  <footer>
-    <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
-  </footer>
-
-  <script src="scripts.js"></script>
+<footer>
+  <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>

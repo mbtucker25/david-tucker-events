@@ -1,32 +1,33 @@
+/* Updated styles.css: Modern, accessible, green-themed, dark mode supported */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
 
 :root {
   --green-dark: #228B22;
   --green-medium: #6FBF73;
-  --green-light: #DFF1E2;
+  --green-light: #E6F4EA;
   --sky-blue: #87CEEB;
-  --sand: #F5DEB3;
   --white: #ffffff;
   --black: #1d1d1d;
   --gray-light: #f9f9f9;
-  --gray-border: #e0e0e0;
+  --gray-dark: #333;
+  --border: #e0e0e0;
   --font-main: 'Open Sans', sans-serif;
   --font-heading: 'Bebas Neue', sans-serif;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   font-family: var(--font-main);
-  background: var(--gray-light);
+  background-color: var(--gray-light);
   color: var(--black);
   line-height: 1.6;
 }
 
-/* HEADER */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
 .site-header {
   background: linear-gradient(135deg, var(--green-dark), var(--sky-blue));
   color: var(--white);
@@ -39,63 +40,41 @@ body {
   z-index: 1000;
 }
 
-.site-header .brand-name {
+.site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  height: 40px;
+}
+
+.brand-name {
   font-family: var(--font-heading);
   font-size: 1.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.header-center a,
-.site-header a {
-  color: var(--white);
-  margin-left: 1rem;
-  font-weight: 600;
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
-.header-center a:hover {
+.main-nav a {
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.main-nav a:hover {
   text-decoration: underline;
 }
 
-.header-right .btn {
-  margin-left: 0.5rem;
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 220px;
-  background-color: var(--green-dark);
-  color: var(--white);
-  padding: 2rem 1rem;
-  position: fixed;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar img {
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-.sidebar nav a {
-  display: block;
-  color: var(--white);
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.sidebar nav a:hover {
-  color: var(--sky-blue);
-}
-
-.main-content {
-  margin-left: 220px;
-  padding: 2rem;
-  flex-grow: 1;
-}
-
-/* HERO */
 .hero-banner {
   position: relative;
   height: 400px;
@@ -105,7 +84,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.hero-banner .hero-image {
+.hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -128,16 +107,11 @@ body {
 .hero-overlay h1 {
   font-family: var(--font-heading);
   font-size: 3rem;
-  text-transform: uppercase;
   margin-bottom: 1rem;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.hero-overlay p {
-  font-size: 1.1rem;
-}
-
-/* BUTTONS */
 .btn {
   background-color: var(--green-dark);
   color: var(--white);
@@ -171,108 +145,17 @@ body {
   padding: 0.35rem 0.75rem;
 }
 
-/* CONTENT SECTIONS */
 section {
-  margin-bottom: 3rem;
-}
-
-.event-text,
-.contact-box,
-.donate,
-.register {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-h2 {
-  color: var(--green-dark);
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-/* SPONSORS */
-.sponsor-logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.sponsor-logos img {
-  width: 140px;
-  height: 80px;
-  object-fit: contain;
-  background: var(--white);
-  border: 1px solid var(--gray-border);
-  padding: 0.5rem;
-  border-radius: 6px;
-}
-
-/* SCHEDULE */
-.schedule-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.schedule-item {
-  background-color: var(--gray-light);
-  border-left: 4px solid var(--green-dark);
+  margin: 2rem auto;
   padding: 1rem;
-  border-radius: 6px;
+  max-width: 1000px;
 }
 
-.schedule-item strong {
-  display: block;
-  font-size: 1rem;
-  color: var(--green-dark);
-  font-weight: 700;
-}
-
-/* FORMS */
-.register form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.register fieldset {
-  border: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.register label {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.register input,
-.register select,
-.register textarea {
-  padding: 0.75rem;
-  border: 1px solid var(--gray-border);
-  border-radius: 4px;
-  font-family: var(--font-main);
-  font-size: 1rem;
-}
-
-.register input:focus,
-.register select:focus,
-.register textarea:focus {
-  border-color: var(--green-dark);
-  outline: none;
-}
-
-/* STATIC HERO */
 .static-hero {
   background: var(--green-light);
-  padding: 2rem 1rem;
   text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .static-hero h1 {
@@ -281,37 +164,74 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  font-size: 0.85rem;
-  color: #666;
-  padding: 2rem 0;
+.register, .event-text, .contact-box, .donate {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-/* RESPONSIVE */
+body.dark-mode .register,
+body.dark-mode .event-text,
+body.dark-mode .contact-box,
+body.dark-mode .donate {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+.register h2,
+.event-text h2,
+.donate h2 {
+  font-family: var(--font-heading);
+  color: var(--green-dark);
+  text-align: center;
+}
+
+form fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  font-weight: 600;
+}
+
+form input,
+form select,
+form textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: var(--green-dark);
+  outline: none;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
 @media (max-width: 768px) {
-  .container {
+  .main-nav ul {
     flex-direction: column;
+    gap: 0.5rem;
   }
-
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    justify-content: center;
-    padding: 1rem;
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
-
-  .main-content {
-    margin-left: 0;
-  }
-
-  .schedule-grid {
-    grid-template-columns: 1fr;
-  }
-
   .hero-overlay h1 {
     font-size: 2rem;
   }
