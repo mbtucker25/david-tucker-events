@@ -7,9 +7,24 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <!-- 🔲 Top UGA-style Header -->
+  <header class="site-header">
+    <div class="brand-name">David Tucker Memorial Classic</div>
+    <div class="header-center">
+      <a href="#event-details">Event Details</a>
+      <a href="#sponsors">Sponsors</a>
+      <a href="#donate">Donate</a>
+    </div>
+    <div class="header-right">
+      <a href="#donate" class="btn small">Donate Now</a>
+      <a href="register.html" class="btn small outline">Register</a>
+    </div>
+  </header>
+
   <div class="container">
 
-    <!-- Sidebar Navigation -->
+    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
         <img src="DavidTuckerLogo.png" alt="Event Logo" />
@@ -25,16 +40,16 @@
       </nav>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Main -->
     <main class="main-content">
       <div class="wrapper">
 
-        <!-- Hero -->
+        <!-- Hero Banner -->
         <section class="hero-banner">
           <img src="pittsboroGolfCourse.jpg" alt="Golf Banner" class="hero-image">
           <div class="hero-overlay">
-            <h1>David Tucker Memorial Golf Outing</h1>
-            <p>Pittsboro Golf Course - Pittsboro, IN<br>Saturday, July 19, 2025</p>
+            <h1>David Tucker Memorial Golf Classic</h1>
+            <p>Pittsboro Golf Course – Pittsboro, IN<br>Saturday, July 19, 2025</p>
             <div class="hero-buttons">
               <a href="register.html" class="btn">Register Now</a>
               <a href="#donate" class="btn secondary">Donate</a>
@@ -52,36 +67,40 @@
           </div>
         </section>
 
-        <!-- Event Details + Contact -->
+        <!-- Event Info -->
         <section id="event-details" class="event-info">
           <div class="event-text">
             <h2>Event Schedule</h2>
-            <ul>
-              <li><strong>8:30 AM</strong> – Liquid Breakfast Begins</li>
-              <li><strong>9:00 AM</strong> – Registration Opens</li>
-              <li><strong>9:00 AM</strong> – Driving Range Opens</li>
-              <li><strong>10:00 AM</strong> – Shotgun Start</li>
-              <li><strong>4:30 PM</strong> – White Castle Sliders for All</li>
-            </ul>
+            <div class="schedule-grid">
+              <div class="schedule-item"><strong>8:30 AM</strong><span>Liquid Breakfast Begins</span></div>
+              <div class="schedule-item"><strong>9:00 AM</strong><span>Registration Opens</span></div>
+              <div class="schedule-item"><strong>9:00 AM</strong><span>Driving Range Opens</span></div>
+              <div class="schedule-item"><strong>10:00 AM</strong><span>Shotgun Start</span></div>
+              <div class="schedule-item"><strong>4:30 PM</strong><span>White Castle Sliders for All</span></div>
+            </div>
           </div>
-          <div class="contact-box">
+
+          <!-- Contact Info -->
+          <div class="contact-box" id="contact">
             <h2>Contact</h2>
             <p><strong>Tucker Tournaments</strong><br>
               DavidTucker.Events@gmail.com</p>
 
             <h3>Location</h3>
             <p>Pittsboro Golf Course<br>2227 E US Highway 136<br>Pittsboro, IN 46167</p>
-            <a href="https://www.google.com/maps/place/Pittsboro+Golf+Course/@39.8670533,-86.4825376,17z/data=!3m1!4b1!4m6!3m5!1s0x886cb3eb4544508f:0x3bd9bf106c788b50!8m2!3d39.8670533!4d-86.4825376!16s%2Fg%2F1tctgbzn?entry=ttu" target="_blank" rel="noopener noreferrer">📍 Get Directions</a>
+            <a href="https://www.google.com/maps/place/Pittsboro+Golf+Course/@39.8670533,-86.4825376,17z/data=!3m1!4b1!4m6!3m5!1s0x886cb3eb4544508f:0x3bd9bf106c788b50!8m2!3d39.8670533!4d-86.4825376!16s%2Fg%2F1tctgbzn?entry=ttu" 
+               target="_blank" rel="noopener noreferrer">📍 Get Directions</a>
           </div>
         </section>
 
-        <!-- Donate -->
+        <!-- Donate Section -->
         <section id="donate" class="donate">
           <h2>Support the Cause</h2>
           <p>All proceeds go directly to a child currently battling cancer.</p>
           <a href="#" class="btn green">Donate via PayPal</a>
         </section>
 
+        <!-- Footer -->
         <footer>
           <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
         </footer>
@@ -89,6 +108,7 @@
       </div>
     </main>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
