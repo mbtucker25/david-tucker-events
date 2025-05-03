@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- 🔲 UGA-Style Top Header (same across pages if needed) -->
+  <!-- 🔲 Top Header -->
   <header class="site-header">
     <div class="brand-name">David Tucker Memorial</div>
     <div class="header-center">
@@ -17,7 +17,7 @@
     </div>
   </header>
 
-  <!-- 🔻 Page Heading -->
+  <!-- 🔻 Hero Section -->
   <section class="hero static-hero">
     <div class="wrapper">
       <h1>🏌️ Register for the Event</h1>
@@ -31,9 +31,8 @@
     <div class="wrapper">
       <h2>Register for the Event</h2>
 
-      <form action="https://formspree.io/f/xyzwebjq" method="POST">
+      <form action="https://formspree.io/f/xyzwebjq" method="POST" id="registrationForm">
         <fieldset>
-
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" required />
 
@@ -54,6 +53,9 @@
             <option value="4">4</option>
           </select>
 
+          <!-- 🔧 Dynamic Player Inputs -->
+          <div id="playerFields"></div>
+
           <button type="submit" class="btn">Submit Registration</button>
         </fieldset>
       </form>
@@ -66,5 +68,35 @@
   <footer>
     <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
   </footer>
+
+  <script>
+    const playerSelect = document.getElementById("players");
+    const playerFields = document.getElementById("playerFields");
+
+    function updatePlayerFields() {
+      const count = parseInt(playerSelect.value);
+      playerFields.innerHTML = ""; // clear existing
+
+      for (let i = 1; i <= count; i++) {
+        const label = document.createElement("label");
+        label.textContent = `Player ${i} Name`;
+        label.setAttribute("for", `player${i}`);
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = `player${i}`;
+        input.name = `player${i}`;
+        input.required = true;
+
+        playerFields.appendChild(label);
+        playerFields.appendChild(input);
+      }
+    }
+
+    playerSelect.addEventListener("change", updatePlayerFields);
+
+    // Initialize with default value
+    window.addEventListener("DOMContentLoaded", updatePlayerFields);
+  </script>
 </body>
 </html>
