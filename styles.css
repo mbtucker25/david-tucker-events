@@ -2,10 +2,15 @@
 
 :root {
   --iu-crimson: #990000;
-  --iu-black: #000000;
-  --iu-white: #ffffff;
+  --iu-crimson-dark: #7b0000;
   --iu-cream: #F2E8D5;
-  --iu-gray: #D8CAB8;
+  --iu-white: #ffffff;
+  --iu-black: #000000;
+
+  --gradient-primary: linear-gradient(135deg, var(--iu-crimson), var(--iu-cream));
+  --gradient-inverse: linear-gradient(135deg, var(--iu-cream), var(--iu-crimson));
+  --gradient-hover: linear-gradient(135deg, var(--iu-crimson-dark), #EEEDEB);
+
   --iu-font: 'Roboto', sans-serif;
 }
 
@@ -24,17 +29,17 @@ body {
 
 /* HEADER */
 .site-header {
-  background-color: var(--iu-black);
+  background: var(--gradient-primary);
   color: var(--iu-white);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 2rem;
   font-size: 0.9rem;
-  border-bottom: 4px solid var(--iu-crimson);
   position: sticky;
   top: 0;
   z-index: 999;
+  border-bottom: none;
 }
 
 .site-header .brand-name {
@@ -69,8 +74,8 @@ body {
 /* SIDEBAR */
 .sidebar {
   width: 220px;
-  background-color: var(--iu-black);
-  color: var(--iu-white);
+  background: var(--gradient-inverse);
+  color: var(--iu-black);
   padding: 2rem 1rem;
   position: fixed;
   height: 100vh;
@@ -88,15 +93,19 @@ body {
 
 .sidebar nav a {
   display: block;
-  color: var(--iu-white);
+  color: var(--iu-black);
   text-decoration: none;
   margin-bottom: 1rem;
   font-weight: 500;
   text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
 .sidebar nav a:hover {
-  color: var(--iu-crimson);
+  background: var(--gradient-hover);
+  color: var(--iu-white);
 }
 
 /* MAIN CONTENT */
@@ -106,7 +115,7 @@ body {
   flex-grow: 1;
 }
 
-/* HERO BANNER */
+/* HERO */
 .hero-banner {
   position: relative;
   height: 400px;
@@ -119,7 +128,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(65%);
   transition: transform 0.4s ease;
 }
 
@@ -130,13 +138,13 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
+  background: linear-gradient(90deg, rgba(153,0,0,0.85), rgba(242,232,213,0.75));
   color: white;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-banner h1 {
@@ -152,7 +160,7 @@ body {
 
 /* BUTTONS */
 .btn {
-  background-color: var(--iu-crimson);
+  background: var(--gradient-primary);
   color: var(--iu-white);
   padding: 0.5rem 1rem;
   border: none;
@@ -166,14 +174,15 @@ body {
 }
 
 .btn:hover {
-  background-color: #7e0000;
+  background: var(--gradient-hover);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: var(--iu-white);
 }
 
 .btn.outline {
-  border: 1px solid white;
+  border: 1px solid var(--iu-white);
   background: transparent;
-  color: white;
+  color: var(--iu-white);
 }
 
 .btn.small {
@@ -189,12 +198,13 @@ body {
   background-color: #218838;
 }
 
-/* SHARED BLOCKS */
+/* CONTENT BLOCKS */
 .event-text,
 .contact-box,
 .donate,
 .register {
-  background-color: var(--iu-cream);
+  background: var(--gradient-inverse);
+  color: var(--iu-black);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -293,7 +303,8 @@ body {
 
 .register input:focus,
 .register select:focus {
-  border-color: var(--iu-crimson);
+  border: 2px solid var(--iu-crimson);
+  box-shadow: 0 0 0 2px rgba(153, 0, 0, 0.1);
   outline: none;
 }
 
@@ -304,11 +315,10 @@ body {
 
 /* STATIC HERO */
 .static-hero {
-  background-color: var(--iu-black);
+  background: var(--gradient-primary);
   color: white;
   padding: 2rem 1rem;
   text-align: center;
-  border-bottom: 4px solid var(--iu-crimson);
 }
 
 .static-hero h1 {
