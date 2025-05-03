@@ -33,7 +33,7 @@ section {
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background: linear-gradient(180deg, #2e7d60, #a0d9c5);
+  background: linear-gradient(270deg, #2e7d60, #a0d9c5);
   color: white;
   padding: 2rem 1rem;
   position: fixed;
