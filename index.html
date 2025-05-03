@@ -7,42 +7,82 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
-    <h1>🏌️ David Tucker Memorial Golf Outing</h1>
-    <p>Honoring David Tucker's memory. Supporting a child battling cancer.</p>
-    <a href="#donate" class="btn">Donate Now</a>
-  </header>
+  <div class="container">
 
-  <section class="about">
-    <h2>About the Event</h2>
-    <p>This annual golf outing celebrates the memory of David Tucker, a beloved father, friend, and sports enthusiast. Proceeds support a child currently fighting cancer.</p>
-  </section>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="your-logo.png" alt="Event Logo" />
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="#event-details">Event Details</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </aside>
 
-  <section class="details">
-    <h2>Event Details</h2>
-    <ul>
-      <li><strong>Date:</strong> August 24, 2025</li>
-      <li><strong>Time:</strong> 8:00 AM - Shotgun Start</li>
-      <li><strong>Location:</strong> Green Meadows Golf Club</li>
-      <li><strong>Format:</strong> 4-Man Scramble</li>
-      <li><strong>Entry Fee:</strong> $75 per player (includes lunch, shirt, and prizes)</li>
-    </ul>
-  </section>
+    <!-- Main Content -->
+    <main class="main-content">
 
-  <section id="donate" class="donate">
-    <h2>Support the Cause</h2>
-    <p>All proceeds go directly to a child and their family currently facing the fight against cancer.</p>
-    <a href="#" class="btn">Donate via PayPal</a> <!-- Replace with real link later -->
-  </section>
+      <!-- Hero -->
+      <section class="hero-banner">
+        <h1>David Tucker Memorial Golf Outing</h1>
+        <p>Bear Dance Golf Club, Larkspur, CO<br>Tuesday, July 16, 2024</p>
+        <div class="hero-buttons">
+          <a href="register.html" class="btn">Register Now</a>
+          <a href="#donate" class="btn secondary">Donate</a>
+        </div>
+      </section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <p>Questions? Want to volunteer or sponsor?</p>
-    <p>Email: <a href="mailto:golf@tuckermemorial.org">golf@tuckermemorial.org</a></p>
-  </section>
+      <!-- Sponsor Row -->
+      <section id="sponsors" class="sponsors">
+        <h2>Our Sponsors</h2>
+        <div class="sponsor-logos">
+          <img src="sponsor1.jpg" alt="Sponsor 1">
+          <img src="sponsor2.jpg" alt="Sponsor 2">
+          <img src="sponsor3.jpg" alt="Sponsor 3">
+          <!-- Add more logos as needed -->
+        </div>
+      </section>
 
-  <footer>
-    <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
-  </footer>
+      <!-- Event Details + Contact -->
+      <section id="event-details" class="event-info">
+        <div class="event-text">
+          <h2>Event Schedule</h2>
+          <ul>
+            <li><strong>7:00 AM</strong> – Breakfast Burrito</li>
+            <li><strong>7:00 AM</strong> – Registration Opens</li>
+            <li><strong>7:00 AM</strong> – Driving Range Opens</li>
+            <li><strong>8:00 AM</strong> – Shotgun Start</li>
+            <li><strong>12:30 PM</strong> – Beef & Turkey Carving Lunch</li>
+          </ul>
+        </div>
+        <div class="contact-box">
+          <h2>Contact</h2>
+          <p><strong>Michael Tucker</strong><br>
+            golf@tuckermemorial.org</p>
+
+          <h3>Location</h3>
+          <p>Pittsboro Golf Course<br>2227 E US Highway 136<br>Pittsboro, IN 46167</p>
+          <a href="https://www.google.com/maps/place/Pittsboro+Golf+Course/@39.8670533,-86.4825376,17z/data=!3m1!4b1!4m6!3m5!1s0x886cb3eb4544508f:0x3bd9bf106c788b50!8m2!3d39.8670533!4d-86.4825376!16s%2Fg%2F1tctgbzn?entry=ttu&g_ep=EgoyMDI1MDQzMC4xIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">📍 Get Directions</a>
+        </div>
+      </section>
+
+      <!-- Donate -->
+      <section id="donate" class="donate">
+        <h2>Support the Cause</h2>
+        <p>All proceeds go directly to a child currently battling cancer.</p>
+        <a href="#" class="btn green">Donate via PayPal</a>
+      </section>
+
+      <footer>
+        <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
+      </footer>
+
+    </main>
+  </div>
 </body>
 </html>
