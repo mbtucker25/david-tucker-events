@@ -1,7 +1,5 @@
-/* 🌿 Updated David Tucker Memorial Stylesheet */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
 
-/* Design Tokens */
 :root {
   --green-dark: #228B22;
   --green-medium: #6FBF73;
@@ -10,41 +8,43 @@
   --white: #ffffff;
   --black: #1d1d1d;
   --gray-light: #f9f9f9;
-  --gray-dark: #2a2a2a;
+  --gray-dark: #333;
   --border: #e0e0e0;
   --font-main: 'Open Sans', sans-serif;
   --font-heading: 'Bebas Neue', sans-serif;
 }
 
-/* Base Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
+  margin: 0;
   font-family: var(--font-main);
   background-color: var(--gray-light);
   color: var(--black);
   line-height: 1.6;
 }
 
-/* Dark Mode */
 body.dark-mode {
   background-color: #121212;
   color: #e0e0e0;
 }
 
-body.dark-mode .register,
-body.dark-mode .event-text,
-body.dark-mode .contact-box,
-body.dark-mode .donate {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+  z-index: 999;
 }
 
-/* Site Header */
 .site-header {
   background: linear-gradient(135deg, var(--green-dark), var(--sky-blue));
   color: var(--white);
@@ -57,7 +57,7 @@ body.dark-mode .donate {
   z-index: 1000;
 }
 
-.site-header .brand {
+.brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -74,27 +74,22 @@ body.dark-mode .donate {
   text-transform: uppercase;
 }
 
-/* Navigation */
 .main-nav ul {
   list-style: none;
   display: flex;
-  justify-content: center;
   gap: 1rem;
   padding: 0;
   margin: 0;
 }
-
 .main-nav a {
   color: var(--white);
   text-decoration: none;
   font-weight: 600;
 }
-
 .main-nav a:hover {
-  opacity: 0.8;
+  text-decoration: underline;
 }
 
-/* Hero */
 .hero-banner {
   position: relative;
   width: 100%;
@@ -110,6 +105,10 @@ body.dark-mode .donate {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.7);
+  transition: transform 0.4s ease;
+}
+.hero-banner:hover .hero-image {
+  transform: scale(1.01);
 }
 
 .hero-overlay {
@@ -124,30 +123,14 @@ body.dark-mode .donate {
   background: rgba(0, 0, 0, 0.35);
   padding: 2rem;
 }
-
 .hero-overlay h1 {
   font-family: var(--font-heading);
   font-size: 3rem;
   margin-bottom: 1rem;
-  letter-spacing: 1px;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Static Hero (Register/Sponsor Pages) */
-.static-hero {
-  background: var(--green-light);
-  text-align: center;
-  padding: 2rem 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.static-hero h1 {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Buttons */
 .btn {
   background-color: var(--green-dark);
   color: var(--white);
@@ -160,32 +143,39 @@ body.dark-mode .donate {
   text-decoration: none;
   transition: background 0.3s ease;
 }
-
 .btn:hover {
   background-color: var(--green-medium);
 }
-
 .btn.outline {
   background: transparent;
   border: 2px solid var(--white);
   color: var(--white);
 }
-
 .btn.outline:hover {
   background-color: var(--white);
   color: var(--green-dark);
 }
-
 .btn.small {
   font-size: 0.75rem;
   padding: 0.35rem 0.75rem;
 }
 
-/* Page Sections */
 section {
   margin: 2rem auto;
   padding: 1rem;
   max-width: 1000px;
+}
+
+.static-hero {
+  background: var(--green-light);
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.static-hero h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .register, .event-text, .contact-box, .donate {
@@ -193,6 +183,14 @@ section {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+body.dark-mode .register,
+body.dark-mode .event-text,
+body.dark-mode .contact-box,
+body.dark-mode .donate {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
 }
 
 .register h2,
@@ -203,18 +201,15 @@ section {
   text-align: center;
 }
 
-/* Forms */
 form fieldset {
   border: none;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-
 form label {
   font-weight: 600;
 }
-
 form input,
 form select,
 form textarea {
@@ -224,7 +219,6 @@ form textarea {
   font-family: var(--font-main);
   font-size: 1rem;
 }
-
 form input:focus,
 form select:focus,
 form textarea:focus {
@@ -232,7 +226,29 @@ form textarea:focus {
   outline: none;
 }
 
-/* Sponsor Images */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.schedule-item {
+  background-color: var(--white);
+  border-left: 4px solid var(--green-dark);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.schedule-item strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--green-dark);
+}
+.schedule-item span {
+  font-size: 0.95rem;
+  color: var(--gray-dark);
+}
+
 .sponsor-logos {
   display: flex;
   flex-wrap: wrap;
@@ -240,18 +256,16 @@ form textarea:focus {
   gap: 1rem;
   margin-top: 1rem;
 }
-
 .sponsor-logos img {
   max-height: 100px;
   max-width: 180px;
   object-fit: contain;
   border-radius: 6px;
-  background: white;
+  background: var(--white);
   padding: 0.25rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 2rem;
@@ -259,119 +273,17 @@ footer {
   color: #666;
 }
 
-/* Logo Alignment */
-.logo img {
-  max-width: 180px;
-  height: auto;
-  display: block;
-  margin: 1rem auto;
-}
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .main-nav ul {
     flex-direction: column;
     gap: 0.5rem;
   }
-
   .site-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-
   .hero-overlay h1 {
     font-size: 2rem;
   }
-
-  .hero-banner {
-    height: auto;
-  }
-}
-
-a:focus, button:focus, input:focus, select:focus, textarea:focus {
-    outline: 2px solid var(--green-medium);
-    outline-offset: 3px;
-  }
-
-  body.dark-mode a {
-    color: #90cdf4; /* soft light blue */
-  }
-  body.dark-mode a:hover {
-    color: #63b3ed;
-  }
-
-  body.dark-mode .event-text h2 {
-    color: var(--sky-blue);
-  }
-
-  /* 📱 Mobile-Specific Enhancements */
-@media (max-width: 768px) {
-  .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .main-nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .brand-logo {
-    height: 32px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-overlay p {
-    font-size: 1rem;
-  }
-
-  .schedule-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sponsor-logos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .register form,
-  .contact-box,
-  .donate,
-  .event-text {
-    padding: 1rem;
-  }
-
-  form input,
-  form select,
-  form textarea {
-    font-size: 1rem;
-    padding: 0.6rem;
-  }
-
-  .btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #000;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  z-index: 100;
-  transition: top 0.3s;
-}
-
-.skip-link:focus {
-  top: 0;
 }

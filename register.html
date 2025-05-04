@@ -6,10 +6,12 @@
   <title>Register – David Tucker Memorial Golf Outing</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
 
-  <!-- Header -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="brand">
       <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
@@ -24,20 +26,20 @@
     <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗</button>
   </header>
 
-  <!-- Hero -->
   <section class="static-hero">
     <h1>Register to Play</h1>
     <p>Secure your spot for the 2025 memorial golf outing.</p>
     <a href="index.html" class="btn">← Back to Home</a>
   </section>
 
-  <!-- Form Section -->
-  <main id="main" class="main-content">
-    <section class="register" id="register">
+  <main id="main">
+    <section class="register">
       <div class="wrapper">
         <h2>Player Registration</h2>
         <form action="https://formspree.io/f/xyzwebjq" method="POST">
           <fieldset>
+            <legend>Team Contact Info</legend>
+
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required />
 
@@ -68,12 +70,10 @@
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
-<a href="#main" class="skip-link">Skip to main content</a>
 </html>

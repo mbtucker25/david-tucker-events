@@ -3,81 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sponsor Registration – David Tucker Memorial Golf Outing</title>
+  <title>Sponsor – David Tucker Memorial Golf Outing</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
 
-  <!-- Header -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="brand">
-      <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
+      <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />
       <span class="brand-name">David Tucker Memorial</span>
     </div>
     <nav class="main-nav" aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="register.html">Player Register</a></li>
+        <li><a href="register.html">Register</a></li>
       </ul>
     </nav>
     <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗</button>
   </header>
 
-  <!-- Static Hero -->
   <section class="static-hero">
-    <h1>Become a Sponsor</h1>
-    <p>Support our cause and gain visibility at the event.</p>
+    <h1>Sponsor the Event</h1>
+    <p>Join us as a sponsor and support a meaningful cause.</p>
     <a href="index.html" class="btn">← Back to Home</a>
   </section>
 
-  <!-- Form -->
-  <main id="main" class="main-content">
-    <section class="register" id="register">
+  <main id="main">
+    <section class="register">
       <div class="wrapper">
-        <h2>Sponsor Registration</h2>
-        <form action="https://formspree.io/f/xyzwebjq" method="POST" enctype="multipart/form-data">
+        <h2>Sponsorship Registration</h2>
+        <form action="https://formspree.io/f/xyzwebjq" method="POST">
           <fieldset>
-            <label for="sponsorName">Sponsor Name</label>
-            <input type="text" id="sponsorName" name="sponsorName" required />
+            <legend>Sponsor Information</legend>
 
-            <label for="contactPerson">Contact Person</label>
-            <input type="text" id="contactPerson" name="contactPerson" required />
+            <label for="org">Organization Name</label>
+            <input type="text" id="org" name="organization" required />
 
-            <label for="email">Email Address</label>
+            <label for="contact">Contact Name</label>
+            <input type="text" id="contact" name="contact" required />
+
+            <label for="email">Email</label>
             <input type="email" id="email" name="_replyto" required />
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" />
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" inputmode="tel" />
 
             <label for="level">Sponsorship Level</label>
             <select id="level" name="level" required>
-              <option value="">Select a Level</option>
-              <option value="Gold">Gold – $1,000</option>
-              <option value="Silver">Silver – $500</option>
-              <option value="Bronze">Bronze – $250</option>
+              <option value="">-- Choose a level --</option>
+              <option value="Hole Sponsor">Hole Sponsor - $100</option>
+              <option value="Gold Sponsor">Gold Sponsor - $250</option>
+              <option value="Platinum Sponsor">Platinum Sponsor - $500</option>
+              <option value="Title Sponsor">Title Sponsor - $1000</option>
             </select>
 
-            <label for="logo">Company Logo (optional)</label>
-            <input type="file" id="logo" name="logo" accept="image/*" />
-
-            <label for="notes">Additional Notes</label>
+            <label for="notes">Additional Notes (optional)</label>
             <textarea id="notes" name="notes" rows="4"></textarea>
 
             <button type="submit" class="btn">Submit Sponsorship</button>
           </fieldset>
         </form>
-        <p class="note">You’ll receive a confirmation email after submission.</p>
+        <p class="note">We will follow up via email with your sponsorship packet and next steps.</p>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
-<a href="#main" class="skip-link">Skip to main content</a>
 </html>
