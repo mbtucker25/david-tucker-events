@@ -28,18 +28,30 @@ function updatePlayerFields() {
   playerFields.innerHTML = "";
 
   for (let i = 1; i <= count; i++) {
-    const label = document.createElement("label");
-    label.setAttribute("for", `player${i}`);
-    label.textContent = `Player ${i} Name`;
+    const nameLabel = document.createElement("label");
+    nameLabel.setAttribute("for", `player${i}_name`);
+    nameLabel.textContent = `Player ${i} Name`;
 
-    const input = document.createElement("input");
-    input.type = "text";
-    input.id = `player${i}`;
-    input.name = `player${i}`;
-    input.required = true;
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.id = `player${i}_name`;
+    nameInput.name = `player${i}_name`;
+    nameInput.required = true;
 
-    playerFields.appendChild(label);
-    playerFields.appendChild(input);
+    const emailLabel = document.createElement("label");
+    emailLabel.setAttribute("for", `player${i}_email`);
+    emailLabel.textContent = `Player ${i} Email`;
+
+    const emailInput = document.createElement("input");
+    emailInput.type = "email";
+    emailInput.id = `player${i}_email`;
+    emailInput.name = `player${i}_email`;
+    emailInput.required = true;
+
+    playerFields.appendChild(nameLabel);
+    playerFields.appendChild(nameInput);
+    playerFields.appendChild(emailLabel);
+    playerFields.appendChild(emailInput);
   }
 }
 
