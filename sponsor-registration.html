@@ -1,18 +1,17 @@
-<!-- sponsor-registration.html (modernized) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sponsor Registration – David Tucker Memorial</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Sponsor Registration – David Tucker Memorial Golf Outing</title>
+  <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header class="site-header">
   <div class="brand">
-    <img src="DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
+    <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
     <span class="brand-name">David Tucker Memorial</span>
   </div>
   <nav class="main-nav" aria-label="Main navigation">
@@ -30,16 +29,16 @@
   <a href="index.html" class="btn">← Back to Home</a>
 </section>
 
-<section class="register">
+<section class="register" id="register">
   <div class="wrapper">
     <h2>Sponsor Registration</h2>
-    <form action="https://formspree.io/f/xgvkarjn" method="POST" enctype="multipart/form-data">
+    <form action="https://formspree.io/f/xyzwebjq" method="POST" enctype="multipart/form-data">
       <fieldset>
         <label for="sponsorName">Sponsor Name</label>
         <input type="text" id="sponsorName" name="sponsorName" required />
 
-        <label for="contactName">Contact Person</label>
-        <input type="text" id="contactName" name="contactName" required />
+        <label for="contact">Contact Person</label>
+        <input type="text" id="contact" name="contact" required />
 
         <label for="email">Email Address</label>
         <input type="email" id="email" name="_replyto" required />
@@ -47,31 +46,30 @@
         <label for="phone">Phone Number</label>
         <input type="tel" id="phone" name="phone" inputmode="tel" />
 
-        <label for="sponsorshipLevel">Sponsorship Level</label>
-        <select id="sponsorshipLevel" name="sponsorshipLevel" required>
+        <label for="level">Sponsorship Level</label>
+        <select id="level" name="level" required>
           <option value="">Select a Level</option>
-          <option value="Platinum">Platinum – $5,000</option>
-          <option value="Gold">Gold – $2,500</option>
-          <option value="Silver">Silver – $1,000</option>
-          <option value="Bronze">Bronze – $500</option>
+          <option value="Gold">Gold</option>
+          <option value="Silver">Silver</option>
+          <option value="Bronze">Bronze</option>
         </select>
 
         <label for="logo">Company Logo (optional)</label>
         <input type="file" id="logo" name="logo" accept="image/*" />
 
         <label for="notes">Additional Notes</label>
-        <textarea id="notes" name="notes" rows="4"></textarea>
+        <textarea id="notes" name="notes" rows="4" placeholder="Anything you'd like us to know..."></textarea>
 
         <button type="submit" class="btn">Submit Sponsorship</button>
       </fieldset>
     </form>
-    <p class="note">We’ll contact you after submission with next steps.</p>
+    <p class="note">We'll follow up with an invoice or confirmation based on your submission.</p>
   </div>
 </section>
 
 <footer>
   <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
 </footer>
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
