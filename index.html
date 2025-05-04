@@ -1,87 +1,81 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>David Tucker Memorial Golf Outing</title>
-  <link rel="icon" href="images/favicon.png" type="image/png" />
   <link rel="stylesheet" href="css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#228B22" />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />    
+        <nav class="nav-menu" aria-label="Sidebar navigation">
+        <button id="darkModeToggle" class="btn">🌓 Toggle Dark Mode</button>
+        <a href="index.html" class="btn small">Home</a>
+        <a href="#event-details" class="btn small">Event Details</a>
+        <a href="#sponsors" class="btn small">Sponsors</a>
+        <a href="#donate" class="btn small">Donate</a>
+        <a href="register.html" class="btn small">Register</a>
+        <a href="sponsor-registration.html" class="btn small">Sponsor</a>
+        </nav>
+    </aside>
+    <main class="main-content">
+      <section class="hero-banner">
+        <img src="images/pittsboroGolfCourse.jpg" alt="Golf Course" class="hero-image" />
+        <div class="hero-overlay">
+          <h1>David Tucker Memorial Golf Classic</h1>
+          <p>Pittsboro Golf Course – July 19, 2025</p>
+          <div class="hero-buttons">
+            <a href="register.html" class="btn">Register Now</a>
+            <a href="#donate" class="btn outline">Donate</a>
+          </div>
+        </div>
+      </section>
 
-  <a href="#main" class="skip-link">Skip to main content</a>
+      <section id="event-details" class="event-text">
+        <h2>Event Schedule</h2>
+        <div class="schedule-grid">
+          <div class="schedule-item"><strong>8:30 AM</strong><span>Liquid Breakfast</span></div>
+          <div class="schedule-item"><strong>9:00 AM</strong><span>Registration & Driving Range</span></div>
+          <div class="schedule-item"><strong>10:00 AM</strong><span>Shotgun Start</span></div>
+          <div class="schedule-item"><strong>4:30 PM</strong><span>White Castle Sliders</span></div>
+        </div>
+      </section>
 
-  <header class="site-header">
-    <div class="brand">
-      <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />
-      <span class="brand-name">David Tucker Memorial</span>
-    </div>
-    <nav class="main-nav" aria-label="Main navigation">
-      <ul>
-        <li><a href="#event-details">Event Details</a></li>
-        <li><a href="#sponsors">Sponsors</a></li>
-        <li><a href="#donate">Donate</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="sponsor-registration.html">Sponsor</a></li>
-      </ul>
-    </nav>
-    <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗 Dark Mode</button>
-  </header>
+      <section id="sponsors" class="event-text">
+        <h2>Our Sponsors</h2>
+        <div class="sponsor-logos">
+          <img src="images/sponsors/ArcemSolutions.jpeg" alt="Arcem Solutions" />
+          <img src="images/sponsors/Margo.jpeg" alt="Margo Tucker" />
+          <img src="images/sponsors/sponsor3.png" alt="Dancers Showclub" />
+        </div>
+      </section>
 
-  <section class="hero-banner">
-    <img src="images/pittsboroGolfCourse.jpg" alt="Golf Course" class="hero-image" />
-    <div class="hero-overlay">
-      <h1>David Tucker Memorial Golf Classic</h1>
-      <p>Pittsboro Golf Course – July 19, 2025</p>
-      <div class="hero-buttons">
-        <a href="register.html" class="btn">Register Now</a>
-        <a href="#donate" class="btn outline">Donate</a>
-      </div>
-    </div>
-  </section>
+      <section id="donate" class="donate">
+        <h2>Support the Cause</h2>
+        <p>All proceeds go directly to children battling cancer.</p>
+        <a href="#" class="btn">Donate via PayPal</a>
+      </section>
 
-  <main id="main" class="main-content">
-    <section id="event-details" class="event-text">
-      <h2>Event Schedule</h2>
-      <div class="schedule-grid">
-        <div class="schedule-item"><strong>8:30 AM</strong><span>Liquid Breakfast</span></div>
-        <div class="schedule-item"><strong>9:00 AM</strong><span>Registration & Driving Range</span></div>
-        <div class="schedule-item"><strong>10:00 AM</strong><span>Shotgun Start</span></div>
-        <div class="schedule-item"><strong>4:30 PM</strong><span>White Castle Sliders</span></div>
-      </div>
-    </section>
+      <section id="contact" class="contact-box">
+        <h2>Contact</h2>
+        <p><strong>Tucker Tournaments</strong><br>
+          <a href="mailto:DavidTucker.Events@gmail.com">DavidTucker.Events@gmail.com</a></p>
+        <h3>Location</h3>
+        <p>Pittsboro Golf Course<br>2227 E US Highway 136<br>Pittsboro, IN 46167</p>
+        <a href="https://goo.gl/maps/XsHz3MwMTGEoKywQA" target="_blank" rel="noopener">📍 Get Directions</a>
+      </section>
 
-    <section id="sponsors" class="event-text">
-      <h2>Our Sponsors</h2>
-      <div class="sponsor-logos">
-        <img src="images/sponsors/ArcemSolutions.jpeg" alt="Arcem Solutions" />
-        <img src="images/sponsors/Margo.jpeg" alt="Margo Tucker" />
-        <img src="images/sponsors/sponsor3.png" alt="Dancers Showclub" />
-      </div>
-    </section>
+      <footer>
+        <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
+      </footer>
+    </main>
+  </div>
 
-    <section id="donate" class="donate">
-      <h2>Support the Cause</h2>
-      <p>All proceeds go directly to children battling cancer.</p>
-      <a href="#" class="btn">Donate via PayPal</a>
-    </section>
-
-    <section id="contact" class="contact-box">
-      <h2>Contact</h2>
-      <p><strong>Tucker Tournaments</strong><br>
-        <a href="mailto:DavidTucker.Events@gmail.com">DavidTucker.Events@gmail.com</a></p>
-      <h3>Location</h3>
-      <p>Pittsboro Golf Course<br>2227 E US Highway 136<br>Pittsboro, IN 46167</p>
-      <a href="https://goo.gl/maps/XsHz3MwMTGEoKywQA" target="_blank" rel="noopener noreferrer">📍 Get Directions</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
-  </footer>
+  <script src="js/script.js"></script>
 </body>
-<script src="js/script.js"></script>
 </html>

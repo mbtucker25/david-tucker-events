@@ -12,67 +12,70 @@
 
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="brand">
-      <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo"/>
-      <span class="brand-name">David Tucker Memorial</span>
-    </div>
-    <nav class="main-nav" aria-label="Main navigation">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="sponsor-registration.html">Sponsor</a></li>
-      </ul>
-    </nav>
-    <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗</button>
-  </header>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />
 
-  <section class="static-hero">
-    <h1>Register to Play</h1>
-    <p>Secure your spot for the 2025 memorial golf outing.</p>
-    <a href="index.html" class="btn">← Back to Home</a>
-  </section>
+      <nav class="nav-menu" aria-label="Sidebar navigation">
+        <button id="darkModeToggle" class="btn">🌓 Toggle Dark Mode</button>
+        <a href="index.html" class="btn small">Home</a>
+        <a href="register.html" class="btn small">Register</a>
+        <a href="sponsor-registration.html" class="btn small">Sponsor</a>
+        <a href="#main" class="btn small">Form</a>
+      </nav>
+    </aside>
 
-  <main id="main">
-    <section class="register">
-      <div class="wrapper">
-        <h2>Player Registration</h2>
-        <form action="https://formspree.io/f/xyzwebjq" method="POST">
-          <fieldset>
-            <legend>Team Contact Info</legend>
+    <!-- Main Content Area -->
+    <main class="main-content" id="main">
+      <section class="static-hero">
+        <h1>Register to Play</h1>
+        <p>Secure your spot for the 2025 memorial golf outing.</p>
+        <a href="index.html" class="btn">← Back to Home</a>
+      </section>
 
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required />
+      <section class="register">
+        <div class="wrapper">
+          <h2>Player Registration</h2>
+          <form action="https://formspree.io/f/xyzwebjq" method="POST">
+            <fieldset>
+              <legend>Team Contact Info</legend>
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="_replyto" required />
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required />
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" inputmode="tel" />
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="_replyto" required />
 
-            <label for="team">Team Name (optional)</label>
-            <input type="text" id="team" name="team" />
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" inputmode="tel" />
 
-            <label for="players">Number of Players</label>
-            <select id="players" name="players" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
+              <label for="team">Team Name (optional)</label>
+              <input type="text" id="team" name="team" />
 
-            <div id="playerFields"></div>
+              <label for="players">Number of Players</label>
+              <select id="players" name="players" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
 
-            <button type="submit" class="btn">Submit Registration</button>
-          </fieldset>
-        </form>
-        <p class="note">You'll receive a confirmation email after registration.</p>
-      </div>
-    </section>
-  </main>
+              <div id="playerFields"></div>
+
+              <button type="submit" class="btn">Submit Registration</button>
+            </fieldset>
+          </form>
+          <p class="note">You'll receive a confirmation email after registration.</p>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <footer>
     <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
   </footer>
+
+  <script src="js/script.js"></script>
 </body>
-<script src="js/script.js"></script>
 </html>
