@@ -1,6 +1,7 @@
-/* Updated styles.css: Modern, accessible, green-themed, dark mode supported */
+/* 🌿 Updated David Tucker Memorial Stylesheet */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
 
+/* Design Tokens */
 :root {
   --green-dark: #228B22;
   --green-medium: #6FBF73;
@@ -9,32 +10,41 @@
   --white: #ffffff;
   --black: #1d1d1d;
   --gray-light: #f9f9f9;
-  --gray-dark: #333;
+  --gray-dark: #2a2a2a;
   --border: #e0e0e0;
   --font-main: 'Open Sans', sans-serif;
   --font-heading: 'Bebas Neue', sans-serif;
 }
 
-body {
+/* Base Reset */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: var(--font-main);
   background-color: var(--gray-light);
   color: var(--black);
   line-height: 1.6;
 }
 
-.logo img {
-    max-width: 180px;
-    height: auto;
-    display: block;
-    margin: 1rem auto;
-  }  
-
+/* Dark Mode */
 body.dark-mode {
   background-color: #121212;
   color: #e0e0e0;
 }
 
+body.dark-mode .register,
+body.dark-mode .event-text,
+body.dark-mode .contact-box,
+body.dark-mode .donate {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+/* Site Header */
 .site-header {
   background: linear-gradient(135deg, var(--green-dark), var(--sky-blue));
   color: var(--white);
@@ -64,25 +74,27 @@ body.dark-mode {
   text-transform: uppercase;
 }
 
+/* Navigation */
 .main-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .main-nav li {
-    list-style: none;
-  }
-  
-  .main-nav a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.main-nav a:hover {
+  opacity: 0.8;
+}
+
+/* Hero */
 .hero-banner {
   position: relative;
   width: 100%;
@@ -121,6 +133,21 @@ body.dark-mode {
   text-transform: uppercase;
 }
 
+/* Static Hero (Register/Sponsor Pages) */
+.static-hero {
+  background: var(--green-light);
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.static-hero h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
 .btn {
   background-color: var(--green-dark);
   color: var(--white);
@@ -154,23 +181,11 @@ body.dark-mode {
   padding: 0.35rem 0.75rem;
 }
 
+/* Page Sections */
 section {
   margin: 2rem auto;
   padding: 1rem;
   max-width: 1000px;
-}
-
-.static-hero {
-  background: var(--green-light);
-  text-align: center;
-  padding: 2rem 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.static-hero h1 {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .register, .event-text, .contact-box, .donate {
@@ -178,14 +193,6 @@ section {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-body.dark-mode .register,
-body.dark-mode .event-text,
-body.dark-mode .contact-box,
-body.dark-mode .donate {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
 }
 
 .register h2,
@@ -196,6 +203,7 @@ body.dark-mode .donate {
   text-align: center;
 }
 
+/* Forms */
 form fieldset {
   border: none;
   display: flex;
@@ -224,6 +232,26 @@ form textarea:focus {
   outline: none;
 }
 
+/* Sponsor Images */
+.sponsor-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.sponsor-logos img {
+  max-height: 100px;
+  max-width: 180px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: white;
+  padding: 0.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 2rem;
@@ -231,17 +259,49 @@ footer {
   color: #666;
 }
 
+/* Logo Alignment */
+.logo img {
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .main-nav ul {
     flex-direction: column;
     gap: 0.5rem;
   }
+
   .site-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
+
   .hero-overlay h1 {
     font-size: 2rem;
   }
+
+  .hero-banner {
+    height: auto;
+  }
 }
+
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--green-medium);
+    outline-offset: 3px;
+  }
+
+  body.dark-mode a {
+    color: #90cdf4; /* soft light blue */
+  }
+  body.dark-mode a:hover {
+    color: #63b3ed;
+  }
+
+  body.dark-mode .event-text h2 {
+    color: var(--sky-blue);
+  }
+  
