@@ -1,81 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register – David Tucker Memorial Golf Outing</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register – David Tucker Memorial Golf Classic</title>
+  <meta name="description" content="Register for the David Tucker Memorial Golf Classic. Individual and team registrations available.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <a href="#main" class="skip-link">Skip to main content</a>
-
-  <div class="layout">
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />
-
-      <nav class="nav-menu" aria-label="Sidebar navigation">
-        <button id="darkModeToggle" class="btn">🌓 Toggle Dark Mode</button>
-        <a href="index.html" class="btn small">Home</a>
-        <a href="register.html" class="btn small">Register</a>
-        <a href="sponsor-registration.html" class="btn small">Sponsor</a>
-        <a href="#main" class="btn small">Form</a>
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="images/DavidTuckerLogo.png" alt="Logo">
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="register.html" class="nav__link nav__link--active">Register</a></li>
+          <li class="nav__item"><a href="sponsor-registration.html" class="nav__link">Sponsor</a></li>
+        </ul>
       </nav>
-    </aside>
+    </div>
+  </header>
 
-    <!-- Main Content Area -->
-    <main class="main-content" id="main">
-      <section class="static-hero">
-        <h1>Register to Play</h1>
-        <p>Secure your spot for the 2025 memorial golf outing.</p>
-        <a href="index.html" class="btn">← Back to Home</a>
-      </section>
+  <main class="main-content">
+    <section class="registration">
+      <h2 class="registration__title">Register</h2>
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="form">
+        <fieldset class="form__group">
+          <legend class="form__legend">Registration Type</legend>
+          <label class="form__radio">
+            <input type="radio" name="type" value="individual" checked>
+            Individual
+          </label>
+          <label class="form__radio">
+            <input type="radio" name="type" value="team">
+            Full Team (4 players)
+          </label>
+        </fieldset>
 
-      <section class="register">
-        <div class="wrapper">
-          <h2>Player Registration</h2>
-          <form action="https://formspree.io/f/xyzwebjq" method="POST">
-            <fieldset>
-              <legend>Team Contact Info</legend>
-
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" required />
-
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="_replyto" required />
-
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" inputmode="tel" />
-
-              <label for="team">Team Name (optional)</label>
-              <input type="text" id="team" name="team" />
-
-              <label for="players">Number of Players</label>
-              <select id="players" name="players" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-
-              <div id="playerFields"></div>
-
-              <button type="submit" class="btn">Submit Registration</button>
-            </fieldset>
-          </form>
-          <p class="note">You'll receive a confirmation email after registration.</p>
+        <div id="team-fields" class="form__group form__team" hidden>
+          <h3 class="form__subtitle">Team Player Names</h3>
+          <label>
+            Player 1
+            <input type="text" name="player1" required>
+          </label>
+          <label>
+            Player 2
+            <input type="text" name="player2" required>
+          </label>
+          <label>
+            Player 3
+            <input type="text" name="player3" required>
+          </label>
+          <label>
+            Player 4
+            <input type="text" name="player4" required>
+          </label>
         </div>
-      </section>
-    </main>
-  </div>
 
-  <footer>
-    <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
+        <div class="form__group">
+          <label>
+            Contact Name
+            <input type="text" name="contactName" required>
+          </label>
+          <label>
+            Email Address
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            Phone Number
+            <input type="tel" name="phone">
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--primary">Submit Registration</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__text">&copy; 2025 David Tucker Memorial Golf Classic. All rights reserved.</p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

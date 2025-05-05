@@ -1,80 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sponsor – David Tucker Memorial Golf Outing</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sponsor – David Tucker Memorial Golf Classic</title>
+  <meta name="description" content="Become a sponsor of the David Tucker Memorial Golf Classic. Multiple levels available.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<a href="#main" class="skip-link">Skip to main content</a>
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="images/DavidTuckerLogo.png" alt="Logo">
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="register.html" class="nav__link">Register</a></li>
+          <li class="nav__item"><a href="sponsor-registration.html" class="nav__link nav__link--active">Sponsor</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<div class="layout">
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar">
-    <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />
-    <div class="brand-name">David Tucker Memorial</div>
-    <nav class="nav-menu" aria-label="Sidebar Navigation">
-      <a href="index.html" class="btn">Home</a>
-      <a href="register.html" class="btn">Register</a>
-    </nav>
-    <button id="darkModeToggle" class="btn small" aria-label="Toggle dark mode">🌗 Dark Mode</button>
-  </aside>
-
-  <!-- Main Content -->
-  <main id="main" class="main-content">
-    <section class="static-hero">
-      <h1>Sponsor the Event</h1>
-      <p>Join us as a sponsor and support a meaningful cause.</p>
-      <a href="index.html" class="btn">← Back to Home</a>
-    </section>
-
-    <section class="register">
-      <div class="wrapper">
-        <h2>Sponsorship Registration</h2>
-        <form action="https://formspree.io/f/xyzwebjq" method="POST">
-          <fieldset>
-            <legend>Sponsor Information</legend>
-
-            <label for="org">Organization Name</label>
-            <input type="text" id="org" name="organization" required />
-
-            <label for="contact">Contact Name</label>
-            <input type="text" id="contact" name="contact" required />
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="_replyto" required />
-
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" inputmode="tel" />
-
-            <label for="level">Sponsorship Level</label>
-            <select id="level" name="level" required>
-              <option value="">-- Choose a level --</option>
-              <option value="Hole Sponsor">Hole Sponsor - $100</option>
-              <option value="Gold Sponsor">Gold Sponsor - $250</option>
-              <option value="Platinum Sponsor">Platinum Sponsor - $500</option>
-              <option value="Title Sponsor">Title Sponsor - $1000</option>
+  <main class="main-content">
+    <section class="sponsor">
+      <h2 class="sponsor__title">Sponsorship Registration</h2>
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="form">
+        <div class="form__group">
+          <label>
+            Organization Name
+            <input type="text" name="organization" required>
+          </label>
+          <label>
+            Contact Person
+            <input type="text" name="contactName" required>
+          </label>
+          <label>
+            Email Address
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            Sponsorship Level
+            <select name="level" required>
+              <option value="">Select level</option>
+              <option value="platinum">Platinum – $5,000</option>
+              <option value="gold">Gold – $2,500</option>
+              <option value="silver">Silver – $1,000</option>
+              <option value="bronze">Bronze – $500</option>
             </select>
-
-            <label for="notes">Additional Notes (optional)</label>
-            <textarea id="notes" name="notes" rows="4"></textarea>
-
-            <button type="submit" class="btn">Submit Sponsorship</button>
-          </fieldset>
-        </form>
-        <p class="note">We will follow up via email with your sponsorship packet and next steps.</p>
-      </div>
+          </label>
+        </div>
+        <button type="submit" class="btn btn--primary">Submit Sponsorship</button>
+      </form>
     </section>
-
-    <footer>
-      <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
-    </footer>
   </main>
-</div>
 
-<script src="js/script.js"></script>
+  <footer class="footer">
+    <p class="footer__text">&copy; 2025 David Tucker Memorial Golf Classic. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

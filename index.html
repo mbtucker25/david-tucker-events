@@ -2,80 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Tucker Memorial Golf Outing</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>David Tucker Memorial Golf Classic</title>
+  <meta
+    name="description"
+    content="Join us July 19, 2025 for the David Tucker Memorial Golf Classic—a charity scramble supporting children battling cancer."
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="images/favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="layout">
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <img src="images/DavidTuckerLogo.png" alt="David Tucker Memorial Logo" class="brand-logo" />    
-        <nav class="nav-menu" aria-label="Sidebar navigation">
-        <button id="darkModeToggle" class="btn">🌓 Toggle Dark Mode</button>
-        <a href="index.html" class="btn small">Home</a>
-        <a href="#event-details" class="btn small">Event Details</a>
-        <a href="#sponsors" class="btn small">Sponsors</a>
-        <a href="#donate" class="btn small">Donate</a>
-        <a href="register.html" class="btn small">Register</a>
-        <a href="sponsor-registration.html" class="btn small">Sponsor</a>
-        </nav>
-    </aside>
-    <main class="main-content">
-      <section class="hero-banner">
-        <img src="images/pittsboroGolfCourse.jpg" alt="Golf Course" class="hero-image" />
-        <div class="hero-overlay">
-          <h1>David Tucker Memorial Golf Classic</h1>
-          <p>Pittsboro Golf Course – July 19, 2025</p>
-          <div class="hero-buttons">
-            <a href="register.html" class="btn">Register Now</a>
-            <a href="#donate" class="btn outline">Donate</a>
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <img
+        src="images/DavidTuckerLogo_Purple_(1024x1024).png"
+        alt="DT Memorial Golf Classic"
+      />
+    </div>
+    <nav class="sidebar__nav" aria-label="Main navigation">
+      <button class="sidebar__btn" onclick="location.href='index.html'">
+        Home
+      </button>
+      <button class="sidebar__btn" onclick="location.href='register.html'">
+        Register
+      </button>
+      <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">
+        Sponsor
+      </button>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <!-- HERO & MULTI-VIEW SLIDER -->
+    <section class="hero">
+      <h1 class="hero__title">David Tucker Memorial Golf Classic</h1>
+      <div class="slider">
+        <button class="slider__arrow slider__arrow--left" aria-label="Previous slide">
+          ‹
+        </button>
+        <div class="slider__viewport">
+          <div class="slider__track">
+            <div class="slide"><img src="images/TuckerTournamentsLogo.png" alt="Placeholder Logo" /></div>
+            <div class="slide"><img src="images/hero2.jpg" alt="Hand placing golf ball on tee" /></div>
+            <div class="slide"><img src="images/hero3.jpg" alt="Golfer swinging into the distance" /></div>
           </div>
         </div>
-      </section>
+        <button class="slider__arrow slider__arrow--right" aria-label="Next slide">
+          ›
+        </button>
+      </div>
+      <button class="btn btn--primary hero__cta" onclick="location.href='register.html'">
+        Register Now
+      </button>
+    </section>
 
-      <section id="event-details" class="event-text">
-        <h2>Event Schedule</h2>
-        <div class="schedule-grid">
-          <div class="schedule-item"><strong>8:30 AM</strong><span>Liquid Breakfast</span></div>
-          <div class="schedule-item"><strong>9:00 AM</strong><span>Registration & Driving Range</span></div>
-          <div class="schedule-item"><strong>10:00 AM</strong><span>Shotgun Start</span></div>
-          <div class="schedule-item"><strong>4:30 PM</strong><span>White Castle Sliders</span></div>
+    <!-- EVENT DETAILS -->
+    <section class="section details neumorphic">
+      <h2 class="section__title">Event Details</h2>
+      <p class="details__text">
+        All proceeds from this scramble help local youth battling cancer or in remission.
+        Join us for a great day on the course—and make a difference!
+      </p>
+      <ul class="details__pricing">
+        <li>$75 per golfer</li>
+        <li>$300 per foursome</li>
+      </ul>
+    </section>
+
+    <!-- EVENT SCHEDULE AS CALENDAR-STYLE CARDS -->
+    <section class="section schedule neumorphic">
+      <h2 class="section__title">Event Schedule</h2>
+      <div class="schedule__cards">
+        <div class="schedule__card">
+          <div class="schedule__card__header">7:00 AM</div>
+          <div class="schedule__card__body">Breakfast &amp; Registration</div>
         </div>
-      </section>
-
-      <section id="sponsors" class="event-text">
-        <h2>Our Sponsors</h2>
-        <div class="sponsor-logos">
-          <img src="images/sponsors/ArcemSolutions.jpeg" alt="Arcem Solutions" />
-          <img src="images/sponsors/Margo.jpeg" alt="Margo Tucker" />
-          <img src="images/sponsors/sponsor3.png" alt="Dancers Showclub" />
+        <div class="schedule__card">
+          <div class="schedule__card__header">8:00 AM</div>
+          <div class="schedule__card__body">Shotgun Start (Scramble)</div>
         </div>
-      </section>
+        <div class="schedule__card">
+          <div class="schedule__card__header">1:30 PM</div>
+          <div class="schedule__card__body">Lunch &amp; Awards</div>
+        </div>
+      </div>
+    </section>
 
-      <section id="donate" class="donate">
-        <h2>Support the Cause</h2>
-        <p>All proceeds go directly to children battling cancer.</p>
-        <a href="#" class="btn">Donate via PayPal</a>
-      </section>
+    <!-- HOW IT WORKS -->
+    <section class="section how-it-works neumorphic">
+      <h2 class="section__title">How It Works</h2>
+      <ul class="how-it-works__list">
+        <li>All 4 players tee off</li>
+        <li>Pick the best shot; everyone plays from there</li>
+        <li>Repeat until the ball is holed</li>
+      </ul>
+    </section>
 
-      <section id="contact" class="contact-box">
-        <h2>Contact</h2>
-        <p><strong>Tucker Tournaments</strong><br>
-          <a href="mailto:DavidTucker.Events@gmail.com">DavidTucker.Events@gmail.com</a></p>
-        <h3>Location</h3>
-        <p>Pittsboro Golf Course<br>2227 E US Highway 136<br>Pittsboro, IN 46167</p>
-        <a href="https://goo.gl/maps/XsHz3MwMTGEoKywQA" target="_blank" rel="noopener">📍 Get Directions</a>
-      </section>
+    <!-- SPONSORS GRID -->
+    <section class="section sponsors neumorphic">
+      <h2 class="section__title">Our Sponsors</h2>
+      <div class="sponsors__grid">
+        <img src="images/sponsors/ArcemSolutions.jpeg" alt="Arcem Solutions" />
+        <img src="images/sponsors/margo.jpeg" alt="Margo" />
+        <img src="images/sponsors/sponsor3.png" alt="Sponsor 3" />
+      </div>
+    </section>
+  </main>
 
-      <footer>
-        <p>&copy; 2025 David Tucker Memorial Golf Outing</p>
-      </footer>
-    </main>
-  </div>
+  <script>
+    (function() {
+      const track   = document.querySelector('.slider__track');
+      const slides  = Array.from(track.children);
+      const left    = document.querySelector('.slider__arrow--left');
+      const right   = document.querySelector('.slider__arrow--right');
+      const visible = 2;
+      const max     = slides.length - visible;
+      let index = 0;
 
-  <script src="js/script.js"></script>
+      function update() {
+        track.style.transform = `translateX(-${(100/visible)*index}%)`;
+      }
+
+      left.addEventListener('click', () => {
+        index = index === 0 ? max : index - 1;
+        update();
+      });
+      right.addEventListener('click', () => {
+        index = index === max ? 0 : index + 1;
+        update();
+      });
+
+      update();
+    })();
+  </script>
 </body>
 </html>
