@@ -25,8 +25,8 @@
     </div>
     <nav class="sidebar__nav" aria-label="Main navigation">
       <button class="sidebar__btn" onclick="location.href='index.html'">Home</button>
-      <button class="sidebar__btn" onclick="location.href='register.html'">Register</button>
-      <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor</button>
+      <button class="sidebar__btn" onclick="location.href='register.html'">Register to Play</button>
+      <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor the Event</button>
     </nav>
   </aside>
 
@@ -52,39 +52,44 @@
     </section>
 
     <!-- EVENT DETAILS + ATHLETE -->
-    <section class="section details-athlete neumorphic">
-      <div class="details-athlete__event">
-        <h2 class="section__title">Event Details</h2>
-        <p class="details__text">
-          All proceeds from this scramble help local youth battling cancer or in remission.
-          Join us for a great day on the course—and make a difference!
-        </p>
-        <ul class="details__pricing">
-          <li>$75 per golfer</li>
-          <li>$300 per foursome</li>
-        </ul>
-      </div>
-      <div class="details-athlete__athlete">
-        <h2 class="section__title">About This Year’s Athlete</h2>
-        <div class="athlete__content">
-          <img
-            src="images/athlete.png"
-            alt="Photo of [Child’s Name]"
-            class="athlete__photo"
-          />
-          <div class="athlete__bio">
-            <h3 class="athlete__name">[Child’s Name]</h3>
-            <p>
-              [Child’s Name] was diagnosed with pediatric cancer in [Year] and has
-              shown incredible strength and courage in their ongoing treatment.
-              All proceeds from this golf classic go toward helping cover medical
-              bills, travel expenses, and creating special memories for [him/her/them]
-              and [his/her/their] family.
-            </p>
+    <section class="section details-athlete-container">
+      <div class="details-athlete">
+        
+        <div class="neumorphic details-athlete__athlete">
+          <h2 class="section__title">About This Year’s Athlete</h2>
+          <div class="athlete__content">
+            <img
+              src="images/athlete.png"
+              alt="Photo of [Child’s Name]"
+              class="athlete__photo"
+            />
+            <div class="athlete__bio">
+              <h3 class="athlete__name">[Child’s Name]</h3>
+              <p>
+                [Child’s Name] was diagnosed with pediatric cancer in [Year] and has
+                shown incredible strength and courage in their ongoing treatment.
+                All proceeds from this golf classic go toward helping cover medical
+                bills, travel expenses, and creating special memories for [him/her/them]
+                and [his/her/their] family.
+              </p>
+            </div>
           </div>
         </div>
+    
+        <div class="neumorphic details-athlete__event">
+          <h2 class="section__title">Event Details</h2>
+          <p class="details__text">
+            All proceeds from this scramble help local youth battling cancer or in remission.
+            Join us for a great day on the course—and make a difference!
+          </p>
+          <ul class="details__pricing">
+            <li>$75 per golfer</li>
+            <li>$300 per foursome</li>
+          </ul>
+        </div>
+    
       </div>
-    </section>
+    </section>    
 
     <!-- EVENT SCHEDULE -->
     <section class="section schedule neumorphic">
@@ -92,27 +97,25 @@
       <div class="schedule__cards">
         <div class="schedule__card">
           <div class="schedule__card__header">7:00 AM</div>
-          <div class="schedule__card__body">Breakfast &amp; Registration</div>
+          <div class="schedule__card__body">Liquid Breakfast Begins</div>
         </div>
         <div class="schedule__card">
-          <div class="schedule__card__header">8:00 AM</div>
-          <div class="schedule__card__body">Shotgun Start (Scramble)</div>
+          <div class="schedule__card__header">9:00 AM</div>
+          <div class="schedule__card__body">Golfer/Team Check-in</div>
         </div>
         <div class="schedule__card">
-          <div class="schedule__card__header">1:30 PM</div>
-          <div class="schedule__card__body">Lunch &amp; Awards</div>
+          <div class="schedule__card__header">10:00 AM</div>
+          <div class="schedule__card__body">Shotgun Start</div>
+        </div>
+        <div class="schedule__card">
+          <div class="schedule__card__header">1:00 PM</div>
+          <div class="schedule__card__body">Lunch</div>
+        </div>
+        <div class="schedule__card">
+          <div class="schedule__card__header">4:00 PM</div>
+          <div class="schedule__card__body">White Castle Sliders For All</div>
         </div>
       </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="section how-it-works neumorphic">
-      <h2 class="section__title">How It Works</h2>
-      <ul class="how-it-works__list">
-        <li>All 4 players tee off</li>
-        <li>Pick the best shot; everyone plays from there</li>
-        <li>Repeat until the ball is holed</li>
-      </ul>
     </section>
 
     <!-- CONTESTS & PRIZES -->
@@ -141,6 +144,14 @@
     <section class="section gallery neumorphic">
       <h2 class="section__title">Photo Gallery</h2>
       <div class="gallery__grid" id="js-gallery">
+        
+          
+        
+          
+        
+          
+        
+          
         
           
         
