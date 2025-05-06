@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register – David Tucker Memorial Golf Classic</title>
+  <meta name="description" content="Register for the David Tucker Memorial Golf Classic. Individual and team registrations available.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="images/DavidTuckerLogo.png" alt="Logo">
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="register.html" class="nav__link nav__link--active">Register</a></li>
+          <li class="nav__item"><a href="sponsor-registration.html" class="nav__link">Sponsor</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="registration">
+      <h2 class="registration__title">Register</h2>
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="form">
+        <fieldset class="form__group">
+          <legend class="form__legend">Registration Type</legend>
+          <label class="form__radio">
+            <input type="radio" name="type" value="individual" checked>
+            Individual
+          </label>
+          <label class="form__radio">
+            <input type="radio" name="type" value="team">
+            Full Team (4 players)
+          </label>
+        </fieldset>
+
+        <div id="team-fields" class="form__group form__team" hidden>
+          <h3 class="form__subtitle">Team Player Names</h3>
+          <label>
+            Player 1
+            <input type="text" name="player1" required>
+          </label>
+          <label>
+            Player 2
+            <input type="text" name="player2" required>
+          </label>
+          <label>
+            Player 3
+            <input type="text" name="player3" required>
+          </label>
+          <label>
+            Player 4
+            <input type="text" name="player4" required>
+          </label>
+        </div>
+
+        <div class="form__group">
+          <label>
+            Contact Name
+            <input type="text" name="contactName" required>
+          </label>
+          <label>
+            Email Address
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            Phone Number
+            <input type="tel" name="phone">
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--primary">Submit Registration</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__text">&copy; 2025 David Tucker Memorial Golf Classic. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
