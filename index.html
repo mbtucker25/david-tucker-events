@@ -34,25 +34,15 @@
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
-    <!-- HERO & 3-PANE SLIDER -->
-    <section class="hero">
-      <h1 class="hero__title">David Tucker Memorial Golf Classic</h1>
-      <div class="slider">
-        <button class="slider__arrow slider__arrow--left" aria-label="Previous slide">‹</button>
-        <div class="slider__viewport">
-          <div class="slider__track">
-            <div class="slide"><img src="images/TuckerTournamentsLogo.png" alt="Golfer teeing off" /></div>
-            <div class="slide"><img src="images/hero2.jpg" alt="Golf ball on grass" /></div>
-            <div class="slide"><img src="images/hero3.jpg" alt="Scenic golf course" /></div>
-          </div>
-        </div>
-        <button class="slider__arrow slider__arrow--right" aria-label="Next slide">›</button>
+    <!-- HERO -->
+    <section class="hero-banner">
+      <img src="{{ '/images/banner.jpg' | relative_url }}" alt="Banner" class="hero-banner__img" />
+      <div class="hero-banner__overlay">
+        <h1 class="hero-banner__title">David Tucker Memorial Golf Classic</h1>
+        <p class="hero-banner__subtitle">Saturday, July 19, 2025</p>
       </div>
-      <button class="btn btn--primary hero__cta" onclick="location.href='register.html'">
-        Register Now
-      </button>
     </section>
-
+    
     <!-- EVENT DETAILS + ATHLETE -->
     <section class="section details-athlete-container">
       <div class="details-athlete">
@@ -180,33 +170,6 @@
     </section>
   </main>
 
-  <!-- SLIDER SCRIPT -->
-  <script>
-    (function() {
-      const track   = document.querySelector('.slider__track');
-      const slides  = Array.from(track.children);
-      const left    = document.querySelector('.slider__arrow--left');
-      const right   = document.querySelector('.slider__arrow--right');
-      const visible = 3;
-      const max     = slides.length - visible;
-      let index = 0;
-
-      function update() {
-        track.style.transform = `translateX(-${(100/visible)*index}%)`;
-      }
-
-      left.addEventListener('click', () => {
-        index = index === 0 ? max : index - 1;
-        update();
-      });
-      right.addEventListener('click', () => {
-        index = index === max ? 0 : index + 1;
-        update();
-      });
-
-      update();
-    })();
-  </script>
   <script>
     document.getElementById('js-toggle-gallery')
       .addEventListener('click', function(){
