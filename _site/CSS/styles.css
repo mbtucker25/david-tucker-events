@@ -113,13 +113,7 @@ body {
     8px 8px 16px var(--shadow-dark),
    -8px -8px 16px var(--shadow-light);
   padding: 2rem;
-  transition: transform .2s, box-shadow .2s;
-}
-.neumorphic:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    12px 12px 24px var(--shadow-dark),
-   -12px -12px 24px var(--shadow-light);
+  transition: box-shadow .2s;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -180,62 +174,65 @@ body {
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-/*                            HERO BANNER ONLY                             */
+/*                            HERO BANNER                                  */
 /*──────────────────────────────────────────────────────────────────────────*/
-.hero-banner {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
+.hero-card {
+  max-width: 1200px;
+  width: 900px;
+  height: 450px;
+  margin: 2rem auto;
   border-radius: 1rem;
-  margin-bottom: 2rem;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    8px 8px 16px var(--shadow-dark),
+    -8px -8px 16px var(--shadow-light);
 }
 
-.hero-banner__img {
+.hero-card__image-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-radius: .5rem;
+}
+
+.hero-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
   display: block;
 }
 
-.hero-banner__overlay {
+.hero-card__overlay {
   position: absolute;
   inset: 0;
+  background: var(--color-primary);
+  opacity: .45;
+  z-index: 1;
+}
+
+.hero-card__text {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content:center;
   align-items: center;
   text-align: center;
   color: var(--color-light);
-  background: rgba(0, 0, 0, 0.35);
   padding: 2rem;
 }
 
-.hero-banner__title {
+.hero-card__title {
   font-family: var(--font-display);
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
-.hero-banner__subtitle {
+.hero-card__subtitle {
   font-size: 1.25rem;
-  margin-bottom: 1.5rem;
   font-weight: 600;
-}
-
-@media (max-width: 600px) {
-  .hero-banner {
-    height: 280px;
-  }
-
-  .hero-banner__title {
-    font-size: 1.75rem;
-  }
-
-  .hero-banner__subtitle {
-    font-size: 1rem;
-  }
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -254,7 +251,21 @@ body {
   transition: transform .2s;
   margin: 0 auto;
 }
-.btn:hover { transform: translateY(-3px); }
+.sidebar__btn,
+.btn,
+.gallery__toggle {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar__btn:hover,
+.btn:hover,
+.gallery__toggle:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.15),
+    0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                            EVENT DETAILS                                */
@@ -273,10 +284,8 @@ body {
   box-shadow:
     inset -2px -2px 4px rgba(255, 255, 255, 0.7),
     inset 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .details__pricing li:hover {
-  transform: translateY(-2px);
   box-shadow:
     inset -2px -2px 4px rgba(255, 255, 255, 0.8),
     inset 2px 2px 8px rgba(0, 0, 0, 0.15);
@@ -302,10 +311,8 @@ body {
   box-shadow:
     4px 4px 8px rgba(0,0,0,0.05),
    -4px -4px 8px rgba(255,255,255,0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .schedule__card:hover {
-  transform: translateY(-4px);
   box-shadow:
     6px 6px 12px rgba(0,0,0,0.08),
    -6px -6px 12px rgba(255,255,255,0.7);
@@ -340,45 +347,6 @@ body {
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-/*                            HOW IT WORKS                                 */
-/*──────────────────────────────────────────────────────────────────────────*/
-.how-it-works__list {
-  counter-reset: step;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 1.5rem;
-  padding: 0;
-}
-.how-it-works__list li {
-  position: relative;
-  background: var(--color-light);
-  border-radius: 1rem;
-  box-shadow:
-    4px 4px 8px var(--shadow-dark),
-   -4px -4px 8px var(--shadow-light);
-  padding: 1.5rem 1rem 1rem 3rem;
-  transition: transform .2s, box-shadow .2s;
-}
-.how-it-works__list li::before {
-  counter-increment: step;
-  content: counter(step);
-  position: absolute; top: 1rem; left: 1rem;
-  width: 2rem; height: 2rem;
-  background: var(--color-secondary);
-  color: var(--color-light);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 600;
-}
-.how-it-works__list li:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    8px 8px 16px var(--shadow-dark),
-   -8px -8px 16px var(--shadow-light);
-}
-
-/*──────────────────────────────────────────────────────────────────────────*/
 /*                               CONTESTS                                   */
 /*──────────────────────────────────────────────────────────────────────────*/
 .contests__grid {
@@ -394,9 +362,7 @@ body {
   box-shadow:
     4px 4px 8px var(--shadow-dark),
    -4px -4px 8px var(--shadow-light);
-  transition: transform .2s;
 }
-.contest:hover { transform: translateY(-4px); }
 .contest img {
   max-width: 80px;
   margin-bottom: 1rem;
@@ -418,22 +384,28 @@ body {
   max-height: calc((180px*2) + 1rem);
   overflow: hidden;
   transition: max-height 0.3s ease;
+  position: relative;
+  z-index: 0;
 }
 .gallery__grid img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* <-- ensures full image is shown, scaled down */
   border-radius: 0.5rem;
+  transition: transform 0.3s ease, z-index 0.3s;
+  z-index: 0;
 }
+
 .gallery__grid.expanded {
   max-height: none;
 }
+
 .gallery__toggle {
   display: block;
   margin: 1rem auto 0;
   padding: 0.5rem 1.5rem;
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  background: var(--color-primary);
+  color: var(--color-light);
   border: none;
   border-radius: .5rem;
   font-weight: 600;
@@ -441,8 +413,103 @@ body {
   transition: background 0.2s;
 }
 .gallery__toggle:hover {
-  background: var(--color-primary);
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+/* Lightbox base */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.lightbox-modal.hidden {
+  display: none;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 0;
+}
+
+.lightbox-content {
+  position: relative;
+  background: var(--color-light);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 
+    8px 8px 16px var(--shadow-dark),
+   -8px -8px 16px var(--shadow-light);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 90vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+/* Close button inside top-right of card */
+.lightbox-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.5rem;
+  background: #b90303;
   color: var(--color-light);
+  border: none;
+  border-radius: 15%;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+/* Nav buttons styled and positioned on left/right sides */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  border: none;
+  border-radius: 15%;
+  font-size: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.lightbox-nav.left { left: 0.5rem; }
+.lightbox-nav.right { right: 0.5rem; }
+
+@media (max-width: 768px) {
+  .lightbox-nav.left { left: 0.5rem; }
+  .lightbox-nav.right { right: 0.5rem; }
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/

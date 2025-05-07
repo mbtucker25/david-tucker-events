@@ -25,6 +25,7 @@
     </div>
     <nav class="sidebar__nav" aria-label="Main navigation">
       <button class="sidebar__btn" onclick="location.href='index.html'">Home</button>
+      <button class="sidebar__btn" onclick="location.href=''">About David</button>
       <button class="sidebar__btn" onclick="location.href='register.html'">Register to Play</button>
       <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor the Event</button>
     </nav>
@@ -32,15 +33,18 @@
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
-    <!-- HERO -->
-    <section class="hero-banner">
-      <img src="/images/banner.jpg" alt="Banner" class="hero-banner__img" />
-      <div class="hero-banner__overlay">
-        <h1 class="hero-banner__title">David Tucker Memorial Golf Classic</h1>
-        <p class="hero-banner__subtitle">Saturday, July 19, 2025</p>
+    <!-- HERO BANNER -->
+    <section class="hero-card neumorphic">
+      <div class="hero-card__image-wrapper">
+        <img src="/images/banner.jpg" alt="Golf course at sunrise" class="hero-card__image" />
+        <div class="hero-card__overlay"></div>
+        <div class="hero-card__text">
+          <h1 class="hero-card__title">David Tucker Memorial Golf Classic</h1>
+          <p class="hero-card__subtitle">Saturday, July 19, 2025</p>
+        </div>
       </div>
     </section>
-    
+      
     <!-- EVENT DETAILS + ATHLETE -->
     <section class="section details-athlete-container">
       <div class="details-athlete">
@@ -160,6 +164,8 @@
           
         
           
+        
+          
             <img
               src="/images/gallery/469622308_576114215159380_514011085047582359_n.jpg"
               alt="469622308 576114215159380 514011085047582359 n"
@@ -233,13 +239,6 @@
             <img
               src="/images/gallery/469941772_576114168492718_1728630114344130073_n.jpg"
               alt="469941772 576114168492718 1728630114344130073 n"
-            />
-          
-        
-          
-            <img
-              src="/images/gallery/469951606_576114165159385_1502161277322459615_n%20(1).jpg"
-              alt="469951606 576114165159385 1502161277322459615 n (1)"
             />
           
         
@@ -367,7 +366,7 @@
       <h2 class="section__title">Our Sponsors</h2>
       <div class="sponsors__grid">
         <img src="images/sponsors/ArcemSolutions.jpeg" alt="Arcem Solutions" />
-        <img src="images/sponsors/margo.jpeg" alt="Margo" />
+        <img src="images/sponsors/Margo.jpeg" alt="Margo" />
         <img src="images/sponsors/sponsor3.png" alt="Sponsor 3" />
       </div>
     </section>
@@ -383,14 +382,16 @@
       </dl>
     </section>
   </main>
-
-  <script>
-    document.getElementById('js-toggle-gallery')
-      .addEventListener('click', function(){
-        const grid = document.getElementById('js-gallery');
-        const expanded = grid.classList.toggle('expanded');
-        this.textContent = expanded ? 'Show less' : 'Show more';
-      });
-  </script>
+  <script src="js/script.js"></script>
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal hidden">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-nav left" id="lightbox-prev">&#10094;</button>
+      <img id="lightbox-image" src="" alt="Full view" />
+      <button class="lightbox-nav right" id="lightbox-next">&#10095;</button>
+    </div>    
+  </div>
 </body>
 </html>
