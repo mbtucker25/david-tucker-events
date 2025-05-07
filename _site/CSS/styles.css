@@ -494,7 +494,7 @@ body {
   color: var(--color-secondary);
   border: none;
   border-radius: 15%;
-  font-size: 1rem;
+  font-size: 1.25rem;
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
