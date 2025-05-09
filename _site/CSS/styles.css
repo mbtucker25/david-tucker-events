@@ -76,6 +76,29 @@ body {
 }
 .sidebar__btn:hover { background: var(--color-secondary); }
 
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  background: var(--color-primary);
+  color: var(--color-light);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  background: var(--color-secondary);
+}
+
+
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                          CUSTOM SCROLLBARS                              */
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -94,6 +117,7 @@ body {
 /*──────────────────────────────────────────────────────────────────────────*/
 .main-content {
   margin: 0 auto 3rem 280px;    /* left offset for sidebar */
+  height: auto;
   width: calc(100% - 280px);
   max-width: 1480px;            /* widened container */
   padding: 3rem 1rem;
@@ -192,6 +216,11 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 1rem;
+
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+
 }
 
 .hero-card__image {
@@ -609,122 +638,245 @@ body {
   .lightbox-nav.right { right: 0.5rem; }
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*                       REFINED GOLFER REGISTRATION                         */
-/* ────────────────────────────────────────────────────────────────────────── */
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                        GOLFER REGISTRATION                               */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+/* Ensure .form-card grows dynamically */
 .form-card {
-  max-width: 860px;
-  margin: 3rem auto;
-  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto; /* Center horizontally */
+  margin-left: calc((100vw - 800px - 280px) / 2 + 280px); /* Center in remaining space */
+  padding: 3rem 2.5rem;
   background: var(--color-light);
-  border-radius: 1rem;
-  box-shadow:
-    8px 8px 16px var(--shadow-dark),
-   -8px -8px 16px var(--shadow-light);
-}
-
-.form-card h1 {
-  text-align: center;
-  font-family: var(--font-sans);
-  font-size: 2.75rem;
   color: var(--color-primary);
-  margin-bottom: 2rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+  width: 800px; /* Fixed width */
+  max-width: 100%; /* Prevent overflow on smaller screens */
+  box-sizing: border-box;
+  gap: 2rem;
 }
 
-form#registration-form {
+/* Ensure the form inside the .form-card is styled properly */
+form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  width: 100%; /* Ensure the form takes up the full width of the .form-card */
 }
 
-.form-section {
+form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 2rem;
 }
 
+/* Team Info + Golfer Blocks (optional visual debug) */
+#team-info-wrapper,
+#additional-golfers {
+  padding: 0.5rem;
+}
+
+.golfer-fieldset:disabled,
+.golfer-fieldset[disabled] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Section Styling */
+.form-section.neumorphic {
+  background: var(--color-light);
+  padding: 1.25rem;
+  border: 2px solid var(--color-primary);
+  border-radius: .25rem;
+  box-shadow: 4px 4px 8px var(--color-primary), -6px -6px 12px var(--shadow-light);
+}
+
+.form-section,
+.form-section label,
+.form-section legend {
+  text-align: left;
+  background-color: var(--color-light)
+}
+
+legend, label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-dark);
+}
+
+legend {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+}
+
+input, select, textarea {
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  border: 1px solid var(--color-secondary);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+select {
+  width: fit-content;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 6px rgba(72, 45, 140, 0.2);
+}
+
+input[disabled], select[disabled], textarea[disabled] {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+/* RADIO BUTTONS */
 .radio-group {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  gap: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 
 .radio-group label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: #eee;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
+  gap: 0.35rem;
   font-weight: 600;
-  flex: 1;
-  justify-content: center;
-  min-width: 160px;
+  white-space: nowrap;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
 }
 
-input[type="radio"] {
+.radio-group input[type="radio"] {
   accent-color: var(--color-primary);
-  transform: scale(1.3);
 }
 
-/* 2-column layout for name inputs */
-.name-row {
+/* GRID LAYOUTS */
+.grid-2, .grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem 2rem;
+}
+
+.grid-row {
+  display: grid;
+  gap: 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.grid-row.two-thirds {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-row.email-phone {
+  grid-template-columns: 2fr 1fr;
+}
+
+.checkbox-row {
   display: flex;
-  gap: 1rem;
-}
-.name-row > div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  justify-content: start;
+  margin-top: 1rem;
 }
 
-/* Phone row matches width */
-.phone-row {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-/* Input field styles for consistency */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select,
-textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-}
-
-/* Notes textarea appearance */
-textarea#notes {
-  min-height: 100px;
-  resize: vertical;
-}
-
-/* Checkbox styling and alignment */
 .checkbox-inline {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  padding: 0 1rem;
   font-weight: 600;
   font-size: 1rem;
+  text-align: left;
   white-space: nowrap;
 }
+
 .checkbox-inline input[type="checkbox"] {
   accent-color: var(--color-primary);
-  transform: scale(1.5);
+  transform: scale(1.25);
 }
 
-/* Button alignment */
-form#registration-form .btn {
-  align-self: center;
-  width: 100%;
-  max-width: 280px;
-  margin-top: 1rem;
+.team-meta-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: end;
+}
+
+/* Button */
+.btn {
+  display: inline-block;
+  margin: 2rem auto;
+  background: var(--color-primary);
+  color: var(--color-light);
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.form-section + .form-section {
+  margin-top: .25rem;
+}
+
+.form-section {
+  margin-bottom: .25rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .radio-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .team-meta-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: 2rem 1rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Collapsible Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-toggle {
+    display: block; /* Show toggle button on smaller screens */
+  }
+  .main-content {
+    margin: 0 auto;
+    width: 100%;
+    padding: 2rem;
+  }
 }

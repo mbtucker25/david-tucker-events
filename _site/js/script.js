@@ -1,159 +1,134 @@
-/**
- * Registers all interactive behaviors on DOM load
- */
-document.addEventListener('DOMContentLoaded', () => {
-  // TEAM TYPE TOGGLE
-  const radios     = document.querySelectorAll('input[name="type"]');
-  const teamFields = document.getElementById('team-fields');
+// Sidebar toggle functionality
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.classList.toggle('open');
+}
 
-  radios.forEach(radio =>
-    radio.addEventListener('change', () => {
-      teamFields.hidden = radio.value !== 'team';
-    })
-  );
+// Format phone number input
+function formatPhoneInput() {
+  const phoneInput = document.getElementById('phone');
+  phoneInput?.addEventListener('input', (e) => {
+    let input = e.target.value.replace(/\D/g, '').slice(0, 10);
+    let formatted = input;
+    if (input.length >= 6) {
+      formatted = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6)}`;
+    } else if (input.length >= 3) {
+      formatted = `(${input.slice(0, 3)}) ${input.slice(3)}`;
+    }
+    e.target.value = formatted;
+  });
+}
 
-  // GALLERY TOGGLE EXPANSION
-  const galleryToggle = document.getElementById('js-toggle-gallery');
-  const galleryGrid   = document.getElementById('js-gallery');
+// Update form mode based on registration type
+function updateFormMode(type, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer) {
+  const isTeam = type === 'team';
 
-  if (galleryToggle && galleryGrid) {
-    galleryToggle.addEventListener('click', () => {
-      const expanded = galleryGrid.classList.toggle('expanded');
-      galleryToggle.textContent = expanded ? 'Show less' : 'Show more';
+  // Enable or disable team name input
+  teamNameField.disabled = !isTeam;
+
+  // Enable/disable additional golfer fieldsets (Golfer #2–4)
+  golferFieldsets.forEach((fs, index) => {
+    const inputs = fs.querySelectorAll('input, select');
+    const isPrimary = index === 0;
+    inputs.forEach(input => {
+      if (!isPrimary) input.disabled = !isTeam;
     });
+    if (!isPrimary) {
+      fs.style.display = isTeam ? 'block' : 'none';
+    }
+  });
+
+  // Update shirt size selectors if shirt checkbox is on
+  if (shirtCheckbox.checked) renderShirtSizes(isTeam ? 4 : 1, shirtSizesContainer);
+}
+
+// Render shirt sizes dynamically
+function renderShirtSizes(count, shirtSizesContainer) {
+  shirtSizesContainer.innerHTML = '';
+  for (let i = 1; i <= count; i++) {
+    const label = document.createElement('label');
+    label.setAttribute('for', `shirt${i}`);
+    label.textContent = `Player ${i} Shirt Size:`;
+
+    const select = document.createElement('select');
+    select.id = `shirt${i}`;
+    select.name = `shirt${i}`;
+    ['Youth - XS', 'Youth - S', 'Youth - M', 'Youth - L', 'Youth - XL',
+      'Adult - S', 'Adult - M', 'Adult - L', 'Adult - XL'].forEach(size => {
+      const option = document.createElement('option');
+      option.value = size;
+      option.textContent = size;
+      select.appendChild(option);
+    });
+
+    shirtSizesContainer.appendChild(label);
+    shirtSizesContainer.appendChild(select);
   }
+}
 
-  // LIGHTBOX FUNCTIONALITY
-  const galleryImages   = [...document.querySelectorAll('.gallery__grid img')];
-  const lightboxModal   = document.getElementById('lightbox-modal');
-  const lightboxImg     = document.getElementById('lightbox-image');
-  const lightboxClose   = document.getElementById('lightbox-close');
-  const lightboxBackdrop= document.getElementById('lightbox-backdrop');
-  const prevBtn         = document.getElementById('lightbox-prev');
-  const nextBtn         = document.getElementById('lightbox-next');
-
-  let currentIndex = 0;
-
-  const openLightbox = (index) => {
-    currentIndex = index;
-    lightboxImg.src = galleryImages[currentIndex].src;
-    lightboxModal.classList.remove('hidden');
-  };
-
-  const closeLightbox = () => lightboxModal.classList.add('hidden');
-
-  const showNextImage = () => {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    lightboxImg.src = galleryImages[currentIndex].src;
-  };
-
-  const showPrevImage = () => {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    lightboxImg.src = galleryImages[currentIndex].src;
-  };
-
-  galleryImages.forEach((img, index) => {
-    img.addEventListener('click', () => openLightbox(index));
-  });
-
-  lightboxClose?.addEventListener('click', closeLightbox);
-  lightboxBackdrop?.addEventListener('click', closeLightbox);
-  nextBtn?.addEventListener('click', showNextImage);
-  prevBtn?.addEventListener('click', showPrevImage);
-
-  // KEYBOARD NAVIGATION
-  document.addEventListener('keydown', (e) => {
-    if (lightboxModal.classList.contains('hidden')) return;
-    if (e.key === 'ArrowRight') showNextImage();
-    if (e.key === 'ArrowLeft') showPrevImage();
-    if (e.key === 'Escape') closeLightbox();
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const regTypeInputs = document.querySelectorAll('input[name="registration-type"]');
-  const teamInfo = document.getElementById('team-info');
-  const shirtCheckbox = document.getElementById('shirt-checkbox');
-  const shirtSizes = document.getElementById('shirt-sizes');
-
-  const renderTeamFields = (type) => {
-    teamInfo.innerHTML = '';
-    if (type === 'partial') {
-      const label = document.createElement('label');
-      label.textContent = '# of Players (2-4):';
-      const select = document.createElement('select');
-      select.name = 'partial-count';
-      select.id = 'partial-count';
-      for (let i = 2; i <= 4; i++) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = i;
-        select.appendChild(opt);
-      }
-      teamInfo.appendChild(label);
-      teamInfo.appendChild(select);
-      select.addEventListener('change', () => {
-        renderPlayerInputs(parseInt(select.value));
-        if (shirtCheckbox.checked) renderShirtSizes(parseInt(select.value));
-      });
-      renderPlayerInputs(2);
-    } else if (type === 'full') {
-      renderPlayerInputs(4);
-    } else {
-      renderPlayerInputs(0);
-    }
-  };
-
-  const renderPlayerInputs = (count) => {
-    const existing = document.querySelectorAll('.player-field');
-    existing.forEach(e => e.remove());
-
-    for (let i = 2; i <= count; i++) {
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.name = `player${i}`;
-      input.placeholder = `Player ${i} Name`;
-      input.classList.add('player-field');
-      teamInfo.appendChild(input);
-    }
-  };
-
-  const renderShirtSizes = (count) => {
-    shirtSizes.innerHTML = '';
-    for (let i = 1; i <= count; i++) {
-      const label = document.createElement('label');
-      label.textContent = `Player ${i} Shirt Size:`;
-      const select = document.createElement('select');
-      select.name = `shirt${i}`;
-      ['S','M','L','XL','XXL'].forEach(size => {
-        const opt = document.createElement('option');
-        opt.value = size;
-        opt.textContent = size;
-        select.appendChild(opt);
-      });
-      select.classList.add('shirt-size-select');
-      shirtSizes.appendChild(label);
-      shirtSizes.appendChild(select);
-    }
-  };
-
-  regTypeInputs.forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      renderTeamFields(e.target.value);
+// Handle registration type change
+function handleRegistrationTypeChange(regRadios, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer) {
+  regRadios.forEach(input => {
+    input.addEventListener('change', () => {
+      updateFormMode(input.value, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer);
     });
   });
+}
 
-  shirtCheckbox.addEventListener('change', () => {
-    const regType = document.querySelector('input[name="registration-type"]:checked').value;
-    const base = regType === 'full' ? 4 : regType === 'partial' ? parseInt(document.getElementById('partial-count')?.value || 2) : 1;
-    shirtSizes.style.display = shirtCheckbox.checked ? 'block' : 'none';
-    if (shirtCheckbox.checked) renderShirtSizes(base);
+// Handle shirt checkbox toggle
+function handleShirtCheckboxToggle(shirtCheckbox, shirtSizesContainer, regRadios) {
+  shirtCheckbox?.addEventListener('change', () => {
+    const selectedType = document.querySelector('input[name="registration-type"]:checked')?.value || 'individual';
+    shirtSizesContainer.style.display = shirtCheckbox.checked ? 'block' : 'none';
+    if (shirtCheckbox.checked) {
+      updateFormMode(selectedType, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer);
+    } else {
+      shirtSizesContainer.innerHTML = '';
+    }
   });
+}
 
-  document.getElementById('registration-form').addEventListener('submit', e => {
+// Handle form submission
+function handleFormSubmission() {
+  const form = document.getElementById('registration-form');
+  form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Form submitted! 🏌️‍♂️');
+    const successMsg = document.getElementById('success-message');
+    [...form.elements].forEach(el => el.style.display = 'none');
+    successMsg.hidden = false;
   });
+}
 
-  renderTeamFields('individual');
-});
+// Initialize the form state on page load
+function initializeFormState(regRadios, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer) {
+  const defaultType = document.querySelector('input[name="registration-type"]:checked')?.value || 'individual';
+  updateFormMode(defaultType, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer);
+  if (shirtCheckbox.checked) renderShirtSizes(defaultType === 'team' ? 4 : 1, shirtSizesContainer);
+}
+
+// Main initialization function
+function initialize() {
+  // Sidebar toggle
+  window.toggleSidebar = toggleSidebar;
+
+  // Phone formatting
+  formatPhoneInput();
+
+  // Form elements
+  const regRadios = document.querySelectorAll('input[name="registration-type"]');
+  const teamNameField = document.getElementById('team-name');
+  const golferFieldsets = document.querySelectorAll('.golfer-fieldset');
+  const shirtCheckbox = document.getElementById('shirt-checkbox');
+  const shirtSizesContainer = document.getElementById('shirt-sizes');
+
+  // Event handlers
+  handleRegistrationTypeChange(regRadios, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer);
+  handleShirtCheckboxToggle(shirtCheckbox, shirtSizesContainer, regRadios);
+  handleFormSubmission();
+
+  // Initialize form state
+  initializeFormState(regRadios, teamNameField, golferFieldsets, shirtCheckbox, shirtSizesContainer);
+}
+
+// Run the initialization function when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initialize);

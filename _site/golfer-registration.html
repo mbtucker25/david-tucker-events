@@ -2,71 +2,183 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Golfer/Team Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Golfer Registration</title>
   <link rel="stylesheet" href="CSS/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <script defer src="JS/scripts.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <main class="form-card">
-    <h1>Golfer/Team Registration</h1>
-    <form id="registration-form">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <img
+        src="images/DavidTuckerLogo_Purple_(1024x1024).png"
+        alt="DT Memorial Golf Classic"
+      />
+    </div>
+    <nav class="sidebar__nav" aria-label="Main navigation">
+      <button class="sidebar__btn" onclick="location.href='index.html'">Home</button>
+      <button class="sidebar__btn" onclick="location.href=''">About David</button>
+      <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor the Event</button>
+    </nav>
+  </aside>
+  <!-- END SIDEBAR -->
+ <!-- MAIN CONTENT -->
+<main class="form-card">
+  <h1><i class="fas fa-golf-ball-tee"></i> Golfer/Team Registration</h1>
 
-      <!-- Registration Type -->
-      <div class="form-section">
-        <label>Registration Type:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="registration-type" value="individual" checked /> Individual</label>
-          <label><input type="radio" name="registration-type" value="partial" /> Partial Team</label>
-          <label><input type="radio" name="registration-type" value="full" /> Full Team</label>
+  <form id="registration-form" method="POST" action="https://formspree.io/f/xyzwebjq">
+
+    <!-- Registration Type -->
+    <fieldset class="form-section neumorphic">
+      <legend><i class="fa-solid fa-people-group"></i> Registration Type</legend>
+      <div class="radio-group">
+        <label><input type="radio" name="registration-type" value="individual" checked> Individual</label>
+        <label><input type="radio" name="registration-type" value="team"> Team</label>
+      </div>
+    </fieldset>
+
+    <!-- Team Name -->
+    <fieldset class="form-section neumorphic">
+      <legend><i class="fa-solid fa-flag"></i> Team Name</legend>
+      <input type="text" id="team-name" name="team-name" placeholder="Enter Team Name" disabled>
+    </fieldset>
+
+    <!-- Golfer 1 -->
+    <fieldset class="form-section neumorphic">
+      <legend><i class="fa-solid fa-user"></i> Golfer #1 Contact Information</legend>
+      <div class="grid-row two-thirds">
+        <div><label for="first-name">First Name</label><input type="text" id="first-name" name="first-name" required></div>
+        <div><label for="last-name">Last Name</label><input type="text" id="last-name" name="last-name" required></div>
+      </div>
+      <div class="grid-row email-phone">
+        <div><label for="email">Email</label><input type="email" id="email" name="email" required></div>
+        <div><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" required></div>
+      </div>
+      <div class="grid-row">
+        <div>
+          <label>
+            <input type="checkbox" class="shirt-checkbox" id="shirt-checkbox-1">
+            I would like to purchase a t-shirt
+          </label>
         </div>
-      <!-- Contact Info -->
-      <div class="form-section">
-        <div class="name-row">
-          <div>
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" name="first-name" required />
-          </div>
-          <div>
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" required />
-          </div>
-        </div>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-
-        <div class="phone-row">
-          <div>
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required />
-          </div>
+      </div>
+      <div class="grid-row">
+        <div>
+          <label for="shirt1">Size</label>
+          <select name="shirt1" id="shirt1">
+            <option value="">Select size...</option>
+            <option>Adult - S</option>
+            <option>Adult - M</option>
+            <option>Adult - L</option>
+            <option>Adult - XL</option>
+            <option>Youth - S</option>
+            <option>Youth - M</option>
+          </select>
         </div>
       </div>
+    </fieldset>
 
-
-      <!-- Team Members -->
-      <div class="form-section" id="team-info">
-        <!-- Will be dynamically generated -->
+    <!-- Golfer 2 -->
+    <fieldset class="form-section neumorphic golfer-fieldset" id="golfer2">
+      <legend><i class="fa-solid fa-user"></i> Golfer #2 Contact Information</legend>
+      <div class="grid-row two-thirds">
+        <div><label for="player2-first">First Name</label><input type="text" id="player2-first" name="player2-first" disabled placeholder="First name"></div>
+        <div><label for="player2-last">Last Name</label><input type="text" id="player2-last" name="player2-last" disabled placeholder="Last name"></div>
       </div>
-
-      <!-- Shirt Options -->
-      <div class="form-section">
-        <label class="checkbox-inline">
-          <input type="checkbox" id="shirt-checkbox" />
-          I would like to receive a shirt
-        </label>
+      <div class="grid-row email-phone">
+        <div><label for="player2-email">Email</label><input type="email" id="player2-email" name="player2-email" disabled placeholder="Email address"></div>
+        <div><label for="player2-phone">Phone Number</label><input type="tel" id="player2-phone" name="player2-phone" disabled placeholder="Phone number"></div>
       </div>
-
-      <!-- Notes -->
-      <div class="form-section">
-        <label for="notes">Additional Notes:</label>
-        <textarea id="notes" name="notes" rows="4"></textarea>
+      <div class="grid-row">
+        <div>
+          <label>
+            <input type="checkbox" class="shirt-checkbox" id="shirt-checkbox-1">
+            I would like to purchase a t-shirt
+          </label>
+        </div>
       </div>
+      <div class="grid-row">
+        <div>
+          <label for="shirt2">Size</label>
+          <select name="shirt2" id="shirt2">
+            <option value="">Select size...</option>
+            <option>Adult - S</option>
+            <option>Adult - M</option>
+            <option>Adult - L</option>
+            <option>Adult - XL</option>
+            <option>Youth - S</option>
+            <option>Youth - M</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
 
-      <button type="submit" class="btn">Submit Registration</button>
-    </form>
-  </main>
+    <!-- Golfer 3 -->
+    <fieldset class="form-section neumorphic golfer-fieldset" id="golfer3">
+      <legend><i class="fa-solid fa-user"></i> Golfer #3 Contact Information</legend>
+      <div class="grid-row two-thirds">
+        <div><label for="player3-first">First Name</label><input type="text" id="player3-first" name="player3-first" disabled placeholder="First name"></div>
+        <div><label for="player3-last">Last Name</label><input type="text" id="player3-last" name="player3-last" disabled placeholder="Last name"></div>
+      </div>
+      <div class="grid-row email-phone">
+        <div><label for="player3-email">Email</label><input type="email" id="player3-email" name="player3-email" disabled placeholder="Email address"></div>
+        <div><label for="player3-phone">Phone Number</label><input type="tel" id="player3-phone" name="player3-phone" disabled placeholder="Phone number"></div>
+      </div>
+      <div class="grid-row">
+        <div>
+          <label for="shirt3">Size</label>
+          <select name="shirt3" id="shirt3">
+            <option value="">Select size...</option>
+            <option>Adult - S</option>
+            <option>Adult - M</option>
+            <option>Adult - L</option>
+            <option>Adult - XL</option>
+            <option>Youth - S</option>
+            <option>Youth - M</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Golfer 4 -->
+    <fieldset class="form-section neumorphic golfer-fieldset" id="golfer4">
+      <legend><i class="fa-solid fa-user"></i> Golfer #4 Contact Information</legend>
+      <div class="grid-row two-thirds">
+        <div><label for="player4-first">First Name</label><input type="text" id="player4-first" name="player4-first" disabled placeholder="First name"></div>
+        <div><label for="player4-last">Last Name</label><input type="text" id="player4-last" name="player4-last" disabled placeholder="Last name"></div>
+      </div>
+      <div class="grid-row email-phone">
+        <div><label for="player4-email">Email</label><input type="email" id="player4-email" name="player4-email" disabled placeholder="Email address"></div>
+        <div><label for="player4-phone">Phone Number</label><input type="tel" id="player4-phone" name="player4-phone" disabled placeholder="Phone number"></div>
+      </div>
+      <div class="grid-row">
+        <div>
+          <label for="shirt4">Size</label>
+          <select name="shirt4" id="shirt4">
+            <option value="">Select size...</option>
+            <option>Adult - S</option>
+            <option>Adult - M</option>
+            <option>Adult - L</option>
+            <option>Adult - XL</option>
+            <option>Youth - S</option>
+            <option>Youth - M</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Submit -->
+    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Submit Registration</button>
+    <div id="success-message" class="form-section neumorphic" hidden>
+      <h2>✅ Thank you!</h2>
+      <p>Your registration has been received.</p>
+    </div>
+
+  </form>
+</main>
+
+
+<script src="js/script.js"></script>
 </body>
 </html>
