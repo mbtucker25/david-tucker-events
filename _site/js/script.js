@@ -32,7 +32,7 @@ function setFieldsetEnabled(fieldset, enabled) {
 
 // --- Populate Teams ---
 function populateTeamDropdown(callback) {
-  fetch('https://script.google.com/macros/s/AKfycbzI6haPknlxK8fLRHdSAsoH1CHYSXH5VdOiqEkKw18tegQCyXqe9jau5NIWy2o-XPzY7g/exec')
+  fetch('https://script.google.com/macros/s/AKfycbxCasBkzP72rmrzVQdiO2TN08D_5v11m4lfJ8qUfsUwk0TtuYfhVGA30_EG_dSTRbHZrg/exec')
     .then(res => res.json())
     .then(teams => {
       const select = document.getElementById('team-select');
@@ -166,7 +166,7 @@ function handleFormSubmission() {
       golfer4: getGolferData(4)
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbzI6haPknlxK8fLRHdSAsoH1CHYSXH5VdOiqEkKw18tegQCyXqe9jau5NIWy2o-XPzY7g/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxCasBkzP72rmrzVQdiO2TN08D_5v11m4lfJ8qUfsUwk0TtuYfhVGA30_EG_dSTRbHZrg/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
