@@ -23,162 +23,420 @@
     </nav>
   </aside>
   <!-- END SIDEBAR -->
- <!-- MAIN CONTENT -->
-<main class="form-card">
-  <h1><i class="fas fa-golf-ball-tee"></i> Golfer/Team Registration</h1>
 
-  <form id="registration-form" method="POST" action="https://formspree.io/f/xyzwebjq">
+  <!-- MAIN CONTENT -->
+  <main class="form-card">
+    <h1><i class="fas fa-golf-ball-tee"></i> Golfer/Team Registration</h1>
 
-    <!-- Registration Type -->
-    <fieldset class="form-section neumorphic">
-      <legend><i class="fa-solid fa-people-group"></i> Registration Type</legend>
-      <div class="radio-group">
-        <label><input type="radio" name="registration-type" value="individual" checked> Individual</label>
-        <label><input type="radio" name="registration-type" value="team"> Team</label>
-      </div>
-    </fieldset>
-
-    <!-- Team Name -->
-    <fieldset class="form-section neumorphic">
-      <legend><i class="fa-solid fa-flag"></i> Team Name</legend>
-      <input type="text" id="team-name" name="team-name" placeholder="Enter Team Name" disabled>
-    </fieldset>
-
-    <!-- Golfer 1 -->
-    <fieldset class="form-section neumorphic">
-      <legend><i class="fa-solid fa-user"></i> Golfer #1 Contact Information</legend>
-      <div class="grid-row two-thirds">
-        <div><label for="first-name">First Name</label><input type="text" id="first-name" name="first-name" required></div>
-        <div><label for="last-name">Last Name</label><input type="text" id="last-name" name="last-name" required></div>
-      </div>
-      <div class="grid-row email-phone">
-        <div><label for="email">Email</label><input type="email" id="email" name="email" required></div>
-        <div><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" required></div>
-      </div>
-      <div class="grid-row">
+    <form id="registration-form">
+      <!-- Team Selection Row -->
+      <div class="team-meta-row team-meta-row--secondary">
         <div>
-          <label>
-            <input type="checkbox" class="shirt-checkbox" id="shirt-checkbox-1">
-            I would like to purchase a t-shirt
-          </label>
-        </div>
-      </div>
-      <div class="grid-row">
-        <div>
-          <label for="shirt1">Size</label>
-          <select name="shirt1" id="shirt1">
-            <option value="">Select size...</option>
-            <option>Adult - S</option>
-            <option>Adult - M</option>
-            <option>Adult - L</option>
-            <option>Adult - XL</option>
-            <option>Youth - S</option>
-            <option>Youth - M</option>
+          <label for="team-select"><i class="fa-solid fa-flag"></i> Team Selection</label>
+          <select id="team-select" name="team-select" class="teamname-control regtype-control">
+            <option value="" disabled selected>-- Please select or create a team --</option>
+            <option value="__free_agent__">*️⃣ Free Agent (assign me to a Team)</option>
+            <!-- Existing teams will be populated by JS -->
+            <option value="__new__">🆕 Create New Team</option>
           </select>
+          <div>
+            <small class="form-instructions">
+              Select "Free Agent" to be assigned to a team, choose an existing team to join, or create a new team.
+            </small>
+          </div>  
+          <div id="new-team-name-row" style="display:none; margin-top: 0.5rem;">
+            <label for="new-team-name">New Team Name</label>
+            <input type="text" id="new-team-name" name="new-team-name" class="regtype-control" placeholder="Enter New Team Name">
+          </div>
         </div>
       </div>
-    </fieldset>
 
-    <!-- Golfer 2 -->
-    <fieldset class="form-section neumorphic golfer-fieldset" id="golfer2">
-      <legend><i class="fa-solid fa-user"></i> Golfer #2 Contact Information</legend>
-      <div class="grid-row two-thirds">
-        <div><label for="player2-first">First Name</label><input type="text" id="player2-first" name="player2-first" disabled placeholder="First name"></div>
-        <div><label for="player2-last">Last Name</label><input type="text" id="player2-last" name="player2-last" disabled placeholder="Last name"></div>
-      </div>
-      <div class="grid-row email-phone">
-        <div><label for="player2-email">Email</label><input type="email" id="player2-email" name="player2-email" disabled placeholder="Email address"></div>
-        <div><label for="player2-phone">Phone Number</label><input type="tel" id="player2-phone" name="player2-phone" disabled placeholder="Phone number"></div>
-      </div>
-      <div class="grid-row">
-        <div>
-          <label>
-            <input type="checkbox" class="shirt-checkbox" id="shirt-checkbox-1">
-            I would like to purchase a t-shirt
-          </label>
+      <div class="golfer-fieldsets-grid">
+      <fieldset class="form-section neumorphic golfer-fieldset" id="golfer1">
+        <legend><i class="fa-solid fa-user"></i> Golfer #1 Contact Information</legend>
+
+        <div class="grid-row two-thirds">
+          <div>
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name">
+          </div>
+          <div>
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name">
+          </div>
         </div>
-      </div>
-      <div class="grid-row">
-        <div>
-          <label for="shirt2">Size</label>
-          <select name="shirt2" id="shirt2">
-            <option value="">Select size...</option>
-            <option>Adult - S</option>
-            <option>Adult - M</option>
-            <option>Adult - L</option>
-            <option>Adult - XL</option>
-            <option>Youth - S</option>
-            <option>Youth - M</option>
-          </select>
+
+        <div class="grid-row email-phone">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
         </div>
-      </div>
-    </fieldset>
 
-    <!-- Golfer 3 -->
-    <fieldset class="form-section neumorphic golfer-fieldset" id="golfer3">
-      <legend><i class="fa-solid fa-user"></i> Golfer #3 Contact Information</legend>
-      <div class="grid-row two-thirds">
-        <div><label for="player3-first">First Name</label><input type="text" id="player3-first" name="player3-first" disabled placeholder="First name"></div>
-        <div><label for="player3-last">Last Name</label><input type="text" id="player3-last" name="player3-last" disabled placeholder="Last name"></div>
-      </div>
-      <div class="grid-row email-phone">
-        <div><label for="player3-email">Email</label><input type="email" id="player3-email" name="player3-email" disabled placeholder="Email address"></div>
-        <div><label for="player3-phone">Phone Number</label><input type="tel" id="player3-phone" name="player3-phone" disabled placeholder="Phone number"></div>
-      </div>
-      <div class="grid-row">
-        <div>
-          <label for="shirt3">Size</label>
-          <select name="shirt3" id="shirt3">
-            <option value="">Select size...</option>
-            <option>Adult - S</option>
-            <option>Adult - M</option>
-            <option>Adult - L</option>
-            <option>Adult - XL</option>
-            <option>Youth - S</option>
-            <option>Youth - M</option>
-          </select>
+        <div class="checkbox-inline golfer-shirt-order">
+          <input type="checkbox" id="golfer1-order-tshirt" name="golfer1-order-tshirt">
+          <label for="golfer1-order-tshirt">Add T-Shirt(s)</label>
         </div>
-      </div>
-    </fieldset>
 
-    <!-- Golfer 4 -->
-    <fieldset class="form-section neumorphic golfer-fieldset" id="golfer4">
-      <legend><i class="fa-solid fa-user"></i> Golfer #4 Contact Information</legend>
-      <div class="grid-row two-thirds">
-        <div><label for="player4-first">First Name</label><input type="text" id="player4-first" name="player4-first" disabled placeholder="First name"></div>
-        <div><label for="player4-last">Last Name</label><input type="text" id="player4-last" name="player4-last" disabled placeholder="Last name"></div>
-      </div>
-      <div class="grid-row email-phone">
-        <div><label for="player4-email">Email</label><input type="email" id="player4-email" name="player4-email" disabled placeholder="Email address"></div>
-        <div><label for="player4-phone">Phone Number</label><input type="tel" id="player4-phone" name="player4-phone" disabled placeholder="Phone number"></div>
-      </div>
-      <div class="grid-row">
-        <div>
-          <label for="shirt4">Size</label>
-          <select name="shirt4" id="shirt4">
-            <option value="">Select size...</option>
-            <option>Adult - S</option>
-            <option>Adult - M</option>
-            <option>Adult - L</option>
-            <option>Adult - XL</option>
-            <option>Youth - S</option>
-            <option>Youth - M</option>
-          </select>
+        <div class="golfer-tshirt-sizes hidden">
+          <div class="tshirt-sizes-clean neumorphic">
+            <div class="tshirt-row">
+              <!-- Youth -->
+              <label for="golfer1-tshirt-yxs">Y-XS
+                <input type="number" id="golfer1-tshirt-yxs" name="golfer1-tshirt-yxs" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-ys">Y-S
+                <input type="number" id="golfer1-tshirt-ys" name="golfer1-tshirt-ys" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-ym">Y-M
+                <input type="number" id="golfer1-tshirt-ym" name="golfer1-tshirt-ym" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-yl">Y-L
+                <input type="number" id="golfer1-tshirt-yl" name="golfer1-tshirt-yl" min="0" max="10" value="0">
+              </label>
+
+              <!-- Adult -->
+              <label for="golfer1-tshirt-as">S
+                <input type="number" id="golfer1-tshirt-as" name="golfer1-tshirt-as" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-am">M
+                <input type="number" id="golfer1-tshirt-am" name="golfer1-tshirt-am" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-al">L
+                <input type="number" id="golfer1-tshirt-al" name="golfer1-tshirt-al" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-axl">XL
+                <input type="number" id="golfer1-tshirt-axl" name="golfer1-tshirt-axl" min="0" max="10" value="0">
+              </label>
+              <label for="golfer1-tshirt-a2xl">2XL
+                <input type="number" id="golfer1-tshirt-a2xl" name="golfer1-tshirt-a2xl" min="0" max="10" value="0">
+              </label>
+            </div>
+
+            <div class="tshirt-summary">
+              <div class="tshirt-summary-line">
+                <div class="summary-col">
+                  <span id="golfer1-shirt-count" class="summary-value">0</span>
+                  <div class="summary-label"># of Shirts</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">×</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-value">$15.00</span>
+                  <div class="summary-label">Price Each</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">=</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span id="golfer1-shirt-total" class="summary-value">$0.00</span>
+                  <div class="summary-label">Total Amt Due</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </fieldset>
+
+      <fieldset class="form-section neumorphic golfer-fieldset" id="golfer2">
+        <legend><i class="fa-solid fa-user"></i> Golfer #2 Contact Information</legend>
+
+        <div class="grid-row two-thirds">
+          <div>
+            <label for="player2-first">First Name</label>
+            <input type="text" id="player2-first" name="player2-first">
+          </div>
+          <div>
+            <label for="player2-last">Last Name</label>
+            <input type="text" id="player2-last" name="player2-last">
+          </div>
+        </div>
+
+        <div class="grid-row email-phone">
+          <div>
+            <label for="player2-email">Email</label>
+            <input type="email" id="player2-email" name="player2-email">
+          </div>
+          <div>
+            <label for="player2-phone">Phone Number</label>
+            <input type="tel" id="player2-phone" name="player2-phone">
+          </div>
+        </div>
+
+        <div class="checkbox-inline golfer-shirt-order">
+          <input type="checkbox" id="golfer2-order-tshirt" name="golfer2-order-tshirt">
+          <label for="golfer2-order-tshirt">Add T-Shirt(s)</label>
+        </div>
+
+        <div class="golfer-tshirt-sizes hidden">
+          <div class="tshirt-sizes-clean neumorphic">
+            <div class="tshirt-row">
+              <!-- Youth Sizes -->
+              <label for="golfer2-tshirt-yxs">Y-XS
+                <input type="number" id="golfer2-tshirt-yxs" name="golfer2-tshirt-yxs" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-ys">Y-S
+                <input type="number" id="golfer2-tshirt-ys" name="golfer2-tshirt-ys" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-ym">Y-M
+                <input type="number" id="golfer2-tshirt-ym" name="golfer2-tshirt-ym" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-yl">Y-L
+                <input type="number" id="golfer2-tshirt-yl" name="golfer2-tshirt-yl" min="0" max="10" value="0">
+              </label>
+
+              <!-- Adult Sizes -->
+              <label for="golfer2-tshirt-as">S
+                <input type="number" id="golfer2-tshirt-as" name="golfer2-tshirt-as" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-am">M
+                <input type="number" id="golfer2-tshirt-am" name="golfer2-tshirt-am" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-al">L
+                <input type="number" id="golfer2-tshirt-al" name="golfer2-tshirt-al" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-axl">XL
+                <input type="number" id="golfer2-tshirt-axl" name="golfer2-tshirt-axl" min="0" max="10" value="0">
+              </label>
+              <label for="golfer2-tshirt-a2xl">2XL
+                <input type="number" id="golfer2-tshirt-a2xl" name="golfer2-tshirt-a2xl" min="0" max="10" value="0">
+              </label>
+            </div>
+
+            <!-- Summary -->
+            <div class="tshirt-summary">
+              <div class="tshirt-summary-line">
+                <div class="summary-col">
+                  <span id="golfer2-shirt-count" class="summary-value">0</span>
+                  <div class="summary-label"># of Shirts</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">×</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-value">$15.00</span>
+                  <div class="summary-label">Price Each</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">=</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span id="golfer2-shirt-total" class="summary-value">$0.00</span>
+                  <div class="summary-label">Total Amt Due</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section neumorphic golfer-fieldset" id="golfer3">
+        <legend><i class="fa-solid fa-user"></i> Golfer #3 Contact Information</legend>
+
+        <div class="grid-row two-thirds">
+          <div>
+            <label for="player3-first">First Name</label>
+            <input type="text" id="player3-first" name="player3-first">
+          </div>
+          <div>
+            <label for="player3-last">Last Name</label>
+            <input type="text" id="player3-last" name="player3-last">
+          </div>
+        </div>
+
+        <div class="grid-row email-phone">
+          <div>
+            <label for="player3-email">Email</label>
+            <input type="email" id="player3-email" name="player3-email">
+          </div>
+          <div>
+            <label for="player3-phone">Phone Number</label>
+            <input type="tel" id="player3-phone" name="player3-phone">
+          </div>
+        </div>
+
+        <div class="checkbox-inline golfer-shirt-order">
+          <input type="checkbox" id="golfer3-order-tshirt" name="golfer3-order-tshirt">
+          <label for="golfer3-order-tshirt">Add T-Shirt(s)</label>
+        </div>
+
+        <div class="golfer-tshirt-sizes hidden">
+          <div class="tshirt-sizes-clean neumorphic">
+            <div class="tshirt-row">
+              <!-- Youth Sizes -->
+              <label for="golfer3-tshirt-yxs">Y-XS
+                <input type="number" id="golfer3-tshirt-yxs" name="golfer3-tshirt-yxs" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-ys">Y-S
+                <input type="number" id="golfer3-tshirt-ys" name="golfer3-tshirt-ys" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-ym">Y-M
+                <input type="number" id="golfer3-tshirt-ym" name="golfer3-tshirt-ym" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-yl">Y-L
+                <input type="number" id="golfer3-tshirt-yl" name="golfer3-tshirt-yl" min="0" max="10" value="0">
+              </label>
+
+              <!-- Adult Sizes -->
+              <label for="golfer3-tshirt-as">S
+                <input type="number" id="golfer3-tshirt-as" name="golfer3-tshirt-as" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-am">M
+                <input type="number" id="golfer3-tshirt-am" name="golfer3-tshirt-am" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-al">L
+                <input type="number" id="golfer3-tshirt-al" name="golfer3-tshirt-al" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-axl">XL
+                <input type="number" id="golfer3-tshirt-axl" name="golfer3-tshirt-axl" min="0" max="10" value="0">
+              </label>
+              <label for="golfer3-tshirt-a2xl">2XL
+                <input type="number" id="golfer3-tshirt-a2xl" name="golfer3-tshirt-a2xl" min="0" max="10" value="0">
+              </label>
+            </div>
+
+            <!-- Summary -->
+            <div class="tshirt-summary">
+              <div class="tshirt-summary-line">
+                <div class="summary-col">
+                  <span id="golfer3-shirt-count" class="summary-value">0</span>
+                  <div class="summary-label"># of Shirts</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">×</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-value">$15.00</span>
+                  <div class="summary-label">Price Each</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">=</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span id="golfer3-shirt-total" class="summary-value">$0.00</span>
+                  <div class="summary-label">Total Amt Due</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section neumorphic golfer-fieldset" id="golfer4">
+        <legend><i class="fa-solid fa-user"></i> Golfer #4 Contact Information</legend>
+
+        <div class="grid-row two-thirds">
+          <div>
+            <label for="player4-first">First Name</label>
+            <input type="text" id="player4-first" name="player4-first">
+          </div>
+          <div>
+            <label for="player4-last">Last Name</label>
+            <input type="text" id="player4-last" name="player4-last">
+          </div>
+        </div>
+
+        <div class="grid-row email-phone">
+          <div>
+            <label for="player4-email">Email</label>
+            <input type="email" id="player4-email" name="player4-email">
+          </div>
+          <div>
+            <label for="player4-phone">Phone Number</label>
+            <input type="tel" id="player4-phone" name="player4-phone">
+          </div>
+        </div>
+
+        <div class="checkbox-inline golfer-shirt-order">
+          <input type="checkbox" id="golfer4-order-tshirt" name="golfer4-order-tshirt">
+          <label for="golfer4-order-tshirt">Add T-Shirt(s)</label>
+        </div>
+
+        <div class="golfer-tshirt-sizes hidden">
+          <div class="tshirt-sizes-clean neumorphic">
+            <div class="tshirt-row">
+              <!-- Youth Sizes -->
+              <label for="golfer4-tshirt-yxs">Y-XS
+                <input type="number" id="golfer4-tshirt-yxs" name="golfer4-tshirt-yxs" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-ys">Y-S
+                <input type="number" id="golfer4-tshirt-ys" name="golfer4-tshirt-ys" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-ym">Y-M
+                <input type="number" id="golfer4-tshirt-ym" name="golfer4-tshirt-ym" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-yl">Y-L
+                <input type="number" id="golfer4-tshirt-yl" name="golfer4-tshirt-yl" min="0" max="10" value="0">
+              </label>
+
+              <!-- Adult Sizes -->
+              <label for="golfer4-tshirt-as">S
+                <input type="number" id="golfer4-tshirt-as" name="golfer4-tshirt-as" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-am">M
+                <input type="number" id="golfer4-tshirt-am" name="golfer4-tshirt-am" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-al">L
+                <input type="number" id="golfer4-tshirt-al" name="golfer4-tshirt-al" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-axl">XL
+                <input type="number" id="golfer4-tshirt-axl" name="golfer4-tshirt-axl" min="0" max="10" value="0">
+              </label>
+              <label for="golfer4-tshirt-a2xl">2XL
+                <input type="number" id="golfer4-tshirt-a2xl" name="golfer4-tshirt-a2xl" min="0" max="10" value="0">
+              </label>
+            </div>
+
+            <!-- Summary -->
+            <div class="tshirt-summary">
+              <div class="tshirt-summary-line">
+                <div class="summary-col">
+                  <span id="golfer4-shirt-count" class="summary-value">0</span>
+                  <div class="summary-label"># of Shirts</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">×</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-value">$15.00</span>
+                  <div class="summary-label">Price Each</div>
+                </div>
+                <div class="summary-col">
+                  <span class="summary-symbol">=</span>
+                  <div class="summary-label">&nbsp;</div>
+                </div>
+                <div class="summary-col">
+                  <span id="golfer4-shirt-total" class="summary-value">$0.00</span>
+                  <div class="summary-label">Total Amt Due</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
       </div>
-    </fieldset>
 
-    <!-- Submit -->
-    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Submit Registration</button>
-    <div id="success-message" class="form-section neumorphic" hidden>
-      <h2>✅ Thank you!</h2>
-      <p>Your registration has been received.</p>
-    </div>
-
-  </form>
-</main>
-
-
-<script src="js/script.js"></script>
+      <!-- Submit -->
+      <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Submit Registration</button>
+      <div id="success-message" class="form-section neumorphic" hidden>
+        <h2>✅ Thank you!</h2>
+        <p>Your registration has been received.</p>
+      </div>
+    </form>
+  </main>
+  <script src="js/script.js"></script>
 </body>
 </html>
