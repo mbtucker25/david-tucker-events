@@ -20,6 +20,7 @@
       <button class="sidebar__btn" onclick="location.href='index.html'">Home</button>
       <button class="sidebar__btn" onclick="location.href=''">About David</button>
       <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor the Event</button>
+      <button class="sidebar__btn" onclick="location.href='tshirtorderform.html'">Order T-Shirts</button>
     </nav>
   </aside>
   <!-- END SIDEBAR -->
@@ -52,37 +53,36 @@
       </div>
 
       <div class="golfer-fieldsets-grid">
-      <fieldset class="form-section neumorphic golfer-fieldset" id="golfer1">
-        <legend><i class="fa-solid fa-user"></i> Golfer #1 Contact Information</legend>
+        <fieldset class="form-section neumorphic golfer-fieldset" id="golfer1">
+          <legend><i class="fa-solid fa-user"></i> Golfer #1 Contact Information</legend>
 
-        <div class="grid-row two-thirds">
-          <div>
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name">
+          <div class="grid-row two-thirds">
+            <div>
+              <label for="player1-first">First Name</label>
+              <input type="text" id="player1-first" name="player1-first">
+            </div>
+            <div>
+              <label for="player1-last">Last Name</label>
+              <input type="text" id="player1-last" name="player1-last">
+            </div>
           </div>
-          <div>
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name">
-          </div>
-        </div>
 
-        <div class="grid-row email-phone">
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+          <div class="grid-row email-phone">
+            <div>
+              <label for="player1-email">Email</label>
+              <input type="email" id="player1-email" name="player1-email">
+            </div>
+            <div>
+              <label for="player1-phone">Phone Number</label>
+              <input type="tel" id="player1-phone" name="player1-phone">
+            </div>
           </div>
-          <div>
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone">
-          </div>
-        </div>
-
         <div class="checkbox-inline golfer-shirt-order">
           <input type="checkbox" id="golfer1-order-tshirt" name="golfer1-order-tshirt">
           <label for="golfer1-order-tshirt">Add T-Shirt(s)</label>
         </div>
 
-        <div class="golfer-tshirt-sizes hidden">
+        <div class="golfer-tshirt-sizes">
           <div class="tshirt-sizes-clean neumorphic">
             <div class="tshirt-row">
               <!-- Youth -->
@@ -175,7 +175,7 @@
           <label for="golfer2-order-tshirt">Add T-Shirt(s)</label>
         </div>
 
-        <div class="golfer-tshirt-sizes hidden">
+        <div class="golfer-tshirt-sizes">
           <div class="tshirt-sizes-clean neumorphic">
             <div class="tshirt-row">
               <!-- Youth Sizes -->
@@ -269,7 +269,7 @@
           <label for="golfer3-order-tshirt">Add T-Shirt(s)</label>
         </div>
 
-        <div class="golfer-tshirt-sizes hidden">
+        <div class="golfer-tshirt-sizes">
           <div class="tshirt-sizes-clean neumorphic">
             <div class="tshirt-row">
               <!-- Youth Sizes -->
@@ -363,7 +363,7 @@
           <label for="golfer4-order-tshirt">Add T-Shirt(s)</label>
         </div>
 
-        <div class="golfer-tshirt-sizes hidden">
+        <div class="golfer-tshirt-sizes">
           <div class="tshirt-sizes-clean neumorphic">
             <div class="tshirt-row">
               <!-- Youth Sizes -->

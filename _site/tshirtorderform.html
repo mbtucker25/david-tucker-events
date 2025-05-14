@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shirt Order Form</title>
+  <link rel="stylesheet" href="CSS/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <img
+        src="images/DavidTuckerLogo_Purple_(1024x1024).png"
+        alt="DT Memorial Golf Classic"
+      />
+    </div>
+    <nav class="sidebar__nav" aria-label="Main navigation">
+      <button class="sidebar__btn" onclick="location.href='index.html'">Home</button>
+      <button class="sidebar__btn" onclick="location.href=''">About David</button>
+      <button class="sidebar__btn" onclick="location.href='golfer-registration.html'">Register to Play</button>
+      <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor the Event</button>
+    </nav>
+  </aside>
+  <!-- END SIDEBAR -->
+
+  <main class="form-card form--shirt-only neumorphic">
+    <h1><i class="fa-solid fa-shirt"></i> T-Shirt Order Form</h1>
+
+    <form id="shirt-order-form">
+      <fieldset class="form-section neumorphic">
+        <legend><i class="fa-solid fa-id-card"></i> Contact Information</legend>
+        <div class="grid-row two-thirds">
+          <div>
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName" required>
+          </div>
+          <div>
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" required>
+          </div>
+        </div>
+        <div class="grid-row email-phone">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section neumorphic">
+        <legend><i class="fa-solid fa-cart-plus"></i> Select Shirt Sizes</legend>
+        
+          <div class="tshirt-row">
+            <label for="yxs">Y-XS <input type="number" id="yxs" name="yxs" min="0" max="10" value="0" /></label>
+            <label for="ys">Y-S <input type="number" id="ys" name="ys" min="0" max="10" value="0" /></label>
+            <label for="ym">Y-M <input type="number" id="ym" name="ym" min="0" max="10" value="0" /></label>
+            <label for="yl">Y-L <input type="number" id="yl" name="yl" min="0" max="10" value="0" /></label>
+            <label for="as">S <input type="number" id="as" name="as" min="0" max="10" value="0" /></label>
+            <label for="am">M <input type="number" id="am" name="am" min="0" max="10" value="0" /></label>
+            <label for="al">L <input type="number" id="al" name="al" min="0" max="10" value="0" /></label>
+            <label for="axl">XL <input type="number" id="axl" name="axl" min="0" max="10" value="0" /></label>
+            <label for="a2xl">2XL <input type="number" id="a2xl" name="a2xl" min="0" max="10" value="0" /></label>
+          </div>
+          <div class="tshirt-summary">
+            <div class="tshirt-summary-line">
+              <div class="summary-col">
+                <span id="shirt-count" class="summary-value">0</span>
+                <div class="summary-label"># of Shirts</div>
+              </div>
+              <div class="summary-col">
+                <span class="summary-symbol">×</span>
+                <div class="summary-label">&nbsp;</div>
+              </div>
+              <div class="summary-col">
+                <span class="summary-value">$15.00</span>
+                <div class="summary-label">Price Each</div>
+              </div>
+              <div class="summary-col">
+                <span class="summary-symbol">=</span>
+                <div class="summary-label">&nbsp;</div>
+              </div>
+              <div class="summary-col">
+                <span id="shirt-total" class="summary-value">$0.00</span>
+                <div class="summary-label">Total Amt Due</div>
+              </div>
+            </div>
+          </div>
+        
+      </fieldset>
+
+      <button type="submit" class="btn"><i class="fa-solid fa-credit-card"></i> Submit Shirt Order</button>
+      <div id="shirt-success" class="form-section neumorphic" hidden>
+        <h2>✅ Thank you!</h2>
+        <p>Your shirt order has been received.</p>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/shirt-form.js"></script>
+</body>
+</html>
