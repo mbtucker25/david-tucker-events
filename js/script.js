@@ -168,8 +168,8 @@ function handleFormSubmission() {
 
     fetch('https://script.google.com/macros/s/AKfycbzI6haPknlxK8fLRHdSAsoH1CHYSXH5VdOiqEkKw18tegQCyXqe9jau5NIWy2o-XPzY7g/exec', {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(() => {
@@ -181,12 +181,12 @@ function handleFormSubmission() {
 }
 
 function getGolferData(num) {
-  const prefix = num === 1 ? '' : `player${num}-`;
+  const prefix = num === 1 ? 'player1-' : `player${num}-`;
   return {
-    firstName: document.getElementById(num === 1 ? 'first-name' : `${prefix}first`)?.value || '',
-    lastName: document.getElementById(num === 1 ? 'last-name' : `${prefix}last`)?.value || '',
-    email: document.getElementById(num === 1 ? 'email' : `${prefix}email`)?.value || '',
-    phone: document.getElementById(num === 1 ? 'phone' : `${prefix}phone`)?.value || '',
+    firstName: document.getElementById(`${prefix}first`)?.value || '',
+    lastName: document.getElementById(`${prefix}last`)?.value || '',
+    email: document.getElementById(`${prefix}email`)?.value || '',
+    phone: document.getElementById(`${prefix}phone`)?.value || '',
     shirtOrder: gatherGolferShirtOrderData(num)
   };
 }
