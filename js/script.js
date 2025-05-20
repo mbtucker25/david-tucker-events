@@ -193,11 +193,26 @@ function handleFormSubmit() {
       if (res.ok) {
         form.reset();
         formModal.setAttribute('hidden', true);
-        const golferCount = Number(json.golfers);
-        const noun = golferCount === 1 ? 'golfer' : 'golfers';
-        successMsg.innerText = `✅ Successfully registered ${golferCount || 0} ${noun}!`;
+
+        const golferNamesHtml = golfers
+          .filter(g => g?.first || g?.last)
+          .map(g => `
+            <li>
+              <i class="fa-solid fa-golf-ball-tee icon-spacing"></i> 
+              ${g.first || ''} ${g.last || ''}
+            </li>
+          `)
+          .join('');
+
+        successMsg.innerHTML = `
+          <h2><i class="fa-solid fa-circle-check icon-spacing"></i> "${teamName}" has been successfully registered!</h2>
+          <p><strong>Registered Golfers:</strong></p>
+          <ul class="success-golfer-list">${golferNamesHtml}</ul>
+        `;
+
         successOverlay.removeAttribute('hidden');
-      } else {
+      }
+   else {
         if (messageBox) {
           messageBox.innerText = `❌ ${json.error || 'Something went wrong'}`;
           messageBox.className = 'form-message error';
@@ -263,4 +278,37 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === overlay) overlay.setAttribute('hidden', true);
     });
   });
+  
+  document.getElementById('test-success')?.addEventListener('click', () => {
+  const dummyTeam = "Shady Pines Golden Golfers";
+  const dummyGolfers = [
+    { first: "Luke", last: "Skywalker" },
+    { first: "Leia", last: "Organa" },
+    { first: "Han", last: "Solo" },
+    { first: "Chewbacca", last: "" }
+  ];
+
+        const golferNamesHtml = dummyGolfers
+          .filter(g => g?.first || g?.last)
+          .map(g => `
+            <li><i class="fa-solid fa-golf-ball-tee icon-spacing"></i> ${g.first || ''} ${g.last || ''}</li>
+          `)
+          .join('');
+
+  const successMsg = document.getElementById('success-message-text');
+  const successOverlay = document.getElementById('success-overlay');
+
+  successMsg.innerHTML = `
+    <div class="success-icon-wrapper">
+      <i class="fa-solid fa-circle-check success-check-icon"></i>
+    </div>
+    <h2>You have successfully registered:</h2>
+    <div class="success-message-text team-name">${dummyTeam}</div>
+    <p class="golfers-label"><strong>Registered Golfers:</strong></p>
+    <ul class="success-golfer-list">${golferNamesHtml}</ul>
+  `;
+
+  successOverlay?.removeAttribute('hidden');
+});
+
 });

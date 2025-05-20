@@ -138,8 +138,8 @@
             Please fill out the form below to register your team. If you are registering as a single golfer, please use the Single Golfer registration option.
           </p>  
           <!-- TEAM NAME -->
+          <small id="team-name-warning" class="form-message error"> ❌ Team name already exists. ❌ </small>
           <input type="text" id="team-name" class="team-input" placeholder="Enter your team name *" required>
-          <small id="team-name-warning" class="form-message error">❌ Team name already exists</small>
 
           <!-- TEAM CAPTAIN -->
           <div class="card neumorphic">
@@ -187,6 +187,7 @@
           <div class="modal-footer right-align">
             <div id="form-message" class="form-message" hidden></div>
             <button type="button" class="btn" id="cancel-form">Cancel</button>
+            <button type="button" class="btn secondary" id="test-success">Test Success Overlay</button>
             <button type="submit" class="btn primary">Submit</button>
           </div>
         </form>
@@ -226,10 +227,10 @@
       </div>
     </div>
 
-    <div id="success-overlay" class="modal-overlay" hidden>
-      <div class="modal-content">
+    <div id="success-overlay" class="modal-overlay neumorphic" hidden>
+      <div class="modal-content neumorphic">
         <p id="success-message-text" class="success-message-text"></p>
-          <button id="success-ok-btn" class="btn primary">OK</button>
+          <button id="success-ok-btn" class="success-ok-btn">OK</button>
         </div>
       </div>
     </div>

@@ -858,28 +858,128 @@ label {
   color: var(--color-primary);
 }
 
-/* Submission Success Message */
-#success-message {
-  display: none; /* initial hidden fallback for browsers that don't respect [hidden] */
-  text-align: center;
-  padding: 2rem;
-  font-size: 1rem;
-  color: var(--color-primary);
+/* ✅ Center the entire overlay */
+#success-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
 }
 
-#success-message h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-#success-message p {
-  font-size: 1rem;
-}
-
-#success-message.show {
+/* ✅ Style the content box */
+#success-overlay .modal-content {
+  background: var(--color-light);
+  border-radius: 12px;
+  padding-top: 4rem;
+  max-width: 400px;
+  width: auto;
+  box-shadow:
+    4px 4px 8px var(--color-primary),
+    -4px -4px 8px var(--color-secondary);
+  background: linear-gradient(to right, var(--color-primary), #6a11cb);
   animation: fadeInUp 0.5s ease-out;
 }
 
+/* ✅ Text block */
+.success-message-text {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--color-light);
+  line-height: 1.6;
+  white-space: normal;
+}
+
+#success-ok-btn {
+  color: var(--color-primary);
+  background: linear-gradient(to right, var(--color-secondary), var(--color-light));
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.success-icon-wrapper {
+  position: absolute;
+  top: -2.5rem; /* adjust how much it overlaps */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  background: white; /* optional: circular backdrop */
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.success-check-icon {
+  font-size: 3rem;
+  color: #2ecc71; /* or use var(--color-primary) */
+}
+
+.success-message-icons {
+  margin-right: .5rem;
+  margin-bottom: .25rem;
+}
+
+/* ✅ Heading */
+.success-message-text h2 {
+  font-size: .95rem;
+  color: var(--color-light);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ✅ Team name label */
+.success-message-text .team-name {
+  font-size: 1.5rem;
+  font-weight: 750;
+  text-align: center;
+  justify-content: center;
+  margin: 0.5rem 0 1rem 0;
+  color: var(--color-light);
+}
+
+.golfers-label {
+  text-align: left;
+  margin: 1rem 0 0.5rem;
+  font-weight: bold;
+  font-size: .95rem;
+  color: var(--color-light);
+}
+
+
+/* ✅ List of golfers */
+.success-golfer-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.5rem; /* row gap and column gap */
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.success-golfer-list li {
+  display: flex;
+  align-content: center;
+  font-size: .95rem;
+  margin: 0.5rem;
+  color: var(--color-light);
+}
+
+/* ✅ Animation (optional) */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1058,11 +1158,17 @@ label {
 
 .form-message.error,
 #team-name-warning {
-  color: #d32f2f; /* Material red or choose your brand red */
+  color: #ac0101; /* Material red or choose your brand red */
+  border-radius: .5rem;
+  border-left: 4px solid #ac0101;
+  border-right: 4px solid #ac0101;;
+  background-color: #f35d5d62;
   font-size: 0.85rem;
-  font-weight: 600;
-  margin-top: 0.25rem;
+  font-weight: 700;
   display: none;
+  margin-top: -1.8rem;
+  margin-bottom: -1.8rem;
+  padding: 2px 6px;
 }
 
 #team-name-warning.visible {
@@ -1375,7 +1481,7 @@ input[type="tel"]:focus {
 
 /* ───── Icon Spacing ───── */
 .icon-spacing {
-  margin-right: .1rem;
+  margin-right: .25rem;
   margin-bottom: .1rem;
 }
 
