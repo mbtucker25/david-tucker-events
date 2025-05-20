@@ -130,8 +130,6 @@
       <div class="modal-content team-form">
         <button class="modal-close" data-close>&times;</button>
 
-        <div id="form-message" class="form-message" hidden></div>
-
         <form id="team-registration-form">
           <h2 class="section__title">Register a Team</h2>
           <p class="form_details">
@@ -139,9 +137,7 @@
           </p>  
           <!-- TEAM NAME -->
           <input type="text" id="team-name" class="team-input" placeholder="Enter your team name *" required>
-          <small id="team-name-warning" style="color: red; display: none;">
-            Team name already exists. Please choose another.
-          </small>
+          <small id="team-name-warning" class="form-message error">❌ Team name already exists</small>
 
           <!-- TEAM CAPTAIN -->
           <div class="card neumorphic">
@@ -187,6 +183,7 @@
 
           <!-- SUBMIT + CANCEL -->
           <div class="modal-footer right-align">
+            <div id="form-message" class="form-message" hidden></div>
             <button type="button" class="btn" id="cancel-form">Cancel</button>
             <button type="submit" class="btn primary">Submit</button>
           </div>
@@ -227,8 +224,16 @@
       </div>
     </div>
 
+    <div id="success-overlay" class="modal-overlay" hidden>
+      <div class="modal-content">
+        <p id="success-message-text" class="success-message-text"></p>
+          <button id="success-ok-btn" class="btn primary">OK</button>
+        </div>
+      </div>
+    </div>
+
     <!-- EVENT SCHEDULE -->
-    <section class="section schedule neumorphic">
+
       <h2 class="section__title">Event Schedule</h2>
       <div class="schedule__cards">
         <div class="schedule__card">
@@ -252,7 +257,7 @@
           <div class="schedule__card__body">White Castle Sliders For All</div>
         </div>
       </div>
-    </section>
+
 
     <!-- CONTESTS & PRIZES -->
     <section class="section contests neumorphic">
@@ -473,8 +478,6 @@
               src="/images/gallery/470235486_576114351826033_7542817184164923376_n.jpg"
               alt="470235486 576114351826033 7542817184164923376 n"
             />
-          
-        
           
         
           

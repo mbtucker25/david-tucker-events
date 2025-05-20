@@ -36,10 +36,10 @@ serve(async (req) => {
         if (error.code === "23505") {
           return respond({ error: "Team name already exists." });
         }
-        throw error;
+        return respond({ error: error.message });
       }
 
-      teamId = teamData.id;
+      teamId = teamData?.id;
     } else if (teamSelect) {
       const { data: teamData, error } = await supabase
         .from("teams")

@@ -1042,13 +1042,12 @@ label {
 }
 
 .form-message {
-  margin-bottom: 1rem;
-  padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
   text-align: center;
-  font-size: 1rem;
-  transition: opacity 0.3s ease;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem auto;
+  max-width: 90%;
 }
 
 .form-message.success {
@@ -1057,12 +1056,18 @@ label {
   border: 2px solid #12b76a;
 }
 
-.form-message.error {
-  background-color: #ffeeee;
-  color: #b42318;
-  border: 2px solid #f04438;
+.form-message.error,
+#team-name-warning {
+  color: #d32f2f; /* Material red or choose your brand red */
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  display: none;
 }
 
+#team-name-warning.visible {
+  display: inline;
+}
 
 /* ───── Grid 1: Step Navigation ───── */
 .stepper-grid {
@@ -1147,6 +1152,7 @@ label {
   width: 60%;
   padding: 0.75rem 1rem;
   font-size: .75rem;
+  color: var(--color-primary);
   text-align: center;
   border-radius: 0.35rem;
   margin: auto;
@@ -1176,13 +1182,14 @@ label {
 }
 
 .form_details {
-  background: #f1f0f7;
+  background: #d6d6d6;
   border-left: 4px solid var(--color-primary);
   border-right: 4px solid var(--color-primary);
   padding: .75rem;
   border-radius: 0.5rem;
   text-align: left;
   font-size: 0.95rem;
+  color: var(--color-primary);
   margin: auto;
 }
 

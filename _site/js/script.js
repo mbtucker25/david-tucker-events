@@ -1,5 +1,7 @@
 // --- Constants ---
 const SHIRT_PRICE = 15;
+const teamWarning = document.getElementById('team-name-warning');
+const teamNameInput = document.getElementById('team-name');
 
 // --- Phone Formatter ---
 function formatPhoneInput() {
@@ -77,25 +79,43 @@ function generateGolferFieldsets() {
   }
 }
 
-// --- Gather Shirt Size Info ---
+// --- Shirt Size ---
 function getShirtSize(i) {
   return document.getElementById(`golfer${i}-shirt-size`)?.value || '';
 }
 
-// --- Inline Team Name Validation ---
-function validateTeamName() {
-  const input = document.getElementById('team-name');
-  const warning = document.getElementById('team-name-warning');
-  const teams = JSON.parse(document.getElementById('team-select')?.dataset.teams || '[]');
-  const entered = input?.value.trim().toLowerCase();
+// --- Get Golfer Info ---
+function getGolfer(i) {
+  const first = document.getElementById(`player${i}-first`)?.value.trim();
+  const last = document.getElementById(`player${i}-last`)?.value.trim();
+  const email = document.getElementById(`player${i}-email`)?.value.trim();
+  const phone = document.getElementById(`player${i}-phone`)?.value.trim();
+  const shirtSize = getShirtSize(i);
 
-  const exists = teams.some(t => t.name.toLowerCase() === entered);
-  if (exists) {
-    warning.style.display = 'inline';
+  if (first || last || email || phone || shirtSize) {
+    return { first, last, email, phone, shirtSize };
+  }
+
+  return null;
+}
+
+// --- Check if Team Name Exists ---
+async function checkTeamNameExists(name) {
+  if (!name) {
+    teamWarning.classList.remove('visible');
     return false;
-  } else {
-    warning.style.display = 'none';
-    return true;
+  }
+
+  try {
+    const res = await fetch('https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-teams');
+    const teams = await res.json();
+    const exists = teams.some(team => team.name.toLowerCase() === name.toLowerCase());
+    teamWarning.classList.toggle('visible', exists);
+    return exists;
+  } catch (err) {
+    console.error('Team name check failed:', err);
+    teamWarning.classList.remove('visible');
+    return false;
   }
 }
 
@@ -107,9 +127,13 @@ function handleFormSubmit() {
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    // Validate team name
-    const validTeam = validateTeamName();
-    const teamName = document.getElementById('team-name')?.value.trim();
+    const teamName = teamNameInput?.value.trim();
+    const teamExists = await checkTeamNameExists(teamName);
+
+    if (!teamName || teamExists) {
+      alert("Please enter a valid, unique team name.");
+      return;
+    }
 
     const captain = {
       first: document.getElementById('captain-first')?.value.trim(),
@@ -122,21 +146,16 @@ function handleFormSubmit() {
     const golfer2First = document.getElementById('player2-first')?.value.trim();
     const golfer2Last = document.getElementById('player2-last')?.value.trim();
 
-    // Basic validation
-    if (!teamName || !validTeam) {
-      alert("Please enter a valid, unique team name.");
-      return;
-    }
     if (!captain.first || !captain.last || !captain.email || !captain.phone) {
       alert("Please complete all required Team Captain fields.");
       return;
     }
+
     if (!golfer2First && !golfer2Last) {
-      alert("Golfer #2 is required.");
+      alert("Team Captain & Golfer #2 are required to register a team.");
       return;
     }
 
-    // Collect golfers (including captain as Golfer #1)
     const golfers = [
       {
         first: captain.first,
@@ -148,18 +167,10 @@ function handleFormSubmit() {
     ];
 
     for (let i = 2; i <= 4; i++) {
-      const first = document.getElementById(`player${i}-first`)?.value.trim();
-      const last = document.getElementById(`player${i}-last`)?.value.trim();
-      const email = document.getElementById(`player${i}-email`)?.value.trim();
-      const phone = document.getElementById(`player${i}-phone`)?.value.trim();
-      const shirtSize = getShirtSize(i);
-
-      if (first || last || email || phone || shirtSize) {
-        golfers.push({ first, last, email, phone, shirtSize });
-      }
+      const golfer = getGolfer(i);
+      if (golfer) golfers.push(golfer);
     }
 
-    // ✅ Submit to Supabase
     try {
       const res = await fetch('https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register', {
         method: 'POST',
@@ -172,24 +183,27 @@ function handleFormSubmit() {
           golfer4: golfers[3]
         })
       });
-    const json = await res.json();
-    const messageBox = document.getElementById('form-message');
 
-    if (messageBox) {
+      const json = await res.json();
+      const messageBox = document.getElementById('form-message');
+      const formModal = document.getElementById('modal-register-team');
+      const successOverlay = document.getElementById('success-overlay');
+      const successMsg = document.getElementById('success-message-text');
+
       if (res.ok) {
-        messageBox.innerText = `✅ Successfully registered ${json.golfers} golfer(s)!`;
-        messageBox.className = 'form-message success';
         form.reset();
+        formModal.setAttribute('hidden', true);
+        const golferCount = Number(json.golfers);
+        const noun = golferCount === 1 ? 'golfer' : 'golfers';
+        successMsg.innerText = `✅ Successfully registered ${golferCount || 0} ${noun}!`;
+        successOverlay.removeAttribute('hidden');
       } else {
-        messageBox.innerText = `❌ ${json.error || 'Something went wrong'}`;
-        messageBox.className = 'form-message error';
+        if (messageBox) {
+          messageBox.innerText = `❌ ${json.error || 'Something went wrong'}`;
+          messageBox.className = 'form-message error';
+          messageBox.removeAttribute('hidden');
+        }
       }
-
-      messageBox.removeAttribute('hidden');
-      setTimeout(() => {
-        messageBox.setAttribute('hidden', true);
-      }, 6000);
-    }
     } catch (err) {
       console.error(err);
       const messageBox = document.getElementById('form-message');
@@ -197,13 +211,20 @@ function handleFormSubmit() {
         messageBox.innerText = `❌ Submission failed. Please try again later.`;
         messageBox.className = 'form-message error';
         messageBox.removeAttribute('hidden');
-        setTimeout(() => {
-          messageBox.setAttribute('hidden', true);
-        }, 6000);
       }
     }
   });
 }
+
+// --- Debounce Utility ---
+function debounce(func, delay = 500) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
 // --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
   generateGolferFieldsets();
@@ -211,31 +232,35 @@ document.addEventListener('DOMContentLoaded', () => {
   populateTeamDropdown();
   handleFormSubmit();
 
-  document.getElementById('team-name')?.addEventListener('input', validateTeamName);
+  teamNameInput?.addEventListener('input', debounce(e => {
+    const entered = e.target.value.trim();
+    checkTeamNameExists(entered);
+  }, 500));
 
-  // --- Modal Open (Register Button) ---
-document.querySelectorAll('.cta-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const modalId = btn.dataset.modal;
-    const modal = document.getElementById(modalId);
-    if (modal) modal.removeAttribute('hidden');
+  document.getElementById('success-ok-btn')?.addEventListener('click', () => {
+    document.getElementById('success-overlay')?.setAttribute('hidden', true);
+  });
+
+  // Modal Open
+  document.querySelectorAll('.cta-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modalId = btn.dataset.modal;
+      const modal = document.getElementById(modalId);
+      if (modal) modal.removeAttribute('hidden');
+    });
+  });
+
+  // Modal Close
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.modal-overlay')?.setAttribute('hidden', true);
+    });
+  });
+
+  // Click outside modal to close
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.setAttribute('hidden', true);
+    });
   });
 });
-
-// --- Modal Close Button ---
-document.querySelectorAll('[data-close]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.closest('.modal-overlay')?.setAttribute('hidden', true);
-  });
-});
-
-// --- Modal Background Click to Close ---
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.setAttribute('hidden', true);
-  });
-});
-
-});
-
-
