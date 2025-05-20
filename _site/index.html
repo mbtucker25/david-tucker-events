@@ -13,6 +13,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="CSS/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <!-- SIDEBAR -->
@@ -26,9 +27,6 @@
     <nav class="sidebar__nav" aria-label="Main navigation">
       <button class="sidebar__btn" onclick="location.href='index.html'">Home</button>
       <button class="sidebar__btn" onclick="location.href=''">About David</button>
-      <button class="sidebar__btn" onclick="location.href='golfer-registration.html'">Register to Play</button>
-      <button class="sidebar__btn" onclick="location.href='sponsor-registration.html'">Sponsor the Event</button>
-      <button class="sidebar__btn" onclick="location.href='tshirtorderform.html'">Order T-Shirts</button>
     </nav>
   </aside>
 
@@ -37,7 +35,7 @@
     <!-- HERO BANNER -->
     <section class="hero-card neumorphic">
       <div class="hero-card__image-wrapper">
-        <img src="/images/banner.jpg" alt="Golf course at sunrise" class="hero-card__image" />
+        <img src="images/banner.jpg" alt="Golf course at sunrise" class="hero-card__image" />
         <div class="hero-card__overlay"></div>
         <div class="hero-card__text">
           <h1 class="hero-card__title">David Tucker Memorial Golf Classic</h1>
@@ -97,21 +95,137 @@
             Join us for a great day on the course and make a difference!
 
           </p>
-          <div class = "details_pricing">
-            <div class="detailspricing__cards">
-              <div class="detailspricing__card">
-                <div class="detailspricing__card__header">$75.00</div>
-                <div class="detailspricing__card__body">per golfer</div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cta-grid">
+      <div class="cta-card">
+        <div class="cta-title">Register Foursome</div>
+        <div class="cta-price">$300</div>
+        <button class="cta-btn" data-modal="modal-register-team">Register</button>
+      </div>
+
+      <div class="cta-card">
+        <div class="cta-title">Register Single Golfer</div>
+        <div class="cta-price">$75</div>
+        <button class="cta-btn" data-modal="modal-golfer">Register</button>
+      </div>
+
+      <div class="cta-card">
+        <div class="cta-title">Become a Sponsor</div>
+        <div class="cta-price sponsor-note">Sponsorship Options</div>
+        <button class="cta-btn" data-modal="modal-sponsor">Sponsor</button>
+      </div>
+
+      <div class="cta-card">
+        <div class="cta-title">Volunteer</div>
+        <div class="cta-price volunteer-note">Free</div>
+        <button class="cta-btn" data-modal="modal-volunteer">Sign Up</button>
+      </div>
+    </section>
+
+    <!-- 🧾 Team Registration Modal (Simplified) -->
+    <div id="modal-register-team" class="modal-overlay" hidden>
+      <div class="modal-content team-form">
+        <button class="modal-close" data-close>&times;</button>
+
+        <div id="form-message" class="form-message" hidden></div>
+
+        <form id="team-registration-form">
+          <h2 class="section__title">Register a Team</h2>
+          <p class="form_details">
+            Please fill out the form below to register your team. If you are registering as a single golfer, please use the Single Golfer registration option.
+          </p>  
+          <!-- TEAM NAME -->
+          <input type="text" id="team-name" class="team-input" placeholder="Enter your team name *" required>
+          <small id="team-name-warning" style="color: red; display: none;">
+            Team name already exists. Please choose another.
+          </small>
+
+          <!-- TEAM CAPTAIN -->
+          <div class="card neumorphic">
+            <div class="section-heading-wrapper">
+              <div class="section-heading">
+                <div class="section-heading-main">
+                  <i class="fa-solid fa-address-card icon-spacing"></i>Team Captain
+                </div>
               </div>
-              <div class="detailspricing__card">
-                <div class="detailspricing__card__header">$300.00</div>
-                <div class="detailspricing__card__body">per foursome</div>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="form-field">
+                <input type="text" id="captain-first" placeholder="First Name" required>
+              </div>
+              <div class="form-field">
+                <input type="text" id="captain-last" placeholder="Last Name" required>
+              </div>
+            </div>
+
+            <div class="form-grid-email-phone">
+              <div class="form-field">
+                <input type="email" id="captain-email" placeholder="Email Address" required>
+              </div>
+              <div class="form-field">
+                <input type="tel" id="captain-phone" placeholder="Phone #" required>
+              </div>
+              <div class="form-field">
+                <select id="captain-shirt-size" name="captain-shirt-size" required>
+                  <option value="">-- T-Shirt  Size --</option>
+                  <option value="Small">SMALL</option>
+                  <option value="Medium">MEDIUM</option>
+                  <option value="Large">LARGE</option>
+                  <option value="X-Large">X-LARGE</option>
+                  <option value="XX-Large">XX-LARGE</option>
+                </select>
               </div>
             </div>
           </div>
-        </div>
+
+          <!-- GOLFERS 2-4 -->
+          <div id="golfer-fieldsets"></div>
+
+          <!-- SUBMIT + CANCEL -->
+          <div class="modal-footer right-align">
+            <button type="button" class="btn" id="cancel-form">Cancel</button>
+            <button type="submit" class="btn primary">Submit</button>
+          </div>
+        </form>
       </div>
-    </section>    
+    </div>
+
+
+
+    <!-- 🔸 Single Golfer Modal -->
+    <div id="modal-golfer" class="modal-overlay" hidden>
+      <div class="modal-content">
+        <button class="modal-close" data-close>&times;</button>
+        <h2>Registration Information: Single Golfer</h2>
+        <!-- Optional: Condensed version of team form -->
+      </div>
+    </div>
+
+    <!-- 🟡 Sponsor Modal -->
+    <div id="modal-sponsor" class="modal-overlay" hidden>
+      <div class="modal-content">
+        <button class="modal-close" data-close>&times;</button>
+        <h2>Registration: Sponsorship Opportunities</h2>
+        <form>
+          <!-- Your fields here -->
+        </form>
+      </div>
+    </div>
+
+    <!-- 🟢 Volunteer Modal -->
+    <div id="modal-volunteer" class="modal-overlay" hidden>
+      <div class="modal-content">
+        <button class="modal-close" data-close>&times;</button>
+        <h2>Registration Information: Volunteer to Help</h2>
+        <form>
+          <!-- Your fields here -->
+        </form>
+      </div>
+    </div>
 
     <!-- EVENT SCHEDULE -->
     <section class="section schedule neumorphic">
@@ -166,8 +280,6 @@
     <section class="section gallery neumorphic">
       <h2 class="section__title">Photo Gallery</h2>
       <div class="gallery__grid" id="js-gallery">
-        
-          
         
           
         
@@ -361,6 +473,16 @@
               src="/images/gallery/470235486_576114351826033_7542817184164923376_n.jpg"
               alt="470235486 576114351826033 7542817184164923376 n"
             />
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           

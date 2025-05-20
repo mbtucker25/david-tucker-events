@@ -1,208 +1,241 @@
-// --- Shared Constants ---
+// --- Constants ---
 const SHIRT_PRICE = 15;
-const SIZE_IDS = ['yxs', 'ys', 'ym', 'yl', 'as', 'am', 'al', 'axl', 'a2xl'];
 
-// --- Sidebar ---
-function toggleSidebar() {
-  const sidebar = document.querySelector('.sidebar');
-  sidebar?.classList.toggle('open');
-}
-
-// --- Phone Format ---
+// --- Phone Formatter ---
 function formatPhoneInput() {
-  const phoneInput = document.getElementById('phone');
-  phoneInput?.addEventListener('input', e => {
-    let input = e.target.value.replace(/\D/g, '').slice(0, 10);
-    let formatted = input;
-    if (input.length >= 6) formatted = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6)}`;
-    else if (input.length >= 3) formatted = `(${input.slice(0, 3)}) ${input.slice(3)}`;
-    e.target.value = formatted;
+  document.querySelectorAll('input[type="tel"]').forEach(input => {
+    input.addEventListener('input', e => {
+      let val = e.target.value.replace(/\D/g, '').slice(0, 10);
+      if (val.length >= 6) {
+        e.target.value = `(${val.slice(0, 3)}) ${val.slice(3, 6)}-${val.slice(6)}`;
+      } else if (val.length >= 3) {
+        e.target.value = `(${val.slice(0, 3)}) ${val.slice(3)}`;
+      } else {
+        e.target.value = val;
+      }
+    });
   });
 }
 
-// --- Enable Fieldset ---
-function setFieldsetEnabled(fieldset, enabled) {
-  fieldset.querySelectorAll('input, select').forEach(input => {
-    const isTshirtQty = input.closest('.golfer-tshirt-sizes');
-    const checkbox = fieldset.querySelector('input[type="checkbox"][id*="order-tshirt"]');
-    input.disabled = isTshirtQty ? !(checkbox?.checked) : !enabled;
-  });
-  fieldset.classList.toggle('fieldset-disabled', !enabled);
-}
-
-// --- Populate Teams ---
-function populateTeamDropdown(callback) {
-  fetch('https://script.google.com/macros/s/AKfycbxCasBkzP72rmrzVQdiO2TN08D_5v11m4lfJ8qUfsUwk0TtuYfhVGA30_EG_dSTRbHZrg/exec')
+// --- Populate Team Dropdown ---
+function populateTeamDropdown() {
+  fetch('https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-teams')
     .then(res => res.json())
     .then(teams => {
       const select = document.getElementById('team-select');
       if (!select) return;
-      select.innerHTML = `
-        <option value="" disabled selected>-- Please select or create a team --</option>
-        <option value="__free_agent__">*️⃣ Free Agent (assign me to a Team)</option>
-        ${teams.map(t => `<option value="${t.teamName}">${t.teamName}</option>`).join('')}
-        <option value="__new__">🆕 Create New Team</option>
-      `;
       select.dataset.teams = JSON.stringify(teams);
-      if (typeof callback === 'function') callback(teams);
-    });
+    })
+    .catch(err => console.error("Team fetch failed:", err));
 }
 
-// --- Handle Team Selection ---
-function handleTeamSelection() {
-  const select = document.getElementById('team-select');
-  const newTeamRow = document.getElementById('new-team-name-row');
-  const golferFieldsets = document.querySelectorAll('.golfer-fieldset');
+// --- Generate Golfer Fieldsets (2–4) ---
+function generateGolferFieldsets() {
+  const container = document.getElementById('golfer-fieldsets');
+  if (!container) return;
 
-  if (!select) return;
+  const sizes = ['Small', 'Medium', 'Large', 'X-Large', 'XX-Large'];
+  const options = sizes.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+  container.innerHTML = '';
 
-  function resetFieldsets() {
-    golferFieldsets.forEach(fs => {
-      fs.querySelectorAll('input').forEach(input => {
-        input.value = '';
-        input.disabled = true;
-      });
-      fs.classList.add('fieldset-disabled');
-    });
+  for (let i = 2; i <= 4; i++) {
+    container.innerHTML += `
+      <div class="card neumorphic">
+        <div class="section-heading-wrapper">
+          <div class="section-heading">
+            <div class="section-heading-main">
+              <i class="fa-solid fa-address-card icon-spacing"></i>Golfer ${i}
+            </div>
+          </div>
+        </div>
+        <fieldset class="golfer-fieldset" id="golfer${i}">
+          <div class="form-grid-two">
+            <div class="form-field">
+              <input type="text" id="player${i}-first" placeholder="First Name" />
+            </div>
+            <div class="form-field">
+              <input type="text" id="player${i}-last" placeholder="Last Name" />
+            </div>
+          </div>
+          <div class="form-grid-email-phone">
+            <div class="form-field">
+              <input type="email" id="player${i}-email" placeholder="Email" />
+            </div>
+            <div class="form-field">
+              <input type="tel" id="player${i}-phone" placeholder="Phone #" />
+            </div>
+            <div class="form-field">
+              <select id="golfer${i}-shirt-size">
+                <option value="">-- T-Shirt Size --</option>
+                ${options}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    `;
   }
+}
 
-  resetFieldsets();
+// --- Gather Shirt Size Info ---
+function getShirtSize(i) {
+  return document.getElementById(`golfer${i}-shirt-size`)?.value || '';
+}
 
-  select.addEventListener('change', function () {
-    const teams = JSON.parse(select.dataset.teams || '[]');
-    newTeamRow.style.display = this.value === '__new__' ? 'block' : 'none';
-    resetFieldsets();
+// --- Inline Team Name Validation ---
+function validateTeamName() {
+  const input = document.getElementById('team-name');
+  const warning = document.getElementById('team-name-warning');
+  const teams = JSON.parse(document.getElementById('team-select')?.dataset.teams || '[]');
+  const entered = input?.value.trim().toLowerCase();
 
-    if (this.value === '__free_agent__') return setFieldsetEnabled(golferFieldsets[0], true);
-    if (this.value === '__new__') return golferFieldsets.forEach(fs => setFieldsetEnabled(fs, true));
+  const exists = teams.some(t => t.name.toLowerCase() === entered);
+  if (exists) {
+    warning.style.display = 'inline';
+    return false;
+  } else {
+    warning.style.display = 'none';
+    return true;
+  }
+}
 
-    const team = teams.find(t => t.teamName === this.value);
-    if (team) {
-      team.roster.forEach((m, i) => {
-        const fs = golferFieldsets[i];
-        if (!fs) return;
-        fs.querySelector('input[name$="first"]').value = m.firstName || '';
-        fs.querySelector('input[name$="last"]').value = m.lastName || '';
-        fs.querySelector('input[type="email"]').value = m.email || '';
-        fs.querySelector('input[type="tel"]').value = m.phone || '';
-        fs.querySelectorAll('input').forEach(input => input.disabled = true);
-        fs.classList.add('fieldset-disabled');
+// --- Handle Form Submit ---
+function handleFormSubmit() {
+  const form = document.getElementById('team-registration-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // Validate team name
+    const validTeam = validateTeamName();
+    const teamName = document.getElementById('team-name')?.value.trim();
+
+    const captain = {
+      first: document.getElementById('captain-first')?.value.trim(),
+      last: document.getElementById('captain-last')?.value.trim(),
+      email: document.getElementById('captain-email')?.value.trim(),
+      phone: document.getElementById('captain-phone')?.value.trim(),
+      shirtSize: document.getElementById('captain-shirt-size')?.value
+    };
+
+    const golfer2First = document.getElementById('player2-first')?.value.trim();
+    const golfer2Last = document.getElementById('player2-last')?.value.trim();
+
+    // Basic validation
+    if (!teamName || !validTeam) {
+      alert("Please enter a valid, unique team name.");
+      return;
+    }
+    if (!captain.first || !captain.last || !captain.email || !captain.phone) {
+      alert("Please complete all required Team Captain fields.");
+      return;
+    }
+    if (!golfer2First && !golfer2Last) {
+      alert("Golfer #2 is required.");
+      return;
+    }
+
+    // Collect golfers (including captain as Golfer #1)
+    const golfers = [
+      {
+        first: captain.first,
+        last: captain.last,
+        email: captain.email,
+        phone: captain.phone,
+        shirtSize: captain.shirtSize
+      }
+    ];
+
+    for (let i = 2; i <= 4; i++) {
+      const first = document.getElementById(`player${i}-first`)?.value.trim();
+      const last = document.getElementById(`player${i}-last`)?.value.trim();
+      const email = document.getElementById(`player${i}-email`)?.value.trim();
+      const phone = document.getElementById(`player${i}-phone`)?.value.trim();
+      const shirtSize = getShirtSize(i);
+
+      if (first || last || email || phone || shirtSize) {
+        golfers.push({ first, last, email, phone, shirtSize });
+      }
+    }
+
+    // ✅ Submit to Supabase
+    try {
+      const res = await fetch('https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          newTeamName: teamName,
+          golfer1: golfers[0],
+          golfer2: golfers[1],
+          golfer3: golfers[2],
+          golfer4: golfers[3]
+        })
       });
-      for (let i = team.roster.length; i < golferFieldsets.length; i++) setFieldsetEnabled(golferFieldsets[i], true);
+    const json = await res.json();
+    const messageBox = document.getElementById('form-message');
+
+    if (messageBox) {
+      if (res.ok) {
+        messageBox.innerText = `✅ Successfully registered ${json.golfers} golfer(s)!`;
+        messageBox.className = 'form-message success';
+        form.reset();
+      } else {
+        messageBox.innerText = `❌ ${json.error || 'Something went wrong'}`;
+        messageBox.className = 'form-message error';
+      }
+
+      messageBox.removeAttribute('hidden');
+      setTimeout(() => {
+        messageBox.setAttribute('hidden', true);
+      }, 6000);
+    }
+    } catch (err) {
+      console.error(err);
+      const messageBox = document.getElementById('form-message');
+      if (messageBox) {
+        messageBox.innerText = `❌ Submission failed. Please try again later.`;
+        messageBox.className = 'form-message error';
+        messageBox.removeAttribute('hidden');
+        setTimeout(() => {
+          messageBox.setAttribute('hidden', true);
+        }, 6000);
+      }
     }
   });
 }
-
-// --- Per-Golfer Shirt Logic ---
-function gatherGolferShirtOrderData(gNum) {
-  const order = SIZE_IDS.reduce((acc, id) => {
-    const input = document.getElementById(`golfer${gNum}-tshirt-${id}`);
-    const qty = input ? parseInt(input.value, 10) || 0 : 0;
-    acc[id] = qty;
-    return acc;
-  }, {});
-
-  const totalQty = Object.values(order).reduce((s, q) => s + q, 0);
-  const totalAmt = totalQty * SHIRT_PRICE;
-
-  return { ...order, total: totalQty, amount: totalAmt };
-}
-
-function setupShirtSummaryLiveUpdate(gNum) {
-  const container = document.querySelector(`#golfer${gNum} .golfer-tshirt-sizes`);
-  if (!container) return;
-
-  const inputs = SIZE_IDS.map(id => container.querySelector(`#golfer${gNum}-tshirt-${id}`)).filter(Boolean);
-  const countDisplay = document.getElementById(`golfer${gNum}-shirt-count`);
-  const totalDisplay = document.getElementById(`golfer${gNum}-shirt-total`);
-
-  function updateSummary() {
-    const totalQty = inputs.reduce((s, input) => s + (parseInt(input.value, 10) || 0), 0);
-    const totalAmt = totalQty * SHIRT_PRICE;
-    countDisplay.textContent = totalQty;
-    totalDisplay.textContent = `$${totalAmt.toFixed(2)}`;
-  }
-
-  inputs.forEach(input => input.addEventListener('input', updateSummary));
-  updateSummary();
-}
-
-function setupPerGolferShirtOrder(gNum) {
-  const checkbox = document.getElementById(`golfer${gNum}-order-tshirt`);
-  const fieldset = document.getElementById(`golfer${gNum}`);
-  const sizesDiv = fieldset?.querySelector('.golfer-tshirt-sizes');
-  const sizeInputs = sizesDiv?.querySelectorAll('input[type="number"]') || [];
-
-  if (!checkbox || !sizesDiv) return;
-
-  checkbox.addEventListener('change', function () {
-    const isChecked = this.checked;
-    sizeInputs.forEach(input => {
-      input.value = 0;
-      input.disabled = !isChecked;
-      input.dispatchEvent(new Event('input'));
-    });
-  });
-
-  sizeInputs.forEach(input => {
-    input.value = 0;
-    input.disabled = true;
-  });
-}
-
-// --- Form Submission ---
-function handleFormSubmission() {
-  const form = document.getElementById('registration-form');
-  if (!form) return;
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const data = {
-      teamSelect: document.getElementById('team-select').value,
-      newTeamName: document.getElementById('new-team-name')?.value,
-      golfer1: getGolferData(1),
-      golfer2: getGolferData(2),
-      golfer3: getGolferData(3),
-      golfer4: getGolferData(4)
-    };
-
-    fetch('https://script.google.com/macros/s/AKfycbxCasBkzP72rmrzVQdiO2TN08D_5v11m4lfJ8qUfsUwk0TtuYfhVGA30_EG_dSTRbHZrg/exec', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(() => {
-        form.style.display = 'none';
-        document.getElementById('success-message').hidden = false;
-      })
-      .catch(() => alert('There was an error submitting your registration.'));
-  });
-}
-
-function getGolferData(num) {
-  const prefix = num === 1 ? 'player1-' : `player${num}-`;
-  return {
-    firstName: document.getElementById(`${prefix}first`)?.value || '',
-    lastName: document.getElementById(`${prefix}last`)?.value || '',
-    email: document.getElementById(`${prefix}email`)?.value || '',
-    phone: document.getElementById(`${prefix}phone`)?.value || '',
-    shirtOrder: gatherGolferShirtOrderData(num)
-  };
-}
-
 // --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
-  toggleSidebar();
+  generateGolferFieldsets();
   formatPhoneInput();
-  populateTeamDropdown(handleTeamSelection);
-  document.querySelectorAll('.golfer-fieldset').forEach(fs => {
-    fs.querySelectorAll('input').forEach(i => i.disabled = true);
-    fs.classList.add('fieldset-disabled');
-  });
-  handleFormSubmission();
-  [1, 2, 3, 4].forEach(n => {
-    setupPerGolferShirtOrder(n);
-    setupShirtSummaryLiveUpdate(n);
+  populateTeamDropdown();
+  handleFormSubmit();
+
+  document.getElementById('team-name')?.addEventListener('input', validateTeamName);
+
+  // --- Modal Open (Register Button) ---
+document.querySelectorAll('.cta-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const modalId = btn.dataset.modal;
+    const modal = document.getElementById(modalId);
+    if (modal) modal.removeAttribute('hidden');
   });
 });
+
+// --- Modal Close Button ---
+document.querySelectorAll('[data-close]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.modal-overlay')?.setAttribute('hidden', true);
+  });
+});
+
+// --- Modal Background Click to Close ---
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.setAttribute('hidden', true);
+  });
+});
+
+});
+
+
