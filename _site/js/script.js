@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const golferNamesHtml = dummyGolfers
           .filter(g => g?.first || g?.last)
           .map(g => `
-            <li><i class="fa-solid fa-golf-ball-tee icon-spacing"></i> ${g.first || ''} ${g.last || ''}</li>
+            <li><i class="fa-solid fa-golf-ball-tee success-message-icons"> </i>  ${g.first || ''} ${g.last || ''}</li>
           `)
           .join('');
 
