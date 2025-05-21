@@ -325,7 +325,7 @@ body {
 .details__text p {
   text-indent: 2em;
   margin-top: .25rem;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -713,8 +713,7 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: .25rem;
+  gap: 1rem;
   width: 100%;
   font-size: .95rem;
 }
@@ -736,6 +735,7 @@ form {
 
 .select-wrapper {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
@@ -754,7 +754,6 @@ form {
 .clear-select:hover {
   color: red;
 }
-
 
 legend, label {
   font-weight: 600;
@@ -804,7 +803,110 @@ input:focus, select:focus, textarea:focus {
 }
 
 select {
-  width: fit-content !important;
+  background-color: var(--color-light);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+select option {
+  background-color: var(--color-light);
+  color: var(--color-primary);
+}
+
+select option:hover {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+}
+
+.team-members-display {
+  margin: .25rem;
+  padding: 1rem 1.5rem;
+  max-width: 100%;
+  background: var(--color-light);
+  box-shadow:
+    4px 4px 8px var(--color-primary),
+   -4px -4px 8px var(--color-secondary);
+}
+
+.team-members-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.team-members-list-wrapper {
+  padding: 2rem 1rem 1rem;
+}
+
+.team-members-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-members-list li {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 0.5rem;
+  border-radius: .25rem;
+  box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.team-members-list li i {
+  font-size: .85rem;
+  margin-right: 0.25rem;
+}
+
+.team-members-inline {
+  border: none;
+  margin: 0.5rem 0 1rem;
+  padding: 0;
+}
+
+.team-members-inline legend {
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team-members-list.clean {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.team-members-list.clean li {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+    border-right: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+  border-radius: .5rem;
+}
+
+#team-members-wrapper {
+  display: none;
 }
 
 input::placeholder {
@@ -815,7 +917,7 @@ input::placeholder {
 .grid-row {
   display: grid;
   gap: 1rem 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   align-items: center;
 }
 
@@ -937,7 +1039,7 @@ label {
 
 .success-check-icon {
   font-size: 4rem;
-  color: #089203;
+  color: #03b103;
 }
 
 .success-message-icons {
@@ -961,7 +1063,7 @@ label {
   font-weight: 750;
   text-align: center;
   justify-content: center;
-  margin: 0.5rem 0 1rem 0;
+  margin: 1rem 0 2rem 0;
   color: var(--color-light);
 }
 
@@ -1162,7 +1264,7 @@ label {
   font-weight: bold;
   padding: 1rem;
   border-radius: 0.5rem;
-  margin: 1rem auto;
+  margin: auto;
   max-width: 90%;
 }
 
@@ -1182,8 +1284,8 @@ label {
   font-size: 0.85rem;
   font-weight: 700;
   display: none;
-  margin-top: -1.8rem;
-  margin-bottom: -1.8rem;
+  margin-top: -1.75rem;
+  margin-bottom: -1rem;
   padding: 2px 6px;
 }
 
@@ -1264,8 +1366,8 @@ label {
   width: 80%;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin-bottom: .5rem;
   border: #b90303 4px solid;
 }
 
@@ -1277,7 +1379,18 @@ label {
   color: var(--color-primary);
   text-align: center;
   border-radius: 0.35rem;
-  margin: auto;
+  margin: .25rem auto;
+}
+
+.golfer-team {
+  display: flex;
+  width: 60%;
+  padding: 0.75rem 1rem;
+  font-size: .75rem;
+  color: var(--color-primary);
+  text-align: center;
+  border-radius: 0.35rem;
+  margin: .25rem auto;
 }
 
 /* ───── Grid 3: First + Last Name ───── */
@@ -1285,13 +1398,14 @@ label {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem 2rem;
-  margin-top: 2rem;
+  margin-top: .5rem;
   margin-bottom: 1rem;
 
 }
 .form-field {
   display: flex;
   flex-direction: column;
+  margin-bottom: .25rem;
 }
 label {
   font-weight: 600;
@@ -1309,10 +1423,16 @@ label {
   border-right: 4px solid var(--color-primary);
   padding: .75rem;
   border-radius: 0.5rem;
-  text-align: left;
-  font-size: 0.95rem;
+  text-align: center;
+  font-size: 0.85rem;
   color: var(--color-primary);
-  margin: auto;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.form_details p{
+  line-height: normal; 
+  padding-bottom: .5rem;
 }
 
 /* 🧬 Unified input/select/textarea styling */
@@ -1367,8 +1487,12 @@ input[type="tel"]:focus {
 /* ───── Grid 4: Email 65% / Phone 35% ───── */
 .form-grid-email-phone {
   display: grid;
-  grid-template-columns: 65% 30%;
+  grid-template-columns: 60% 40%;
   gap: 1.25rem 2rem;
+}
+
+.golfer-fieldset .form-grid-email-phone {
+  margin-top: .5rem;
 }
 
 /* ───── Section Title ───── */
@@ -1377,7 +1501,7 @@ input[type="tel"]:focus {
   max-width: 100%;
   position: relative;
   padding-top: 4.5rem; /* Give room for ribbon */
-  padding-bottom: 2rem;
+  padding-bottom: .5rem;
   border-radius: 1rem;
   z-index: 0;
   overflow: visible;
@@ -1400,7 +1524,7 @@ input[type="tel"]:focus {
   color: var(--color-light);
   font-weight: 500;
   font-family: var(--font-display);
-  padding: 1.25rem 2rem 1rem 2rem;
+  padding: .5rem 3rem .5rem 3rem;
   width: 100%;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
   border-radius: .5rem .5rem 0 0;

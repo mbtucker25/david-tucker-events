@@ -187,7 +187,6 @@
           <div class="modal-footer right-align">
             <div id="form-message" class="form-message" hidden></div>
             <button type="button" class="btn" id="cancel-form">Cancel</button>
-            <button type="button" class="btn secondary" id="test-success">Test Success Overlay</button>
             <button type="submit" class="btn primary">Submit</button>
           </div>
         </form>
@@ -198,12 +197,83 @@
 
     <!-- 🔸 Single Golfer Modal -->
     <div id="modal-golfer" class="modal-overlay" hidden>
-      <div class="modal-content">
+      <div class="modal-content team-form">
         <button class="modal-close" data-close>&times;</button>
-        <h2>Registration Information: Single Golfer</h2>
-        <!-- Optional: Condensed version of team form -->
+
+        <form id="single-golfer-form">
+          <h2 class="section__title">Register as a Single Golfer</h2>
+          <div class="form_details">
+            <p>
+              Fill out the form below to register yourself as a single golfer for the event.
+            </p>
+            <p>
+              You have the option to join a specific team that has already been registered or you may choose to register as a "free agent" and you will be assigned to a team by the event coordinators.
+            </p>
+          </div>
+
+          <!-- JOIN EXISTING TEAM -->
+          <div class="select-wrapper">
+            <div class="select">
+              <select class="content" id="golfer-team" name="golfer-team" required>
+                <option value="__free_agent__" selected>No Team (Free Agent)</option>
+              </select>
+            </div>
+          </div>
+
+        <!-- Existing Team Members (minimal design) -->
+        <fieldset class="team-members-inline" id="team-members-inline-display" hidden>
+          <ul id="team-members-list" class="team-members-list clean"></ul>
+        </fieldset>
+
+          <!-- SINGLE GOLFER INFO -->
+          <div class="card neumorphic">
+            <div class="section-heading-wrapper">
+              <div class="section-heading">
+                <div class="section-heading-main">
+                  <i class="fa-solid fa-user icon-spacing"></i>Your Contact Information
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="form-field">
+                <input type="text" id="golfer-first" placeholder="First Name" required>
+              </div>
+              <div class="form-field">
+                <input type="text" id="golfer-last" placeholder="Last Name" required>
+              </div>
+            </div>
+
+            <div class="form-grid-email-phone">
+              <div class="form-field">
+                <input type="email" id="golfer-email" placeholder="Email Address" required>
+              </div>
+              <div class="form-field">
+                <input type="tel" id="golfer-phone" placeholder="Phone #" required>
+              </div>
+              <div class="form-field">
+                <select id="golfer-shirt-size" name="golfer-shirt-size" required>
+                  <option value="">-- T-Shirt Size --</option>
+                  <option value="Small">SMALL</option>
+                  <option value="Medium">MEDIUM</option>
+                  <option value="Large">LARGE</option>
+                  <option value="X-Large">X-LARGE</option>
+                  <option value="XX-Large">XX-LARGE</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBMIT + CANCEL -->
+          <div class="modal-footer right-align">
+            <div id="single-form-message" class="form-message" hidden></div>
+            <button type="button" class="btn" id="cancel-single-form">Cancel</button>
+            <button type="submit" class="btn primary">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
+
 
     <!-- 🟡 Sponsor Modal -->
     <div id="modal-sponsor" class="modal-overlay" hidden>
