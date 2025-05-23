@@ -3,9 +3,6 @@ const SHIRT_PRICE = 15;
 
 // ─── Utilities ────────────────────────────────────────────────
 
-/**
- * Debounce utility to limit the rate of function execution.
- */
 function debounce(func, delay = 500) {
   let timeout;
   return (...args) => {
@@ -14,9 +11,6 @@ function debounce(func, delay = 500) {
   };
 }
 
-/**
- * Formats phone inputs live into (XXX) XXX-XXXX format.
- */
 function formatPhoneInput() {
   document.querySelectorAll('input[type="tel"]').forEach(input => {
     input.addEventListener('input', e => {
@@ -32,19 +26,12 @@ function formatPhoneInput() {
   });
 }
 
-/**
- * Dynamically populates team dropdown for single golfers.
- * "__free_agent__" will appear as "No Team (Free Agent)".
- */
-// --- Populate Team Dropdown for Single Golfer ---
 async function populateTeamDropdown() {
   const select = document.getElementById('golfer-team');
   if (!select) return;
 
-  // Clear the select menu
   select.innerHTML = '';
 
-  // Always include __free_agent__ first
   const freeAgentOption = document.createElement('option');
   freeAgentOption.value = '__free_agent__';
   freeAgentOption.textContent = 'No Team (Free Agent)';
@@ -57,17 +44,8 @@ async function populateTeamDropdown() {
     for (const team of teams) {
       if (team.name === '__free_agent__') continue;
 
-      const statusRes = await fetch(`https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-team-status?team=${encodeURIComponent(team.name)}`, {
-        headers: {
-          'Authorization': `Bearer YOUR_PUBLIC_SUPABASE_ANON_KEY` // Optional if RLS allows public
-        }
-      });
-
-      if (!statusRes.ok) {
-        console.warn(`Status check failed for ${team.name}`);
-        continue;
-      }
-
+      const statusRes = await fetch(`https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-team-status?team=${encodeURIComponent(team.name)}`);
+      if (!statusRes.ok) continue;
       const status = await statusRes.json();
 
       if (!status.isFull) {
@@ -82,10 +60,6 @@ async function populateTeamDropdown() {
   }
 }
 
-
-/**
- * Checks if a team name already exists in the database.
- */
 async function checkTeamNameExists(name) {
   const teamWarning = document.getElementById('team-name-warning');
   if (!name) {
@@ -106,26 +80,15 @@ async function checkTeamNameExists(name) {
   }
 }
 
-/**
- * Retrieves individual golfer data from form inputs.
- */
 function getGolfer(i) {
   const first = document.getElementById(`player${i}-first`)?.value.trim();
   const last = document.getElementById(`player${i}-last`)?.value.trim();
   const email = document.getElementById(`player${i}-email`)?.value.trim();
   const phone = document.getElementById(`player${i}-phone`)?.value.trim();
   const shirtSize = document.getElementById(`golfer${i}-shirt-size`)?.value || '';
-
-  if (first || last || email || phone || shirtSize) {
-    return { first, last, email, phone, shirtSize };
-  }
-
-  return null;
+  return (first || last || email || phone || shirtSize) ? { first, last, email, phone, shirtSize } : null;
 }
 
-/**
- * Dynamically builds golfer fieldsets for golfers 2–4.
- */
 function generateGolferFieldsets() {
   const container = document.getElementById('golfer-fieldsets');
   if (!container) return;
@@ -160,10 +123,11 @@ function generateGolferFieldsets() {
             <div class="form-field">
               <input type="tel" id="player${i}-phone" placeholder="Phone #" />
             </div>
-            <div class="form-field">
-              <select id="golfer${i}-shirt-size">
-                <option value="">-- T-Shirt Size --</option>
-                ${options}
+          </div>
+          <div class="select-wrapper">
+            <div class="select">
+              <select id="golfer${i}-shirt-size" required>
+                <option value="" disabled selected>-- T-Shirt Size --</option>${options}
               </select>
             </div>
           </div>
@@ -173,30 +137,45 @@ function generateGolferFieldsets() {
   }
 }
 
+// ─── Modal Reset Utility ───────────────────────────────
+function resetAndCloseModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  modal.setAttribute('hidden', true);
+
+  const form = modal.querySelector('form');
+  if (form) form.reset();
+
+  const messageBox = modal.querySelector('.form-message');
+  if (messageBox) {
+    messageBox.innerText = '';
+    messageBox.classList.remove('error', 'success');
+    messageBox.setAttribute('hidden', true);
+  }
+
+  // Clear team member list
+  const teamList = document.getElementById('team-members-list');
+  const teamBox = document.getElementById('team-members-inline-display');
+  if (teamList) teamList.innerHTML = '';
+  if (teamBox) teamBox.setAttribute('hidden', true);
+}
+
 // ─── Form Handlers ────────────────────────────────────────────
 
-/**
- * Handles submission of the team registration form.
- */
 function handleFormSubmit() {
   const form = document.getElementById('team-registration-form');
   const teamNameInput = document.getElementById('team-name');
-  const teamWarning = document.getElementById('team-name-warning');
-
   if (!form || !teamNameInput) return;
 
   teamNameInput.addEventListener('input', debounce(e => {
-    const entered = e.target.value.trim();
-    checkTeamNameExists(entered);
+    checkTeamNameExists(e.target.value.trim());
   }, 500));
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const teamName = teamNameInput.value.trim();
-    const teamExists = await checkTeamNameExists(teamName);
-
-    if (!teamName || teamExists) {
+    if (!teamName || await checkTeamNameExists(teamName)) {
       alert("Please enter a valid, unique team name.");
       return;
     }
@@ -211,14 +190,6 @@ function handleFormSubmit() {
 
     if (!captain.first || !captain.last || !captain.email || !captain.phone) {
       alert("Please complete all required Team Captain fields.");
-      return;
-    }
-
-    const golfer2First = document.getElementById('player2-first')?.value.trim();
-    const golfer2Last = document.getElementById('player2-last')?.value.trim();
-
-    if (!golfer2First && !golfer2Last) {
-      alert("Team Captain & Golfer #2 are required to register a team.");
       return;
     }
 
@@ -242,20 +213,15 @@ function handleFormSubmit() {
       });
 
       const json = await res.json();
-      const messageBox = document.getElementById('form-message');
-      const formModal = document.getElementById('modal-register-team');
       const successOverlay = document.getElementById('success-overlay');
       const successMsg = document.getElementById('success-message-text');
 
       if (res.ok) {
-        form.reset();
-        formModal.setAttribute('hidden', true);
-
+        resetAndCloseModal('modal-register-team');
         const golferNamesHtml = golfers
           .filter(g => g?.first || g?.last)
-          .map(g => `
-            <li><i class="fa-solid fa-golf-ball-tee success-message-icons"></i> ${g.first || ''} ${g.last || ''}</li>
-          `).join('');
+          .map(g => `<li><i class="fa-solid fa-golf-ball-tee success-message-icons"></i> ${g.first || ''} ${g.last || ''}</li>`)
+          .join('');
 
         successMsg.innerHTML = `
           <div class="success-icon-wrapper">
@@ -268,9 +234,7 @@ function handleFormSubmit() {
         `;
         successOverlay.removeAttribute('hidden');
       } else {
-        messageBox.innerText = `❌ ${json.error || 'Something went wrong'}`;
-        messageBox.className = 'form-message error';
-        messageBox.removeAttribute('hidden');
+        throw new Error(json.error || 'Something went wrong');
       }
     } catch (err) {
       console.error(err);
@@ -282,67 +246,10 @@ function handleFormSubmit() {
   });
 
   document.getElementById('cancel-form')?.addEventListener('click', () => {
-    document.getElementById('modal-register-team')?.setAttribute('hidden', true);
+    resetAndCloseModal('modal-register-team');
   });
 }
 
-document.getElementById('golfer-team')?.addEventListener('change', async (e) => {
-  const selectedTeam = e.target.value;
-  const teamList = document.getElementById('team-members-list');
-  const teamBox = document.getElementById('team-members-inline-display');
-
-  if (selectedTeam === '__free_agent__') {
-    teamBox.hidden = true;
-    return;
-  }
-
-  try {
-    const res = await fetch(`https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/get-team-members?team=${encodeURIComponent(selectedTeam)}`);
-    const { golfers } = await res.json();
-
-    if (golfers?.length) {
-      teamList.innerHTML = golfers
-        .map(g => `<li>⛳ ${g.first_name || ''} ${g.last_name || ''}</li>`)
-        .join('');
-      teamBox.hidden = false;
-    } else {
-      teamList.innerHTML = `<li>No golfers yet.</li>`;
-      teamBox.hidden = false;
-    }
-  } catch (err) {
-    console.error('Error fetching team members:', err);
-    teamBox.hidden = true;
-  }
-});
-
-function renderTeamMembers(members = []) {
-  const container = document.getElementById('team-members-display');
-  const list = document.getElementById('team-members-list');
-
-  if (!container || !list) return;
-
-  if (!members.length) {
-    container.setAttribute('hidden', true);
-    list.innerHTML = '';
-    return;
-  }
-
-  container.removeAttribute('hidden');
-
-  list.innerHTML = members
-    .map(member => `
-      <li>
-        <i class="fa-solid fa-image-portrait"></i> ${member.first_name} ${member.last_name}
-      </li>
-    `)
-    .join('');
-}
-
-
-
-/**
- * Handles submission of the single golfer form.
- */
 function handleSingleGolferSubmit() {
   const form = document.getElementById('single-golfer-form');
   if (!form) return;
@@ -374,31 +281,21 @@ function handleSingleGolferSubmit() {
       const successMsg = document.getElementById('success-message-text');
 
       if (res.ok) {
-        form.reset();
-        document.getElementById('modal-golfer')?.setAttribute('hidden', true);
+        resetAndCloseModal('modal-golfer');
         successMsg.innerHTML = `
           <div class="success-icon-wrapper">
             <i class="fa-solid fa-circle-check success-check-icon"></i>
           </div>
-          <div class="success-message-text team-name">Successfully Registered!</div>
           <div class="success-message-text team-name">${first} ${last}</div>
-          <h2>${
+          <p class="golfers-label"><strong>${
             teamName === "__free_agent__"
-              ? "You’ve been registered as a free agent. You'll be notified of your team assignment upon check-in on the day of the event."
-              : "You've been added to:"
-          }</h2>
-            ${
-            teamName !== "__free_agent__"
-              ? `<div class="success-message-text team-name">${teamName}</div>`
-              : ""
-          }
+              ? "You've been registered as a free agent. You’ll be assigned to a team on event day."
+              : `You've been added to:<br><span class="team-name">${teamName}</span>`
+          }</strong></p>
         `;
         successOverlay.removeAttribute('hidden');
       } else {
-        const messageBox = document.getElementById('single-form-message');
-        messageBox.innerText = `❌ ${json.error || 'Something went wrong'}`;
-        messageBox.className = 'form-message error';
-        messageBox.removeAttribute('hidden');
+        throw new Error(json.error || 'Something went wrong');
       }
     } catch (err) {
       console.error(err);
@@ -410,11 +307,50 @@ function handleSingleGolferSubmit() {
   });
 
   document.getElementById('cancel-single-form')?.addEventListener('click', () => {
-    document.getElementById('modal-golfer')?.setAttribute('hidden', true);
+    resetAndCloseModal('modal-golfer');
   });
 }
 
-// ─── Initialization ───────────────────────────────────────────
+// ─── Sponsor Tier Toggle + Radio-like Logic ───────────────────────────
+
+function initSponsorTierCollapsibles() {
+  const sponsorOptions = document.querySelectorAll('.sponsor-option');
+  const sponsorBtn = document.getElementById('sponsor-submit-btn');
+  let currentlySelected = null;
+
+  sponsorOptions.forEach(option => {
+    const heading = option.querySelector('.sponsor-heading');
+
+    if (heading) {
+      heading.addEventListener('click', () => {
+        const isSelected = option.classList.contains('active');
+
+        // Clear all selections
+        sponsorOptions.forEach(o => o.classList.remove('active'));
+
+        if (!isSelected) {
+          option.classList.add('active');
+          currentlySelected = option;
+        } else {
+          currentlySelected = null;
+        }
+
+        updateSponsorSubmitButton();
+      });
+    }
+  });
+
+  function updateSponsorSubmitButton() {
+    if (currentlySelected) {
+      const tier = currentlySelected.getAttribute('data-tier');
+      sponsorBtn.innerText = `Become a ${tier} Sponsor`;
+      sponsorBtn.disabled = false;
+    } else {
+      sponsorBtn.innerText = 'Select a Tier';
+      sponsorBtn.disabled = true;
+    }
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   generateGolferFieldsets();
@@ -422,13 +358,14 @@ document.addEventListener('DOMContentLoaded', () => {
   populateTeamDropdown();
   handleFormSubmit();
   handleSingleGolferSubmit();
+  initSponsorTierCollapsibles();
 
-  // Success overlay close
+  // ✅ Success overlay dismiss
   document.getElementById('success-ok-btn')?.addEventListener('click', () => {
     document.getElementById('success-overlay')?.setAttribute('hidden', true);
   });
 
-  // Modal open handlers
+  // ✅ Open modals from CTA buttons
   document.querySelectorAll('.cta-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const modalId = btn.dataset.modal;
@@ -437,17 +374,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Modal close buttons
+  // ✅ Close buttons inside modals
   document.querySelectorAll('[data-close]').forEach(btn => {
     btn.addEventListener('click', () => {
-      btn.closest('.modal-overlay')?.setAttribute('hidden', true);
+      const modal = btn.closest('.modal-overlay');
+      if (modal?.id) resetAndCloseModal(modal.id);
     });
   });
 
-  // Click outside to close modal
+  // ✅ Close modal on click outside content
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.setAttribute('hidden', true);
+      if (e.target === overlay && overlay?.id) resetAndCloseModal(overlay.id);
+    });
+  });
+
+  // ✅ Sponsorship Tier Selection Logic
+  const sponsorCards = document.querySelectorAll('.sponsor-card');
+  const sponsorBtn = document.getElementById('sponsor-submit-btn');
+  let selectedTier = null;
+
+  sponsorCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.classList.contains('selected')) {
+        card.classList.remove('selected');
+        selectedTier = null;
+        sponsorBtn.innerText = 'Select a Tier';
+        sponsorBtn.disabled = true;
+      } else {
+        sponsorCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedTier = card.dataset.tier;
+        sponsorBtn.innerText = `Become a ${selectedTier} Sponsor`;
+        sponsorBtn.disabled = false;
+      }
+    });
+  });
+
+  // ✅ Handle Sponsor Form Submission
+  sponsorBtn?.addEventListener('click', () => {
+    if (!selectedTier) return;
+
+    const logo = document.getElementById('sponsor-logo')?.files?.[0];
+    const formData = new FormData();
+    formData.append('tier', selectedTier);
+    if (logo) formData.append('logo', logo);
+
+    // 🔥 Replace with real backend URL
+    fetch('/submit-sponsor', {
+      method: 'POST',
+      body: formData,
+    }).then(res => {
+      if (res.ok) {
+        alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
+        resetAndCloseModal('modal-sponsor');
+        sponsorCards.forEach(c => c.classList.remove('selected'));
+        sponsorBtn.innerText = 'Select a Tier';
+        sponsorBtn.disabled = true;
+      } else {
+        alert('❌ Sponsor submission failed.');
+      }
+    }).catch(() => {
+      alert('❌ Network error while submitting sponsorship.');
     });
   });
 });
+
