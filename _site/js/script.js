@@ -346,7 +346,7 @@ function initSponsorTierCollapsibles() {
       sponsorBtn.innerText = `Become a ${tier} Sponsor`;
       sponsorBtn.disabled = false;
     } else {
-      sponsorBtn.innerText = 'Select a Tier';
+      sponsorBtn.innerText = 'Select Sponsorship Option';
       sponsorBtn.disabled = true;
     }
   }
@@ -412,31 +412,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ✅ Handle Sponsor Form Submission
-  sponsorBtn?.addEventListener('click', () => {
+  sponsorBtn?.addEventListener("click", () => {
     if (!selectedTier) return;
 
-    const logo = document.getElementById('sponsor-logo')?.files?.[0];
-    const formData = new FormData();
-    formData.append('tier', selectedTier);
-    if (logo) formData.append('logo', logo);
+    const form = document.getElementById("sponsor-form");
+    const formData = new FormData(form);
 
-    // 🔥 Replace with real backend URL
-    fetch('/submit-sponsor', {
-      method: 'POST',
+    // Add programmatically controlled fields
+    formData.append("tier", selectedTier);
+    formData.append("tier_amount", getTierAmount(selectedTier));
+    formData.append("pay_status", "unpaid"); // or "paid" if using Stripe, etc.
+
+    fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
+      method: "POST",
       body: formData,
-    }).then(res => {
-      if (res.ok) {
-        alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
-        resetAndCloseModal('modal-sponsor');
-        sponsorCards.forEach(c => c.classList.remove('selected'));
-        sponsorBtn.innerText = 'Select a Tier';
-        sponsorBtn.disabled = true;
-      } else {
-        alert('❌ Sponsor submission failed.');
-      }
-    }).catch(() => {
-      alert('❌ Network error while submitting sponsorship.');
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
+          resetAndCloseModal("modal-sponsor");
+          sponsorCards.forEach((c) => c.classList.remove("selected"));
+          sponsorBtn.innerText = "Select Sponsorhip Option";
+          sponsorBtn.disabled = true;
+        } else {
+          throw new Error("Registration failed.");
+        }
+      })
+      .catch(() => {
+        alert("❌ Submission failed. Please try again.");
+      });
   });
+
+  function getTierAmount(tier) {
+    const prices = {
+      Platinum: 550,
+      Gold: 350,
+      Silver: 150,
+      Bronze: 50,
+      Hole: 75,
+    };
+    return prices[tier] || 0;
+  }
 });
 

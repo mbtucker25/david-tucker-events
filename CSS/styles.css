@@ -915,6 +915,32 @@ select option:hover {
   display: none;
 }
 
+#modal-sponsor .form_details {
+  max-width: 600px; /* or whatever width fits your design */
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.sponsor-description ul {
+  list-style: none; /* remove default bullets */
+  padding-left: 1rem;
+}
+
+.sponsor-description ul li {
+  font-size: .85rem;
+  color: var(--color-primary); /* or use a hex code like #333 */
+}
+
+.sponsor-description li::before {
+  content: '→'; /* or any character like '→', '★', etc. */
+  color: var(--color-primary);
+  display: inline-block;
+  width: 2rem;
+  margin-left: -2rem;
+}
+
+
+
 /* GRID LAYOUTS */
 .grid-row {
   display: grid;
@@ -1301,7 +1327,7 @@ label {
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
   justify-content: center;
-  margin: .75rem;
+  margin: 1rem;
   max-width: 900px;
 }
 
@@ -1330,6 +1356,23 @@ label {
   margin: 2rem auto;
 }
 
+.sponsor-submit-wrapper {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Only target rows inside Sponsor Contact Info */
+.sponsor-contact-info .form-field {
+  margin-bottom: 0.1rem; /* reduce from default */
+}
+
+.sponsor-contact-info .form-grid-two,
+.sponsor-contact-info .form-grid-email-phone {
+  gap: 0.25rem 1rem; /* tighter vertical and horizontal spacing */
+  margin-bottom: 0.5rem; /* reduce bottom margin between grids */
+}
 
 @media (max-width: 600px) {
   .sponsor-company-card {
@@ -1395,6 +1438,7 @@ label {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: .25rem;
+  margin-right: 2rem;
 }
 
 .sponsor-company-column {
@@ -1807,6 +1851,13 @@ input[type="tel"]:focus {
   display: flex;
   justify-content: flex-end;
   margin-top: 2rem;
+}
+.modal-footer.center-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: .5rem;
+  margin-bottom: 2rem;
 }
 .btn.primary {
   background: var(--color-primary);

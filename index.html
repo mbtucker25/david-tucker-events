@@ -251,7 +251,9 @@
               <div class="form-field">
                 <input type="tel" id="golfer-phone" placeholder="Phone #" required>
               </div>
-              <div class="form-field">
+            </div>
+            <div class="select-wrapper">
+              <div class="select">
                 <select id="golfer-shirt-size" name="golfer-shirt-size" required>
                   <option value="">-- T-Shirt Size --</option>
                   <option value="Small">SMALL</option>
@@ -260,7 +262,7 @@
                   <option value="X-Large">X-LARGE</option>
                   <option value="XX-Large">XX-LARGE</option>
                 </select>
-              </div>
+              </div> 
             </div>
           </div>
 
@@ -284,8 +286,9 @@
           Choose your sponsorship tier and upload your company logo. Your logo will be featured on event materials, shirts, and signage based on your selection.
         </p>
 
-        <form id="sponsor-form">
+        <form id="sponsor-form" class="card" enctype="multipart/form-data" method="POST">
           <div class="sponsor-modal-grid">
+            
             <!-- Column 1: Sponsorship Options -->
             <div class="sponsor-options-column">
               <!-- Repeat for each tier -->
@@ -370,41 +373,53 @@
 
             <!-- Column 2: Company Info -->
             <div class="sponsor-form-column">
-              <fieldset class="form-section neumorphic">
-                <legend>Company Information</legend>
-
-                <div class="form-field">
-                  <input type="text" id="company-name" placeholder="Company Name" required>
-                </div>
-
-                <div class="form-grid-two">
-                  <div class="form-field">
-                    <input type="text" id="sponsor-first-name" placeholder="First Name" required>
-                  </div>
-                  <div class="form-field">
-                    <input type="text" id="sponsor-last-name" placeholder="Last Name" required>
+              <div class="card neumorphic">
+                <div class="section-heading-wrapper">
+                  <div class="section-heading">
+                    <div class="section-heading-main">
+                      <i class="fa-solid fa-user icon-spacing"></i>Your Contact Information
+                    </div>
                   </div>
                 </div>
 
-                <div class="form-grid-email-phone">
+                <fieldset class="form-section sponsor-contact-info">
                   <div class="form-field">
-                    <input type="email" id="sponsor-email" placeholder="email@example.com" required>
+                    <input type="text" id="company-name" placeholder="Company Name" required>
                   </div>
+
+                  <div class="form-grid-two">
+                    <div class="form-field">
+                      <input type="text" id="sponsor-first-name" placeholder="First Name" required>
+                    </div>
+                    <div class="form-field">
+                      <input type="text" id="sponsor-last-name" placeholder="Last Name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-grid-email-phone">
+                    <div class="form-field">
+                      <input type="email" id="sponsor-email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-field">
+                      <input type="tel" id="sponsor-phone" placeholder="(555) 555-5555" required>
+                    </div>
+                  </div>
+
                   <div class="form-field">
-                    <input type="tel" id="sponsor-phone" placeholder="(555) 555-5555" required>
+                    <label for="sponsor-logo">Upload Company Logo</label>
+                    <input type="file" id="sponsor-logo" name="sponsor-logo" accept="image/png, image/jpeg" />
                   </div>
-                </div>
+                </fieldset>
 
-                <div class="form-field">
-                  <label for="sponsor-logo">Logo Upload</label>
-                  <input type="file" id="sponsor-logo" name="sponsor-logo" accept="image/png, image/jpeg" />
+                <!-- ✅ Button aligned with form, avoids modal shift -->
+                <div class="modal-footer center-align sponsor-submit-wrapper">
+                  <button type="submit" id="sponsor-submit-btn" class="btn primary" disabled>
+                    Select Sponsorship Option
+                  </button>
                 </div>
-              </fieldset>
-
-              <div class="modal-footer right-align">
-                <button type="submit" id="sponsor-submit-btn" class="btn primary" disabled>Select a Tier</button>
               </div>
             </div>
+
           </div>
         </form>
       </div>
