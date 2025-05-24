@@ -411,11 +411,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ✅ Handle Sponsor Form Submission
+  // ✅ Handle Sponsor Form Submission with Debugging
   sponsorBtn?.addEventListener("click", () => {
-    if (!selectedTier) return;
+    if (!selectedTier) {
+      console.warn("No tier selected.");
+      return;
+    }
 
     const form = document.getElementById("sponsor-form");
+    if (!form) {
+      console.error("Sponsor form element not found.");
+      return;
+    }
+
     const formData = new FormData(form);
 
     // Add programmatically controlled fields
@@ -423,24 +431,35 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append("tier_amount", getTierAmount(selectedTier));
     formData.append("pay_status", "unpaid"); // or "paid" if using Stripe, etc.
 
+    console.log("🟡 Submitting sponsor form with data:");
+    for (let [key, value] of formData.entries()) {
+      console.log(`→ ${key}:`, value);
+    }
+
     fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
       method: "POST",
       body: formData,
       mode: "cors"
     })
-      .then((res) => {
+      .then(async (res) => {
+        const responseText = await res.text();
+
         if (res.ok) {
+          console.log("✅ Server response:", responseText);
           alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
           resetAndCloseModal("modal-sponsor");
           sponsorCards.forEach((c) => c.classList.remove("selected"));
-          sponsorBtn.innerText = "Select Sponsorhip Option";
+          sponsorBtn.innerText = "Select Sponsorship Option";
           sponsorBtn.disabled = true;
         } else {
-          throw new Error("Registration failed.");
+          console.error("❌ Server returned error status:", res.status);
+          console.error("❌ Response body:", responseText);
+          alert("❌ Sponsor registration failed. Check console for details.");
         }
       })
-      .catch(() => {
-        alert("❌ Submission failed. Please try again.");
+      .catch((err) => {
+        console.error("🔥 Fetch failed:", err);
+        alert("❌ Submission failed. Check console for details.");
       });
   });
 
@@ -453,17 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
       Hole: 75,
     };
     return prices[tier] || 0;
-  }
-
-    // ✅ Show Last Updated Timestamp
-  const lastUpdatedEl = document.getElementById('last-updated');
-  if (lastUpdatedEl) {
-    const now = new Date();
-    const formatted = now.toLocaleString('en-US', {
-      dateStyle: 'medium',
-      timeStyle: 'short'
-    });
-    lastUpdatedEl.textContent = `Last Updated: ${formatted}`;
   }
 });
 
