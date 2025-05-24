@@ -453,5 +453,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     return prices[tier] || 0;
   }
+
+    // ✅ Show Last Updated Timestamp
+  const lastUpdatedEl = document.getElementById('last-updated');
+  if (lastUpdatedEl) {
+    const now = new Date();
+    const formatted = now.toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'short'
+    });
+    lastUpdatedEl.textContent = `Last Updated: ${formatted}`;
+  }
 });
 
