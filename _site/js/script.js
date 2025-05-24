@@ -426,6 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
       method: "POST",
       body: formData,
+      mode: "cors"
     })
       .then((res) => {
         if (res.ok) {

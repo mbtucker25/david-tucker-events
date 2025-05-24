@@ -311,20 +311,34 @@ s3_secret_key = "env(S3_SECRET_KEY)"
 enabled = true
 verify_jwt = false
 import_map = "./functions/get-teams/deno.json"
-# Uncomment to specify a custom file path to the entrypoint.
-# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
 entrypoint = "./functions/get-teams/index.ts"
-# Specifies static files to be bundled with the function. Supports glob patterns.
-# For example, if you want to serve static HTML pages in your function:
-# static_files = [ "./functions/get-teams/*.html" ]
 
 [functions.register]
 enabled = true
 verify_jwt = false
 import_map = "./functions/register/deno.json"
-# Uncomment to specify a custom file path to the entrypoint.
-# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
 entrypoint = "./functions/register/index.ts"
-# Specifies static files to be bundled with the function. Supports glob patterns.
-# For example, if you want to serve static HTML pages in your function:
-# static_files = [ "./functions/register/*.html" ]
+
+[functions.get-team-status]
+enabled = true
+verify_jwt = false
+import_map = "./functions/get-team-status/deno.json"
+entrypoint = "./functions/get-team-status/index.ts"
+
+[functions.get-team-members]
+enabled = true
+verify_jwt = false
+import_map = "./functions/get-team-members/deno.json"
+entrypoint = "./functions/get-team-members/index.ts"
+
+[functions.register-single]
+enabled = true
+verify_jwt = false
+import_map = "./functions/register-single/deno.json"
+entrypoint = "./functions/register-single/index.ts"
+
+[functions.register-sponsor]
+enabled = true
+verify_jwt = false
+import_map = "./functions/register-sponsor/deno.json"
+entrypoint = "./functions/register-sponsor/index.ts"
