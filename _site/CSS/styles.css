@@ -1882,6 +1882,13 @@ input[type="tel"]:focus {
   gap: 1.5rem;
 }
 
+.last-updated {
+  font-size: 0.55rem;
+  color: var(--color-light);
+  margin-bottom: .5rem;
+  text-align: center; /* or left/right depending on layout */
+}
+
 /* ───── Responsive Adjustments ───── */
 @media (max-width: 700px) {
   .stepper-grid {
