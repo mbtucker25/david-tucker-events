@@ -324,6 +324,90 @@ function handleSingleGolferSubmit() {
   });
 }
 
+function handleSponsorFormSubmit() {
+  const sponsorCards = document.querySelectorAll('.sponsor-card');
+  const sponsorBtn = document.getElementById('sponsor-submit-btn');
+  let selectedTier = null;
+
+  sponsorCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.classList.contains('selected')) {
+        card.classList.remove('selected');
+        selectedTier = null;
+        sponsorBtn.innerText = 'Select a Tier';
+        sponsorBtn.disabled = true;
+      } else {
+        sponsorCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedTier = card.dataset.tier;
+        sponsorBtn.innerText = `Become a ${selectedTier} Sponsor`;
+        sponsorBtn.disabled = false;
+      }
+    });
+  });
+
+  sponsorBtn?.addEventListener("click", () => {
+    if (!selectedTier) {
+      console.warn("No tier selected.");
+      logToSupabase("❌ No tier selected.");
+      return;
+    }
+
+    const form = document.getElementById("sponsor-form");
+    if (!form) {
+      console.error("Sponsor form not found.");
+      logToSupabase("❌ Sponsor form not found.");
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.append("tier", selectedTier);
+    formData.append("tier_amount", getTierAmount(selectedTier));
+    formData.append("pay_status", "unpaid");
+
+    console.log("🟡 Submitting sponsor form...");
+    logToSupabase("🟡 Sponsor form submitted.");
+
+    fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
+      method: "POST",
+      body: formData,
+      mode: "cors"
+    })
+      .then(async (res) => {
+        const body = await res.text();
+        if (res.ok) {
+          console.log("✅ Sponsor registered:", body);
+          logToSupabase("✅ Sponsor registered successfully.");
+          alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
+          resetAndCloseModal("modal-sponsor");
+          sponsorCards.forEach((c) => c.classList.remove("selected"));
+          sponsorBtn.innerText = "Select Sponsorship Option";
+          sponsorBtn.disabled = true;
+        } else {
+          console.error("❌ Server error:", body);
+          logToSupabase(`❌ Server returned error: ${res.status} - ${body}`);
+          alert("❌ Sponsor registration failed.");
+        }
+      })
+      .catch((err) => {
+        console.error("🔥 Network error:", err);
+        logToSupabase(`🔥 Network error: ${err.message}`);
+        alert("❌ Submission failed.");
+      });
+  });
+
+  function getTierAmount(tier) {
+    const prices = {
+      Platinum: 550,
+      Gold: 350,
+      Silver: 150,
+      Bronze: 50,
+      Hole: 75,
+    };
+    return prices[tier] || 0;
+  }
+}
+
 // ─── Sponsor Tier Toggle + Radio-like Logic ───────────────────────────
 
 function initSponsorTierCollapsibles() {
@@ -372,6 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
   handleFormSubmit();
   handleSingleGolferSubmit();
   initSponsorTierCollapsibles();
+  handleSponsorFormSubmit();
 
   // ✅ Success overlay dismiss
   document.getElementById('success-ok-btn')?.addEventListener('click', () => {
@@ -422,57 +507,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sponsorBtn.disabled = false;
       }
     });
-  });
-
-  sponsorBtn?.addEventListener("click", () => {
-    if (!selectedTier) {
-      console.warn("No tier selected.");
-      logToSupabase("sponsor-submit", "⚠️ Attempted submission with no tier selected.");
-      return;
-    }
-
-    const form = document.getElementById("sponsor-form");
-    if (!form) {
-      console.error("Sponsor form element not found.");
-      logToSupabase("sponsor-submit", "❌ Sponsor form element not found.");
-      return;
-    }
-
-    const formData = new FormData(form);
-    formData.append("tier", selectedTier);
-    formData.append("tier_amount", getTierAmount(selectedTier));
-    formData.append("pay_status", "unpaid");
-
-    let debugLog = `Submitting sponsor form:\nTier: ${selectedTier}\n`;
-    for (let [key, value] of formData.entries()) {
-      debugLog += `→ ${key}: ${value}\n`;
-    }
-    logToSupabase("sponsor-submit", debugLog);
-
-    fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
-      method: "POST",
-      body: formData,
-      mode: "cors"
-    })
-      .then(async (res) => {
-        const responseText = await res.text();
-
-        if (res.ok) {
-          logToSupabase("sponsor-submit", `✅ Success response:\n${responseText}`);
-          alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
-          resetAndCloseModal("modal-sponsor");
-          sponsorCards.forEach((c) => c.classList.remove("selected"));
-          sponsorBtn.innerText = "Select Sponsorship Option";
-          sponsorBtn.disabled = true;
-        } else {
-          logToSupabase("sponsor-submit", `❌ Error ${res.status}:\n${responseText}`);
-          alert("❌ Sponsor registration failed. Check console for details.");
-        }
-      })
-      .catch((err) => {
-        logToSupabase("sponsor-submit", `🔥 Fetch error:\n${err}`);
-        alert("❌ Submission failed. Check console for details.");
-      });
   });
 });
 
